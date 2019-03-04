@@ -14,7 +14,7 @@ export default createGlobalStyle`
     position: fixed;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+   
   }
 
   h1, h2, h3, h4, h5, h6,

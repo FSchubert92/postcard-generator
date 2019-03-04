@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Logo from './images/logoPng.png'
+import Card from './Card'
 
 const Header = styled.header`
   display: flex;
@@ -20,9 +21,12 @@ const Header = styled.header`
 
 export default function Home() {
   return (
-    <Header>
-      <img src={Logo} alt="Riyoko Logo" />
-      <h1>RIYOKO</h1>
-    </Header>
+    <React.Fragment>
+      <Header>
+        <img src={Logo} alt="Riyoko Logo" />
+        <h1>RIYOKO</h1>
+      </Header>
+      <Card />
+    </React.Fragment>
   )
 }
