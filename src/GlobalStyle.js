@@ -20,8 +20,11 @@ export default createGlobalStyle`
   h1, h2, h3, h4, h5, h6,
   ul, ol {
     margin: 0;
-    
   }
+h1{
+  font-size: 23pt;
+}
+
 
   input, textarea, button {
     font-size: 1em;
