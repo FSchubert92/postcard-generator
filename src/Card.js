@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import testImage from './assets/images/test-image.jpg'
 import styled from 'styled-components'
 import WeatherIconSun from './assets/images/weatherIconSun.png'
+import { ReactComponent as Sun } from './assets/images/icon-sun.svg'
 
 const StyledCard = styled.section`
   margin-top: 57px;
@@ -17,6 +18,7 @@ const StyledDateHeadline = styled.h2`
   margin-left: 13px;
   margin-bottom: 5px;
 `
+
 const StyledHeadlineInImage = styled.h2`
   position: absolute;
   z-index: 1;
