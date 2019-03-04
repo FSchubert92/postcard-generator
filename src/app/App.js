@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
-import GlobalStyle from './GlobalStyle'
+import GlobalStyle from '../GlobalStyle'
 import Home from '../Home'
 
 const Grid = styled.div`
   display: grid;
-  grid-template-rows: auto 48px;
+  grid-template-rows: 48px auto;
   position: absolute;
   top: 0;
   left: 0;
