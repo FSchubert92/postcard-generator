@@ -9,6 +9,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-jsx-remove-data-test-id": "^2.0.0",
     "babel-plugin-styled-components": "^1.10.0",
+    "cypress": "^3.1.5",
     "docz": "^0.13.7",
     "docz-theme-default": "^0.13.7",
     "prop-types": "^15.7.2",
@@ -25,6 +26,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
     "docz:dev": "docz dev",
     "docz:build": "docz build"
   },

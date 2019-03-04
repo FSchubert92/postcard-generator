@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import Logo from './assets/images/logoPng.png'
 import Card from './Card'
+import Logo from './assets/images/logoPng.png'
 
 const Header = styled.header`
   display: flex;
