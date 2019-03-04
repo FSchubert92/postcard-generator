@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from './GlobalStyle'
+import Home from '../Home'
 
 const Grid = styled.div`
   display: grid;
