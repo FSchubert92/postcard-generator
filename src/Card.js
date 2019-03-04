@@ -42,6 +42,11 @@ const CardBottom = styled.section`
   bottom: 90px;
   background-color: white;
 `
+const TitleAndWeatherWrapper = styled.div`
+  display: grid;
+  height: 61px;
+  grid-template-columns: 1fr 48px;
+`
 const HowWasToday = styled.h2`
   padding-top: 5px;
   margin-bottom: 28px;
@@ -55,10 +60,13 @@ export default function Card() {
         <StyledImage src={testImage} alt="" />
       </section>
       <CardBottom>
-        <HowWasToday>
-          How was today?
-          <WeatherIcon src={WeatherIconSun} alt="" />
-        </HowWasToday>
+        <TitleAndWeatherWrapper>
+          <HowWasToday>How was today?</HowWasToday>
+          <div>
+            <WeatherIcon src={WeatherIconSun} alt="" />
+            20 C°
+          </div>
+        </TitleAndWeatherWrapper>
 
         <div>
           <h3>Summary of the day</h3>
