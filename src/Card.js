@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import testImage from './images/test-image.jpg'
+import testImage from './assets/images/test-image.jpg'
 import styled from 'styled-components'
+import WeatherIconSun from './assets/images/weatherIconSun.png'
 
 const StyledCard = styled.section`
   margin-top: 57px;
   p {
     margin: 2px 0 0 4px;
   }
+`
+const WeatherIcon = styled.img`
+  width: 48px;
+  height: 50px;
 `
 const StyledDateHeadline = styled.h2`
   margin-left: 13px;
@@ -50,7 +55,11 @@ export default function Card() {
         <StyledImage src={testImage} alt="" />
       </section>
       <CardBottom>
-        <HowWasToday>How was today?</HowWasToday>
+        <HowWasToday>
+          How was today?
+          <WeatherIcon src={WeatherIconSun} alt="" />
+        </HowWasToday>
+
         <div>
           <h3>Summary of the day</h3>
           <p>

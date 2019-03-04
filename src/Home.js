@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Logo from './images/logoPng.png'
+import Logo from './assets/images/logoPng.png'
 import Card from './Card'
 
 const Header = styled.header`
