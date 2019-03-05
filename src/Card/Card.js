@@ -47,10 +47,18 @@ const CardBottomWrapper = styled.section`
   box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 50%);
   background-color: white;
 `
-export default function Card() {
+export default function Card({
+  date,
+  location,
+  picture,
+  summary,
+  iAte,
+  itTasted,
+}) {
+  console.log(date)
   return (
     <StyledCard data-cy="single-card">
-      <DateHeadline>August 24, 2019</DateHeadline>
+      <DateHeadline>{date}</DateHeadline>
       <Stage>
         <LocationHeadline>New York City</LocationHeadline>
       </Stage>
