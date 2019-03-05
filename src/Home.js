@@ -31,7 +31,8 @@ export default function Home() {
       location: 'New York City',
       temperatur: '20C°',
       picture: testImage,
-      summary: 'Lorem Ipsum',
+      summary:
+        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanc',
       iAte: 'Hamburger',
       itTasted: 'good',
       id: uid(),
