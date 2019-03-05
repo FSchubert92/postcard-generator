@@ -1,31 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
-import testImage from './assets/images/test-image.jpg'
-import WeatherIconSun from './assets/images/weatherIconSun.png'
+import testImage from '../assets/images/test-image.jpg'
+import WeatherIconSun from '../assets/images/weatherIconSun.png'
 
 const StyledCard = styled.section`
-  margin-top: 57px;
   p {
     margin: 2px 0 0 4px;
   }
 `
-const StyledDateHeadline = styled.h2`
+const Stage = styled.section`
+  height: 237px;
+  width: 100%;
+  background-image: url(${testImage});
+  background-size: cover;
+  padding: 10px 0 0 13px;
+`
+
+const DateHeadline = styled.h2`
   margin-left: 13px;
   margin-bottom: 5px;
 `
-const StyledHeadlineInImage = styled.h2`
-  position: absolute;
-  margin-left: 13px;
-  margin-top: 18px;
-  z-index: 1;
+
+const LocationHeadline = styled.h2`
   color: white;
   text-shadow: 0 2px 14px black;
 `
-const StyledImage = styled.img`
-  height: 237px;
-  width: 100%;
-  position: absolute;
-`
+
 const TitleAndWeatherWrapper = styled.div`
   display: grid;
   height: 61px;
@@ -41,24 +41,19 @@ const WeatherIcon = styled.img`
 `
 const CardBottomWrapper = styled.section`
   display: grid;
-  height: 299px;
-  width: 355px;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  margin: 0 25px;
-  padding: 0 6px;
-  position: relative;
-  top: 29%;
+  grid-gap: 15px;
+  margin: -50px 25px;
+  padding: 12px;
   box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 50%);
   background-color: white;
 `
 export default function Card() {
   return (
     <StyledCard>
-      <StyledDateHeadline> H2 Title</StyledDateHeadline>
-      <section>
-        <StyledHeadlineInImage>H2 Title</StyledHeadlineInImage>
-        <StyledImage src={testImage} alt="" />
-      </section>
+      <DateHeadline> H2 Title</DateHeadline>
+      <Stage>
+        <LocationHeadline>H2 Title</LocationHeadline>
+      </Stage>
       <CardBottomWrapper>
         <TitleAndWeatherWrapper>
           <HowWasToday>How was today?</HowWasToday>

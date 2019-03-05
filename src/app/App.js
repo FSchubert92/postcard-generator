@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
+import Header from '../Header/Header'
 import Home from '../Home'
 
 const Grid = styled.div`
@@ -13,13 +14,19 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
 `
+const CardContainer = styled.section`
+  margin-top: 22px;
+`
 
 function App() {
   return (
     <Router>
       <Grid>
-        <Route exact path="/" render={() => <Home />} />
-        <GlobalStyle />
+        <Header />
+        <CardContainer>
+          <Route exact path="/" render={() => <Home />} />
+          <GlobalStyle />
+        </CardContainer>
       </Grid>
     </Router>
   )
