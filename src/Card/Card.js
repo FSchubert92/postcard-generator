@@ -49,7 +49,7 @@ const CardBottomWrapper = styled.section`
 `
 export default function Card() {
   return (
-    <StyledCard>
+    <StyledCard data-cy="single-card">
       <DateHeadline>August 24, 2019</DateHeadline>
       <Stage>
         <LocationHeadline>New York City</LocationHeadline>

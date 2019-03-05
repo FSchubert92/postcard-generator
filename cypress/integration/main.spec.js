@@ -13,8 +13,9 @@ describe('Riyoko', () => {
     })
 
     it('renders a single card', () => {
-      cy.get('section')
-        .should('contain', 'H2 Title')
+      cy.get('[data-cy="single-card"]')
+        .should('contain', 'August 24, 2019')
+        .should('contain', 'New York City')
         .should('contain', 'How was today')
         .should('contain', 'Summary of the day')
     })
