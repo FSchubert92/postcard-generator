@@ -14,19 +14,14 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
 `
-const CardContainer = styled.section`
-  margin-top: 22px;
-`
 
 function App() {
   return (
     <Router>
       <Grid>
         <Header />
-        <CardContainer>
-          <Route exact path="/" render={() => <Home />} />
-          <GlobalStyle />
-        </CardContainer>
+        <Route exact path="/" render={() => <Home />} />
+        <GlobalStyle />
       </Grid>
     </Router>
   )
