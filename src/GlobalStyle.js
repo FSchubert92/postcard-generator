@@ -14,14 +14,14 @@ export default createGlobalStyle`
     position: fixed;
     width: 100%;
     height: 100%;
-   
   }
 
   h1, h2, h3, h4, h5, h6,
   ul, ol {
     margin: 0;
   }
-h1{
+
+h1 {
   font-size: 23pt;
 }
 

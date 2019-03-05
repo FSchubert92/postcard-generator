@@ -9,9 +9,6 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-jsx-remove-data-test-id": "^2.0.0",
     "babel-plugin-styled-components": "^1.10.0",
-    "cypress": "^3.1.5",
-    "docz": "^0.13.7",
-    "docz-theme-default": "^0.13.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
@@ -41,7 +38,11 @@
   ],
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^3.1.5",
+    "docz": "^0.13.7",
+    "docz-theme-default": "^0.13.7"
+  },
   "author": "",
   "license": "ISC"
 }

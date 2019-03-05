@@ -50,17 +50,17 @@ const CardBottomWrapper = styled.section`
 export default function Card() {
   return (
     <StyledCard>
-      <DateHeadline> H2 Title</DateHeadline>
+      <DateHeadline>August 24, 2019</DateHeadline>
       <Stage>
-        <LocationHeadline>H2 Title</LocationHeadline>
+        <LocationHeadline>New York City</LocationHeadline>
       </Stage>
       <CardBottomWrapper>
         <TitleAndWeatherWrapper>
           <HowWasToday>How was today?</HowWasToday>
-          <div>
+          <section>
             <WeatherIcon src={WeatherIconSun} alt="" />
             20 C°
-          </div>
+          </section>
         </TitleAndWeatherWrapper>
         <div>
           <h3>Summary of the day</h3>
