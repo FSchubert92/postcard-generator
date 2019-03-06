@@ -19,5 +19,8 @@ describe('Riyoko', () => {
         .should('contain', 'How was today')
         .should('contain', 'Summary of the day')
     })
+    it('renders multiple cards', () => {
+      cy.get('section').should('have.length', '4')
+    })
   })
 })

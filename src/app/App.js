@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
-import Home from '../Home'
+import Home from '../Home/Home'
 
 const Grid = styled.div`
   display: grid;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Card from './Card/Card'
-import CardContainer from './Card/CardContainer'
-import testImage from './assets/images/test-image.jpg'
-import testImage2 from './assets/images/test-image2.jpg'
-import testImage3 from './assets/images/test-image3.jpg'
-import testPortrait from './assets/images/test-portrait.jpg'
+import Card from '../Card/Card'
+import CardContainer from '../Card/CardContainer'
+import testImage from '../assets/images/test-image.jpg'
+import testImage2 from '../assets/images/test-image2.jpg'
+import testImage3 from '../assets/images/test-image3.jpg'
+import testPortrait from '../assets/images/test-portrait.jpg'
 import uid from 'uid'
 
 export default function Home() {
