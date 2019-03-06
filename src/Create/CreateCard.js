@@ -19,9 +19,11 @@ const FormGrid = styled.form`
   }
 `
 const defaultData = {
-  title: '',
-  content: '',
-  tags: '',
+  date: '',
+  location: '',
+  summary: '',
+  food: '',
+  taste: '',
 }
 
 export default function CreateCard() {
@@ -32,18 +34,20 @@ export default function CreateCard() {
       ...data,
       [event.target.name]: event.target.value,
     })
+    console.log(data)
   }
   return (
-    <FormGrid>
+    <FormGrid onSubmit=>
       <h2>New Card</h2>
       <div>
         <h3>Date</h3>
-        <input name="input-date" type="date" />
+        <input onChange={onInputChange} name="date" type="date" />
       </div>
       <div>
         <h3>Location</h3>
         <input
-          name="input-location"
+          onChange={onInputChange}
+          name="location"
           type="text"
           placeholder="Where have you been "
         />
@@ -51,7 +55,8 @@ export default function CreateCard() {
       <div>
         <h3>Summarize your day</h3>
         <textarea
-          name="input-summary"
+          onChange={onInputChange}
+          name="summary"
           className={'input-summary'}
           maxLength="260"
           placeholder="Summarize what you did today"
@@ -60,11 +65,11 @@ export default function CreateCard() {
 
       <div>
         <h3>Today I ate</h3>
-        <input name="input-food" type="text" />
+        <input onChange={onInputChange} name="food" type="text" />
       </div>
       <div>
         <h3>It tasted</h3>
-        <input name="taste" type="text" />
+        <input onChange={onInputChange} name="taste" type="text" />
       </div>
     </FormGrid>
   )
