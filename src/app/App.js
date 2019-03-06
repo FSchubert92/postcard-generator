@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
+import CreateCard from '../Create/CreateCard'
 
 const Grid = styled.div`
   display: grid;
@@ -30,6 +31,7 @@ function App() {
       <Grid>
         <Header />
         <Route exact path="/" render={() => <Home />} />
+        <Route path="/create" component={CreateCard} />
         <GlobalStyle />
       </Grid>
     </Router>
