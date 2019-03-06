@@ -8,13 +8,6 @@ const StyledCard = styled.section`
     margin: 2px 0 0 4px;
   }
 `
-const Stage = styled.section`
-  height: 237px;
-  width: 100%;
-  background-image: url(${testImage});
-  background-size: cover;
-  padding: 10px 0 0 13px;
-`
 
 const DateHeadline = styled.h2`
   margin-left: 13px;
@@ -42,42 +35,53 @@ const WeatherIcon = styled.img`
 const CardBottomWrapper = styled.section`
   display: grid;
   grid-gap: 15px;
-  margin: -50px 25px;
+  margin: -50px 25px 0;
   padding: 12px;
-  box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 50%);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   background-color: white;
 `
-export default function Card() {
+export default function Card({
+  date,
+  location,
+  temperatur,
+  picture,
+  summary,
+  iAte,
+  itTasted,
+}) {
+  const Stage = styled.section`
+    height: 237px;
+    width: 100%;
+    background-image: url(${picture});
+    background-size: cover;
+    padding: 10px 0 0 13px;
+  `
+
   return (
     <StyledCard data-cy="single-card">
-      <DateHeadline>August 24, 2019</DateHeadline>
+      <DateHeadline>{date}</DateHeadline>
       <Stage>
-        <LocationHeadline>New York City</LocationHeadline>
+        <LocationHeadline>{location}</LocationHeadline>
       </Stage>
       <CardBottomWrapper>
         <TitleAndWeatherWrapper>
           <HowWasToday>How was today?</HowWasToday>
           <section>
             <WeatherIcon src={WeatherIconSun} alt="" />
-            20 C°
+            {temperatur}
           </section>
         </TitleAndWeatherWrapper>
         <div>
           <h3>Summary of the day</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti
-            molestias saepe quod ab pariatur deleniti harum reprehenderit
-            assumenda porro soluta, deserunt cum tempora error, libero, tenetur
-            rem! Beatae, harum excepturi.
-          </p>
+          <p>{summary}</p>
         </div>
         <section>
           <h3>I ate</h3>
-          <p>Lorem Ipsum</p>
+          <p>{iAte}</p>
         </section>
         <section>
           <h3>It tasted</h3>
-          <p>Lorem Ipsum</p>
+          <p>{itTasted}</p>
         </section>
       </CardBottomWrapper>
     </StyledCard>

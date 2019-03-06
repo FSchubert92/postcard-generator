@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
-import Home from '../Home'
+import Home from '../Home/Home'
 
 const Grid = styled.div`
   display: grid;
@@ -13,9 +13,15 @@ const Grid = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
-const CardContainer = styled.section`
-  margin-top: 22px;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 18px;
+    background: linear-gradient(transparent, #eae6e6);
+  }
 `
 
 function App() {
@@ -23,10 +29,8 @@ function App() {
     <Router>
       <Grid>
         <Header />
-        <CardContainer>
-          <Route exact path="/" render={() => <Home />} />
-          <GlobalStyle />
-        </CardContainer>
+        <Route exact path="/" render={() => <Home />} />
+        <GlobalStyle />
       </Grid>
     </Router>
   )
