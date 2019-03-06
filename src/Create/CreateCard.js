@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom'
+import testImage from '../assets/images/test-image.jpg'
+
 const FormGrid = styled.form`
   display: grid;
   height: 100%;
-  grid-template-rows: 48px repeat(5, auto);
+  grid-template-rows: 48px repeat(6, auto);
   margin: 20px;
   padding-bottom: 55px;
 
@@ -13,7 +16,11 @@ const FormGrid = styled.form`
     padding: 10px;
     margin: 10px 0;
   }
-
+  button {
+    position: fixed;
+    top: 20px;
+    padding: 30px;
+  }
   .input-summary {
     height: 100px;
   }
@@ -26,7 +33,7 @@ const defaultData = {
   taste: '',
 }
 
-export default function CreateCard() {
+export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
 
   function onInputChange(event) {
@@ -34,10 +41,15 @@ export default function CreateCard() {
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
+  }
+  function onSubmit(event) {
+    event.preventDefault()
+    props.onSubmit(data)
+    /*setData(defaultData)*/
+    props.history.push('/')
   }
   return (
-    <FormGrid>
+    <FormGrid onSubmit={onSubmit}>
       <h2>New Card</h2>
       <div>
         <h3>Date</h3>
@@ -71,6 +83,7 @@ export default function CreateCard() {
         <h3>It tasted</h3>
         <input onChange={onInputChange} name="taste" type="text" />
       </div>
+      <button />
     </FormGrid>
   )
 }

@@ -38,17 +38,27 @@ function App() {
       temperatur: '20C°',
       picture: testImage,
       summary: '',
-      iAte: '',
-      itTasted: '',
+      food: '',
+      taste: '',
       id: uid(),
     },
   ])
+
+  function addCardToState(data) {
+    setCards([...cards, data])
+  }
+
   return (
     <Router>
       <Grid>
         <Header />
         <Route exact path="/" render={() => <Home cards={cards} />} />
-        <Route path="/create" component={CreateCard} />
+        <Route
+          path="/create"
+          render={({ history }) => (
+            <CreateCard history={history} onSubmit={addCardToState} />
+          )}
+        />
         <GlobalStyle />
       </Grid>
     </Router>

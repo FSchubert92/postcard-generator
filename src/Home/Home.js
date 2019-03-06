@@ -12,8 +12,8 @@ export default function Home({ cards }) {
           temperatur={card.temperatur}
           picture={card.picture}
           summary={card.summary}
-          iAte={card.iAte}
-          itTasted={card.itTasted}
+          iAte={card.food}
+          itTasted={card.taste}
           key={card.id}
         />
       ))}
