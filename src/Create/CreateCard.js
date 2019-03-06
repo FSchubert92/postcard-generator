@@ -37,7 +37,7 @@ export default function CreateCard() {
     console.log(data)
   }
   return (
-    <FormGrid onSubmit=>
+    <FormGrid>
       <h2>New Card</h2>
       <div>
         <h3>Date</h3>
