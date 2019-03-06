@@ -14,7 +14,8 @@ export default function Home() {
       location: 'New York City',
       temperatur: '20C°',
       picture: testImage,
-      summary: 'Lorem Ipsum',
+      summary:
+        'Heute sind wir angekommen. Die Fahrt vom Flughafen ins Hotel war schon sehr cool, New Yorker Ubahnen sind anders als in Hamburg. Vor allem war es ziemlich dreckig. Abend haben wir uns den Time Square angeschaut, das war großartig!',
       iAte: 'Hamburger',
       itTasted: 'good',
       id: uid(),
@@ -53,7 +54,7 @@ export default function Home() {
     },
   ])
   return (
-    <CardContainer>
+    <CardContainer data-cy="card-container">
       {cards.map(card => (
         <Card
           date={card.date}

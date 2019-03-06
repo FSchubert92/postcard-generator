@@ -14,13 +14,13 @@ describe('Riyoko', () => {
 
     it('renders a single card', () => {
       cy.get('[data-cy="single-card"]')
-        .should('contain', 'August 24, 2019')
+        .should('contain', '24 August 2019')
         .should('contain', 'New York City')
         .should('contain', 'How was today')
         .should('contain', 'Summary of the day')
     })
     it('renders multiple cards', () => {
-      cy.get('section').should('have.length', '4')
+      cy.get('[data-cy="card-container"]').contains('section', 'New York City')
     })
   })
 })

@@ -37,7 +37,7 @@ const CardBottomWrapper = styled.section`
   grid-gap: 15px;
   margin: -50px 25px 0;
   padding: 12px;
-  box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 50%);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   background-color: white;
 `
 export default function Card({
