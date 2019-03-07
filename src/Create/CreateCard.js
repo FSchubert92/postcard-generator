@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
-import dayjs from 'dayjs'
 
 const FormGrid = styled.form`
   display: grid;
@@ -12,18 +11,25 @@ const FormGrid = styled.form`
 
   input,
   textarea {
-    border: 1px solid #ddd;
+    border: ${p =>
+      p.isSomethingEmpty ? '1px solid #18B839' : '2px solid #ddd'};
     padding: 10px;
     margin: 10px 0;
+    &:focus {
+      outline: 3px solid lightgreen;
+    }
   }
+
   input[type='file'] {
     padding: 0;
+    width: 315px;
   }
   button {
     position: fixed;
     bottom: 9px;
     left: 41%;
     background: ${p => (p.isSomethingEmpty ? '#18B839' : '#333')};
+    color: ${p => (p.isSomethingEmpty ? 'white' : '#333')};
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   }
   .input-summary {
@@ -79,6 +85,7 @@ export default function CreateCard(props) {
       return false
     }
   }
+
   function onSubmit(event) {
     event.preventDefault()
     validateForm()
