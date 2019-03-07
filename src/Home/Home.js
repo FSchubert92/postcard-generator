@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Card from '../Card/Card'
 import CardContainer from '../Card/CardContainer'
 import styled from 'styled-components'
+import dayjs from 'dayjs'
 
 const CreateButton = styled(NavLink)`
   background-color: #18b839;
@@ -28,7 +29,7 @@ export default function Home({ cards }) {
       <CardContainer data-cy="card-container">
         {cards.map(card => (
           <Card
-            date={card.date}
+            date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
             location={card.location}
             temperatur={card.temperatur}
             picture={card.picture}

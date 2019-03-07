@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom'
 import testImage from '../assets/images/test-image.jpg'
+import dayjs from 'dayjs'
 
 const FormGrid = styled.form`
   display: grid;
@@ -50,11 +51,19 @@ export default function CreateCard(props) {
   }
   function onSubmit(event) {
     event.preventDefault()
+    parseDate()
     props.onSubmit(data)
     /*setData(defaultData)*/
     props.history.push('/')
   }
 
+  function parseDate() {
+    const parsedDate = dayjs(data.date).format('dddd  DD MMMM YYYY ')
+    console.log(parsedDate)
+
+    setData({ ...data, date: parsedDate })
+    console.log(data)
+  }
   function fileSelectedHandler(event) {
     setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
     console.log(data)
