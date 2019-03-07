@@ -6,9 +6,6 @@ import Header from '../Header/Header'
 import Home from '../Home/Home'
 import CreateCard from '../Create/CreateCard'
 import testImage from '../assets/images/test-image.jpg'
-import testImage2 from '../assets/images/test-image2.jpg'
-import testImage3 from '../assets/images/test-image3.jpg'
-import testPortrait from '../assets/images/test-portrait.jpg'
 import uid from 'uid'
 
 const Grid = styled.div`

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom'
-import testImage from '../assets/images/test-image.jpg'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 const FormGrid = styled.form`
@@ -24,13 +23,30 @@ const FormGrid = styled.form`
     position: fixed;
     bottom: 9px;
     left: 41%;
+    background: ${p => (p.isSomethingEmpty ? '#18B839' : '#333')};
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   }
   .input-summary {
     height: 100px;
   }
 `
-
+const BackButton = styled(NavLink)`
+  background-color: crimson;
+  color: white;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  text-decoration: none;
+  position: fixed;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  bottom: 9px;
+  left: 27px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
+  padding: 3px;
+`
 const defaultData = {
   date: '',
   location: '',
@@ -49,32 +65,39 @@ export default function CreateCard(props) {
       [event.target.name]: event.target.value,
     })
   }
+  function validateForm() {
+    if (
+      data.date.length > 0 &&
+      data.location.length > 0 &&
+      data.picture.length > 0 &&
+      data.summary.length > 0 &&
+      data.food.length > 0 &&
+      data.taste.length > 0
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
   function onSubmit(event) {
     event.preventDefault()
-    parseDate()
+    validateForm()
     props.onSubmit(data)
     /*setData(defaultData)*/
     props.history.push('/')
   }
 
-  function parseDate() {
-    const parsedDate = dayjs(data.date).format('dddd  DD MMMM YYYY ')
-    console.log(parsedDate)
-
-    setData({ ...data, date: parsedDate })
-    console.log(data)
-  }
   function fileSelectedHandler(event) {
     setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
     console.log(data)
   }
 
   return (
-    <FormGrid onSubmit={onSubmit}>
+    <FormGrid isSomethingEmpty={validateForm()} onSubmit={onSubmit}>
       <h2>New Card</h2>
       <div>
         <h3>Date</h3>
-        <input onChange={onInputChange} name="date" type="date" />
+        <input onChange={onInputChange} name="date" type="date" required />
       </div>
       <div>
         <h3>Location</h3>
@@ -82,7 +105,8 @@ export default function CreateCard(props) {
           onChange={onInputChange}
           name="location"
           type="text"
-          placeholder="Where have you been "
+          placeholder="Where have you been"
+          required
         />
       </div>
       <div>
@@ -93,22 +117,29 @@ export default function CreateCard(props) {
           className={'input-summary'}
           maxLength="260"
           placeholder="Summarize what you did today"
+          required
         />
       </div>
 
       <div>
         <h3>Today I ate</h3>
-        <input onChange={onInputChange} name="food" type="text" />
+        <input onChange={onInputChange} name="food" type="text" required />
       </div>
       <div>
         <h3>It tasted</h3>
-        <input onChange={onInputChange} name="taste" type="text" />
+        <input onChange={onInputChange} name="taste" type="text" required />
       </div>
       <div>
         <h3>Image</h3>
-        <input type="file" onChange={fileSelectedHandler} />
+        <input
+          type="file"
+          onChange={fileSelectedHandler}
+          required
+          accept="image/x-png,image/gif,image/jpeg"
+        />
       </div>
       <button>OK!</button>
+      <BackButton to="/">X</BackButton>
     </FormGrid>
   )
 }
