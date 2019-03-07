@@ -5,7 +5,6 @@ import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import CreateCard from '../Create/CreateCard'
-import ImageUpload from '../Create/ImageUpload'
 import testImage from '../assets/images/test-image.jpg'
 import testImage2 from '../assets/images/test-image2.jpg'
 import testImage3 from '../assets/images/test-image3.jpg'
@@ -59,12 +58,6 @@ function App() {
               history={history}
               onSubmit={addCardToState}
             />
-          )}
-        />
-        <Route
-          path="/upload"
-          render={({ history }) => (
-            <ImageUpload history={history} onSubmit={addImageToState} />
           )}
         />
         <GlobalStyle />
