@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import CreateCard from '../Create/CreateCard'
+import ImageUpload from '../Create/ImageUpload'
 import testImage from '../assets/images/test-image.jpg'
 import testImage2 from '../assets/images/test-image2.jpg'
 import testImage3 from '../assets/images/test-image3.jpg'
@@ -19,15 +20,6 @@ const Grid = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 18px;
-    background: linear-gradient(transparent, #eae6e6);
-  }
 `
 
 function App() {
@@ -47,16 +39,32 @@ function App() {
   function addCardToState(data) {
     setCards([...cards, data])
   }
-
+  function addImageToState(image) {}
   return (
     <Router>
       <Grid>
         <Header />
-        <Route exact path="/" render={() => <Home cards={cards} />} />
+        <Route
+          exact
+          path="/"
+          key={uid()}
+          render={() => <Home key={uid()} cards={cards} />}
+        />
         <Route
           path="/create"
+          key={uid()}
           render={({ history }) => (
-            <CreateCard history={history} onSubmit={addCardToState} />
+            <CreateCard
+              key={uid()}
+              history={history}
+              onSubmit={addCardToState}
+            />
+          )}
+        />
+        <Route
+          path="/upload"
+          render={({ history }) => (
+            <ImageUpload history={history} onSubmit={addImageToState} />
           )}
         />
         <GlobalStyle />

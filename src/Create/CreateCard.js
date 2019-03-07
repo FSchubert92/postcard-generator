@@ -5,10 +5,10 @@ import testImage from '../assets/images/test-image.jpg'
 
 const FormGrid = styled.form`
   display: grid;
-  height: 100%;
-  grid-template-rows: 48px repeat(6, auto);
+  grid-template-rows: 48px repeat(7, auto);
   margin: 20px;
   padding-bottom: 55px;
+  overflow-y: scroll;
 
   input,
   textarea {
@@ -16,18 +16,24 @@ const FormGrid = styled.form`
     padding: 10px;
     margin: 10px 0;
   }
+  input[type='file'] {
+    padding: 0;
+  }
   button {
     position: fixed;
-    top: 20px;
-    padding: 30px;
+    bottom: 9px;
+    left: 41%;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   }
   .input-summary {
     height: 100px;
   }
 `
+
 const defaultData = {
   date: '',
   location: '',
+  picture: '',
   summary: '',
   food: '',
   taste: '',
@@ -48,6 +54,12 @@ export default function CreateCard(props) {
     /*setData(defaultData)*/
     props.history.push('/')
   }
+
+  function fileSelectedHandler(event) {
+    setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
+    console.log(data)
+  }
+
   return (
     <FormGrid onSubmit={onSubmit}>
       <h2>New Card</h2>
@@ -83,7 +95,11 @@ export default function CreateCard(props) {
         <h3>It tasted</h3>
         <input onChange={onInputChange} name="taste" type="text" />
       </div>
-      <button />
+      <div>
+        <h3>Image</h3>
+        <input type="file" onChange={fileSelectedHandler} />
+      </div>
+      <button>OK!</button>
     </FormGrid>
   )
 }
