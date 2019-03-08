@@ -39,11 +39,10 @@ h1 {
   }
 
   button {
-    background: hotpink;
-    border: none;
-    border-radius: 4px;
+    background-color: #18B839;
     color: white;
-    font-weight: bold;
-
+    height:44px;
+    width: 44px;
+    border-radius: 50%;
   }
 `
