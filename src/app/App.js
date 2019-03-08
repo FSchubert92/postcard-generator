@@ -7,6 +7,7 @@ import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
 import testImage from '../assets/images/test-image.jpg'
 import uid from 'uid'
+import { Helmet } from 'react-helmet'
 
 const Grid = styled.div`
   display: grid;
@@ -36,29 +37,37 @@ function App() {
     setCards([...cards, data])
   }
   return (
-    <Router>
-      <Grid>
-        <Header />
-        <Route
-          exact
-          path="/"
-          key={uid()}
-          render={() => <Home key={uid()} cards={cards} />}
+    <React.Fragment>
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
+          rel="stylesheet"
         />
-        <Route
-          path="/create"
-          key={uid()}
-          render={({ history }) => (
-            <NewCardForm
-              key={uid()}
-              history={history}
-              onSubmit={addCardToState}
-            />
-          )}
-        />
-        <GlobalStyle />
-      </Grid>
-    </Router>
+      </Helmet>
+      <Router>
+        <Grid>
+          <Header />
+          <Route
+            exact
+            path="/"
+            key={uid()}
+            render={() => <Home key={uid()} cards={cards} />}
+          />
+          <Route
+            path="/create"
+            key={uid()}
+            render={({ history }) => (
+              <NewCardForm
+                key={uid()}
+                history={history}
+                onSubmit={addCardToState}
+              />
+            )}
+          />
+          <GlobalStyle />
+        </Grid>
+      </Router>
+    </React.Fragment>
   )
 }
 

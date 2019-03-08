@@ -66,7 +66,7 @@ const ButtonWrapper = styled.section`
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 45px;
+  padding-bottom: 10px;
   box-shadow: 0;
 `
 
