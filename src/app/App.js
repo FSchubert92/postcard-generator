@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
-import CreateCard from '../Create/CreateCard'
+import NewCardForm from '../Create/NewCardForm'
 import testImage from '../assets/images/test-image.jpg'
 import uid from 'uid'
 
@@ -35,7 +35,6 @@ function App() {
   function addCardToState(data) {
     setCards([...cards, data])
   }
-  function addImageToState(image) {}
   return (
     <Router>
       <Grid>
@@ -50,7 +49,7 @@ function App() {
           path="/create"
           key={uid()}
           render={({ history }) => (
-            <CreateCard
+            <NewCardForm
               key={uid()}
               history={history}
               onSubmit={addCardToState}

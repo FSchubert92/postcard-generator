@@ -7,6 +7,7 @@ const FormGrid = styled.form`
   grid-template-rows: 48px repeat(7, auto);
   margin: 20px;
   padding-bottom: 55px;
+  grid-gap: 50px;
   overflow-y: scroll;
 
   input,
@@ -25,9 +26,6 @@ const FormGrid = styled.form`
     width: 315px;
   }
   button {
-    position: fixed;
-    bottom: 9px;
-    left: 41%;
     background: ${p => (p.isSomethingEmpty ? '#18B839' : '#333')};
     color: ${p => (p.isSomethingEmpty ? 'white' : '#333')};
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
@@ -43,7 +41,6 @@ const BackButton = styled(NavLink)`
   width: 44px;
   border-radius: 50%;
   text-decoration: none;
-  position: fixed;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -52,6 +49,12 @@ const BackButton = styled(NavLink)`
   left: 27px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   padding: 3px;
+`
+const ButtonWrapper = styled.div`
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 45px;
 `
 const defaultData = {
   date: '',
@@ -145,8 +148,10 @@ export default function CreateCard(props) {
           accept="image/x-png,image/gif,image/jpeg"
         />
       </div>
-      <button>OK!</button>
-      <BackButton to="/">X</BackButton>
+      <ButtonWrapper>
+        <BackButton to="/">X</BackButton>
+        <button>OK!</button>
+      </ButtonWrapper>
     </FormGrid>
   )
 }
