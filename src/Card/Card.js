@@ -24,14 +24,17 @@ const TitleAndWeatherWrapper = styled.div`
   height: 61px;
   grid-template-columns: 1fr 48px;
 `
+
 const HowWasToday = styled.h2`
   padding-top: 5px;
   margin-bottom: 28px;
 `
+
 const WeatherIcon = styled.img`
   width: 48px;
   height: 50px;
 `
+
 const CardBottomWrapper = styled.section`
   display: grid;
   grid-gap: 15px;
@@ -40,6 +43,7 @@ const CardBottomWrapper = styled.section`
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   background-color: white;
 `
+
 export default function Card({
   date,
   location,
