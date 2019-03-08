@@ -6,14 +6,19 @@ const FormGrid = styled.form`
   display: grid;
   grid-template-rows: 48px repeat(7, auto);
   margin: 20px;
-  padding-bottom: 55px;
   grid-gap: 50px;
   overflow-y: scroll;
+  padding: 0 5px;
+
+  div {
+    padding: 5px;
+    box-shadow: 2px 1px 12px 0px rgba(0, 0, 0, 50%);
+  }
 
   input,
   textarea {
     border: ${p =>
-      p.isSomethingEmpty ? '1px solid #18B839' : '2px solid #ddd'};
+      p.checkForEmptyFields ? '1px solid #18B839' : '2px solid #ddd'};
     padding: 10px;
     margin: 10px 0;
     &:focus {
@@ -26,8 +31,8 @@ const FormGrid = styled.form`
     width: 315px;
   }
   button {
-    background: ${p => (p.isSomethingEmpty ? '#18B839' : '#333')};
-    color: ${p => (p.isSomethingEmpty ? 'white' : '#333')};
+    background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
+    color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   }
   .input-summary {
@@ -56,6 +61,9 @@ const ButtonWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 45px;
 `
+const ErrorMessage = styled.p`
+  color: crimson;
+`
 const defaultData = {
   date: '',
   location: '',
@@ -73,20 +81,10 @@ export default function CreateCard(props) {
       ...data,
       [event.target.name]: event.target.value,
     })
+    console.log(!Object.values(data).includes(''))
   }
   function validateForm() {
-    if (
-      data.date.length > 0 &&
-      data.location.length > 0 &&
-      data.picture.length > 0 &&
-      data.summary.length > 0 &&
-      data.food.length > 0 &&
-      data.taste.length > 0
-    ) {
-      return true
-    } else {
-      return false
-    }
+    return !Object.values(data).includes('')
   }
 
   function onSubmit(event) {
@@ -100,10 +98,26 @@ export default function CreateCard(props) {
   function fileSelectedHandler(event) {
     setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
     console.log(data)
+    validateForm()
+  }
+
+  const summaryLength = 260 - data.summary.length
+
+  function SummaryInputMessage() {
+    if (summaryLength < 0) {
+      return (
+        <ErrorMessage>
+          Oh! Try to keep yourself a little shorter. The maximum input length is
+          260 characters. Ask yourself: What was your highest high today?
+        </ErrorMessage>
+      )
+    } else {
+      return null
+    }
   }
 
   return (
-    <FormGrid isSomethingEmpty={validateForm()} onSubmit={onSubmit}>
+    <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
       <h2>New Card</h2>
       <div>
         <h3>Date</h3>
@@ -125,10 +139,11 @@ export default function CreateCard(props) {
           onChange={onInputChange}
           name="summary"
           className={'input-summary'}
-          maxLength="260"
+          maxLength="280"
           placeholder="Summarize what you did today"
           required
         />
+        <SummaryInputMessage />
       </div>
 
       <div>
