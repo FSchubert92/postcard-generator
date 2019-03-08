@@ -5,7 +5,7 @@ import WeatherIconSun from '../assets/images/weatherIconSun.png'
 
 const StyledCard = styled.section`
   p {
-    margin: 2px 0 0 4px;
+    margin: 2px 0 0 0px;
   }
 `
 
@@ -21,13 +21,13 @@ const LocationHeadline = styled.h2`
 
 const TitleAndWeatherWrapper = styled.div`
   display: grid;
-  height: 61px;
+  grid-template-rows: auto;
   grid-template-columns: 1fr 48px;
 `
 
-const HowWasToday = styled.h2`
+const HowWasToday = styled.h3`
+  font-size: 24px;
   padding-top: 5px;
-  margin-bottom: 28px;
 `
 
 const WeatherIcon = styled.img`
@@ -68,25 +68,24 @@ export default function Card({
         <LocationHeadline>{location}</LocationHeadline>
       </Stage>
       <CardBottomWrapper>
-        <TitleAndWeatherWrapper>
-          <HowWasToday>How was today?</HowWasToday>
-          <section>
-            <WeatherIcon src={WeatherIconSun} alt="" />
-            {temperatur}
-          </section>
-        </TitleAndWeatherWrapper>
+        <HowWasToday>How was today?</HowWasToday>
         <div>
-          <h3>Summary of the day</h3>
           <p>{summary}</p>
         </div>
-        <section>
-          <h3>I ate</h3>
-          <p>{iAte}</p>
-        </section>
-        <section>
-          <h3>It tasted</h3>
-          <p>{itTasted}</p>
-        </section>
+        <TitleAndWeatherWrapper>
+          <section>
+            <h3>I ate</h3>
+            <p>{iAte}</p>
+          </section>
+          <section>
+            <WeatherIcon src={WeatherIconSun} alt="" />
+          </section>
+          <section>
+            <h3>It tasted</h3>
+            <p>{itTasted}</p>
+          </section>
+          <div>{temperatur}</div>
+        </TitleAndWeatherWrapper>
       </CardBottomWrapper>
     </StyledCard>
   )
