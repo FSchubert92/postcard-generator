@@ -101,13 +101,6 @@ export default function CreateCard(props) {
     return !Object.values(data).includes('')
   }
 
-  // function fileSelectedHandler(event) {
-  //   // uploadImage(event)
-
-  //   setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
-  //   validateForm()
-  // }
-
   function onFileChange(event) {
     event.preventDefault()
     setData({ ...data, pictureFile: event.target.files[0] })
@@ -121,6 +114,7 @@ export default function CreateCard(props) {
     })
     data.picture = imageURL
     props.onSubmit(data)
+    props.history.push('/')
   }
 
   const summaryLength = 260 - data.summary.length
@@ -242,7 +236,6 @@ export default function CreateCard(props) {
           <button>OK!</button>
         </ButtonWrapper>
       </FormGrid>
-      <button onClick={log}>TEST</button>
     </React.Fragment>
   )
 }

@@ -12,11 +12,11 @@ const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
 
 export function uploadImage(picture) {
   console.log(picture)
-  const url = `https://api.cloudinary.com/v1_1/drg6nxkrj/upload`
+  const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
 
   const formData = new FormData()
   formData.append('file', picture)
-  formData.append('upload_preset', 'rkzc8imk')
+  formData.append('upload_preset', PRESET)
 
   return axios.post(url, formData, {
     headers: {
