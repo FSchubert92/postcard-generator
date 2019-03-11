@@ -8,6 +8,7 @@ import NewCardForm from '../Create/NewCardForm'
 import testImage from '../assets/images/test-image.jpg'
 import uid from 'uid'
 import { Helmet } from 'react-helmet'
+import { postNewCard, saveCardsToStorage } from '../services'
 
 const Grid = styled.div`
   display: grid;
@@ -32,6 +33,10 @@ function App() {
       id: uid(),
     },
   ])
+
+  useEffect(() => {
+    saveCardsToStorage(cards)
+  }, [cards])
 
   function addCardToState(data) {
     setCards([...cards, data])
