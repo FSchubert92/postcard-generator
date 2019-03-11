@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import axios from 'axios'
 import uid from 'uid'
 import testImage from './assets/images/test-image.jpg'
@@ -5,6 +6,25 @@ import testImage from './assets/images/test-image.jpg'
 const cardsPath = 'http://localhost:4000/cards'
 export function getAllCards() {
   return axios.get(cardsPath)
+}
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
+
+export function uploadImage(picture) {
+  console.log(picture)
+  const url = `https://api.cloudinary.com/v1_1/drg6nxkrj/upload`
+
+  const formData = new FormData()
+  formData.append('file', picture)
+  formData.append('upload_preset', 'rkzc8imk')
+
+  return axios.post(url, formData, {
+    headers: {
+      'Content-type': 'multipart/form-data',
+    },
+  })
+  // .then(onImageSave)
+  // .catch(err => console.error(err))
 }
 
 export function postNewCard(card) {

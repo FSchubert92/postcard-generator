@@ -27,16 +27,17 @@ function App() {
   }, [cards])
 
   function addCardToState(data) {
+    console.log(data)
     setCards([...cards, data])
   }
   return (
     <React.Fragment>
-      <Helmet>
+      {/* <Helmet>
         <link
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
           rel="stylesheet"
         />
-      </Helmet>
+      </Helmet> */}
       <Router>
         <Grid>
           <Header />
