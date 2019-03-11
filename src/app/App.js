@@ -5,9 +5,9 @@ import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
-import testImage from '../assets/images/test-image.jpg'
 import uid from 'uid'
 import { Helmet } from 'react-helmet'
+import { saveCardsToStorage, getCardsFromStorage } from '../services'
 
 const Grid = styled.div`
   display: grid;
@@ -20,18 +20,11 @@ const Grid = styled.div`
 `
 
 function App() {
-  const [cards, setCards] = useState([
-    {
-      date: '',
-      location: '',
-      temperatur: '20C°',
-      picture: testImage,
-      summary: '',
-      food: '',
-      taste: '',
-      id: uid(),
-    },
-  ])
+  const [cards, setCards] = useState(getCardsFromStorage())
+
+  useEffect(() => {
+    saveCardsToStorage(cards)
+  }, [cards])
 
   function addCardToState(data) {
     setCards([...cards, data])

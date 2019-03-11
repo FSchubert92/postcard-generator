@@ -1,4 +1,6 @@
 import axios from 'axios'
+import uid from 'uid'
+import testImage from './assets/images/test-image.jpg'
 
 const cardsPath = 'http://localhost:4000/cards'
 export function getAllCards() {
@@ -19,7 +21,20 @@ export function deleteCardFromServer(card) {
 }
 
 export function getCardsFromStorage() {
-  return getFromStorage('cards') || []
+  return (
+    getFromStorage('cards') || [
+      {
+        date: '',
+        location: '',
+        temperatur: '20C°',
+        picture: testImage,
+        summary: '',
+        food: '',
+        taste: '',
+        id: uid(),
+      },
+    ]
+  )
 }
 
 export function saveCardsToStorage(cards) {
