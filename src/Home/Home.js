@@ -33,28 +33,36 @@ const NoCardsToShow = styled.section`
 `
 
 export default function Home({ cards }) {
+  function CardsToShow() {
+    if (cards.length === 0) {
+      return (
+        <NoCardsToShow>
+          Sorry, there are no postcards to show TT <br />
+          Why don't you start adding one?
+        </NoCardsToShow>
+      )
+    } else {
+      return null
+    }
+  }
+  console.log(cards)
+  console.log(cards.map(card => card.location !== ''))
   return (
     <React.Fragment>
       <CardContainer data-cy="card-container">
-        {cards.find(card => card.location === '' && card.picture === '') ? (
-          <NoCardsToShow>
-            Sorry, there are no postcards to show TT <br />
-            Why don't you start adding one?
-          </NoCardsToShow>
-        ) : (
-          cards.map(card => (
-            <Card
-              date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
-              location={card.location}
-              temperatur={card.temperatur}
-              picture={card.picture}
-              summary={card.summary}
-              iAte={card.food}
-              itTasted={card.taste}
-              key={card.id}
-            />
-          ))
-        )}
+        <CardsToShow />
+        {cards.map(card => (
+          <Card
+            date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
+            location={card.location}
+            temperatur={card.temperatur}
+            picture={card.picture}
+            summary={card.summary}
+            iAte={card.food}
+            itTasted={card.taste}
+            key={card.id}
+          />
+        ))}
       </CardContainer>
       <CreateButton to="/create">
         <div>+</div>

@@ -51,7 +51,6 @@ export function getCardsFromStorage() {
         summary: '',
         food: '',
         taste: '',
-        id: uid(),
       },
     ]
   )

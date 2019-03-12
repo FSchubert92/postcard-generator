@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import { uploadImage } from '../services'
 import EXIF from 'exif-js'
+import uid from 'uid'
 
 const FormGrid = styled.form`
   display: grid;
@@ -107,6 +108,8 @@ export default function CreateCard(props) {
     const picture = event.target.files[0]
     EXIF.getData(picture, function() {
       const tags = EXIF.getAllTags(this)
+      // const longitude = EXIF.getTag(this, 'GPSLongitudSLon')
+      // const latitude = EXIF.getTag(this, 'GPSlatitude')
       console.log(tags)
     })
     setData({ ...data, pictureFile: event.target.files[0] })
@@ -119,6 +122,7 @@ export default function CreateCard(props) {
       imageURL = res.data.url
     })
     data.picture = imageURL
+    data.id = uid()
     props.onSubmit(data)
     props.history.push('/')
   }
