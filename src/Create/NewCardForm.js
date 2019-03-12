@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import { uploadImage } from '../services'
+import EXIF from 'exif-js'
 
 const FormGrid = styled.form`
   display: grid;
@@ -103,6 +104,11 @@ export default function CreateCard(props) {
 
   function onFileChange(event) {
     event.preventDefault()
+    const picture = event.target.files[0]
+    EXIF.getData(picture, function() {
+      const tags = EXIF.getAllTags(this)
+      console.log(tags)
+    })
     setData({ ...data, pictureFile: event.target.files[0] })
   }
 
@@ -169,17 +175,6 @@ export default function CreateCard(props) {
     }
   }
 
-  function log() {
-    console.log(data)
-  }
-  // function PictureMessage() {
-  //   if (pictureLength > 0) {
-  //     return <Message> Thank you very much!</Message>
-  //   } else {
-  //     return null
-  //   }
-  // }
-
   return (
     <React.Fragment>
       <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
@@ -228,7 +223,7 @@ export default function CreateCard(props) {
             onChange={onFileChange}
             type="file"
             required
-            accept="image/x-png,image/gif,image/jpeg"
+            accept="image/jpeg"
           />
         </div>
         <ButtonWrapper>
