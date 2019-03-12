@@ -107,10 +107,12 @@ export default function CreateCard(props) {
     event.preventDefault()
     const picture = event.target.files[0]
     EXIF.getData(picture, function() {
-      const tags = EXIF.getAllTags(this)
+      const longitude = EXIF.getTag(this, 'GPSLongitude')
+      const latitude = EXIF.getTag(this, 'GPSLatitude')
       // const longitude = EXIF.getTag(this, 'GPSLongitudSLon')
       // const latitude = EXIF.getTag(this, 'GPSlatitude')
-      console.log(tags)
+      console.log(longitude)
+      console.log(latitude)
     })
     setData({ ...data, pictureFile: event.target.files[0] })
   }
