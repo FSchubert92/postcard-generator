@@ -22,23 +22,39 @@ const CreateButton = styled(NavLink)`
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   padding: 3px;
 `
+const NoCardsToShow = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: lightgray;
+  margin: 20px;
+  height: 80%;
+`
 
 export default function Home({ cards }) {
   return (
     <React.Fragment>
       <CardContainer data-cy="card-container">
-        {cards.map(card => (
-          <Card
-            date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
-            location={card.location}
-            temperatur={card.temperatur}
-            picture={card.picture}
-            summary={card.summary}
-            iAte={card.food}
-            itTasted={card.taste}
-            key={card.id}
-          />
-        ))}
+        {cards.find(card => card.location === '' && card.picture === '') ? (
+          <NoCardsToShow>
+            Sorry, there are no postcards to show TT <br />
+            Why don't you start adding one?
+          </NoCardsToShow>
+        ) : (
+          cards.map(card => (
+            <Card
+              date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
+              location={card.location}
+              temperatur={card.temperatur}
+              picture={card.picture}
+              summary={card.summary}
+              iAte={card.food}
+              itTasted={card.taste}
+              key={card.id}
+            />
+          ))
+        )}
       </CardContainer>
       <CreateButton to="/create">
         <div>+</div>

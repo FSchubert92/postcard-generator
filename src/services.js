@@ -47,7 +47,7 @@ export function getCardsFromStorage() {
         date: '',
         location: '',
         temperatur: '20C°',
-        picture: testImage,
+        picture: '',
         summary: '',
         food: '',
         taste: '',

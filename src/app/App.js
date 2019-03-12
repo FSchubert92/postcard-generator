@@ -30,6 +30,7 @@ function App() {
     console.log(data)
     setCards([...cards, data])
   }
+
   return (
     <React.Fragment>
       {/* <Helmet>
