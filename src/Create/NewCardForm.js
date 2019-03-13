@@ -127,14 +127,12 @@ export default function CreateCard(props) {
       try {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
-        await getLocation(latitude, longitude).then(
-          res =>
-            console.log(
-              res.data.address.city ||
-                res.data.address.village ||
-                res.data.address.country
-            )
-          //setImageLocation(res.data.address.city)
+        await getLocation(latitude, longitude).then(res =>
+          setImageLocation(
+            res.data.address.city ||
+              res.data.address.village ||
+              res.data.address.country
+          )
         )
       } catch (error) {
         setData({ ...data, autoImage: false })
