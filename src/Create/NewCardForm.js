@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import { uploadImage, getLocation } from '../services'
 import { getPictureLocation } from './GetPictureLocation'
 import uid from 'uid'
+import EXIF from 'exif-js'
 
 const FormGrid = styled.form`
   display: grid;
@@ -83,13 +84,13 @@ const Message = styled.p`
 
 const defaultData = {
   date: '',
-  location: '',
   summary: '',
   food: '',
   taste: '',
 }
 
 export default function CreateCard(props) {
+  const [imageLocation, setImageLocation] = useState('')
   const [data, setData] = useState(defaultData)
 
   function onInputChange(event) {
@@ -99,24 +100,46 @@ export default function CreateCard(props) {
     })
   }
 
+  function onLocationInputChange(event) {
+    setImageLocation(event.target.value)
+  }
+
   function validateForm() {
     return !Object.values(data).includes('')
+  }
+  function toDecimal(number) {
+    return (
+      number[0].numerator +
+      number[1].numerator / (60 * number[1].denominator) +
+      number[2].numerator / (3600 * number[2].denominator)
+    )
   }
 
   function onFileChange(event) {
     event.preventDefault()
+    let longitude = 0
+    let latitude = 0
     const picture = event.target.files[0]
-    console.log(picture.exifdata)
-    console.log(getPictureLocation(picture))
     setData({ ...data, pictureFile: event.target.files[0] })
+    EXIF.getData(picture, async function() {
+      longitude = EXIF.getTag(this, 'GPSLongitude')
+      latitude = EXIF.getTag(this, 'GPSLatitude')
+      longitude = toDecimal(longitude)
+      latitude = toDecimal(latitude)
+      console.log(longitude)
+      await getLocation(latitude, longitude).then(res =>
+        setImageLocation(res.data.address.address29)
+      )
+    })
   }
-  // Func auslagern
+
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
     await uploadImage(data.pictureFile).then(res => {
       imageURL = res.data.url
     })
+    data.location = imageLocation
     data.picture = imageURL
     data.id = uid()
     props.onSubmit(data)
@@ -125,7 +148,7 @@ export default function CreateCard(props) {
 
   const summaryLength = 260 - data.summary.length
   const dateLength = data.date.length > 0
-  const locationLength = data.location.length > 0
+  const locationLength = imageLocation.length > 0
   const foodLength = data.food.length > 0
   const tasteLength = data.taste.length > 0
   // const pictureLength = data.picture.length
@@ -187,11 +210,11 @@ export default function CreateCard(props) {
         <div>
           <h3>Location</h3>
           <input
-            onChange={onInputChange}
+            onChange={onLocationInputChange}
             name="location"
             type="text"
             placeholder="Where have you been"
-            required
+            value={imageLocation}
           />
           <LocationMessage />
         </div>
@@ -231,6 +254,7 @@ export default function CreateCard(props) {
           <button>OK!</button>
         </ButtonWrapper>
       </FormGrid>
+      <button onClick={() => console.log(data)} />
     </React.Fragment>
   )
 }
