@@ -143,9 +143,11 @@ export default function CreateCard(props) {
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
+
     await uploadImage(data.pictureFile).then(res => {
       imageURL = res.data.url
     })
+
     data.location = imageLocation
     data.picture = imageURL
     data.id = uid()
