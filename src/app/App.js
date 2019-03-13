@@ -9,6 +9,7 @@ import uid from 'uid'
 import { Helmet } from 'react-helmet'
 import { saveCardsToStorage, getCardsFromStorage } from '../services'
 
+
 const Grid = styled.div`
   display: grid;
   grid-template-rows: 48px auto;
@@ -21,6 +22,10 @@ const Grid = styled.div`
 
 function App() {
   const [cards, setCards] = useState(getCardsFromStorage())
+
+  useEffect(() => {
+    saveCardsToStorage(cards)
+  }, [cards])
 
   useEffect(() => {
     saveCardsToStorage(cards)
