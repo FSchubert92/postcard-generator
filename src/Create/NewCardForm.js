@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, NavLink } from 'react-router-dom'
 import { uploadImage, getLocation } from '../services'
-import { getPictureLocation } from './GetPictureLocation'
 import uid from 'uid'
 import EXIF from 'exif-js'
 
@@ -107,6 +106,7 @@ export default function CreateCard(props) {
   function validateForm() {
     return !Object.values(data).includes('')
   }
+
   function toDecimal(number) {
     return (
       number[0].numerator +
@@ -124,12 +124,21 @@ export default function CreateCard(props) {
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
-      longitude = toDecimal(longitude)
-      latitude = toDecimal(latitude)
-      console.log(longitude)
-      await getLocation(latitude, longitude).then(res =>
-        setImageLocation(res.data.address.address29)
-      )
+      try {
+        longitude = toDecimal(longitude)
+        latitude = toDecimal(latitude)
+        await getLocation(latitude, longitude).then(
+          res =>
+            console.log(
+              res.data.address.city ||
+                res.data.address.village ||
+                res.data.address.country
+            )
+          //setImageLocation(res.data.address.city)
+        )
+      } catch (error) {
+        setData({ ...data, autoImage: false })
+      }
     })
   }
 
@@ -198,6 +207,23 @@ export default function CreateCard(props) {
     }
   }
 
+  function InputMessage() {
+    if (data.autoImage === false) {
+      return (
+        <ErrorMessage>
+          Oh no! No location could be found! Please enter one by yourself!
+        </ErrorMessage>
+      )
+    } else {
+      return (
+        <Message>
+          Upload a JPG- Picture. The App will try to get the place where the
+          Image has been taken automatically.
+        </Message>
+      )
+    }
+  }
+
   return (
     <React.Fragment>
       <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
@@ -248,13 +274,13 @@ export default function CreateCard(props) {
             required
             accept="image/jpeg"
           />
+          <InputMessage />
         </div>
         <ButtonWrapper>
           <BackButton to="/">X</BackButton>
           <button>OK!</button>
         </ButtonWrapper>
       </FormGrid>
-      <button onClick={() => console.log(data)} />
     </React.Fragment>
   )
 }
