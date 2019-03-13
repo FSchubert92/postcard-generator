@@ -7,6 +7,13 @@ const cardsPath = 'http://localhost:4000/cards'
 export function getAllCards() {
   return axios.get(cardsPath)
 }
+
+export function getLocation(lat, long) {
+  const TOKEN = process.env.REACT_APP_LOCATIONIQ_TOKEN
+  const url = `https://eu1.locationiq.com/v1/reverse.php?key=${TOKEN}&lat=${lat}&lon=${long}&format=json`
+  return axios.get(url)
+}
+
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
 
@@ -41,19 +48,7 @@ export function deleteCardFromServer(card) {
 }
 
 export function getCardsFromStorage() {
-  return (
-    getFromStorage('cards') || [
-      {
-        date: '',
-        location: '',
-        temperatur: '20C°',
-        picture: '',
-        summary: '',
-        food: '',
-        taste: '',
-      },
-    ]
-  )
+  return getFromStorage('cards') || []
 }
 
 export function saveCardsToStorage(cards) {

@@ -4,6 +4,7 @@ import Card from '../Card/Card'
 import CardContainer from '../Card/CardContainer'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
+import NoCardsToShow from './NoCardsToShow'
 
 const CreateButton = styled(NavLink)`
   background-color: #18b839;
@@ -22,18 +23,9 @@ const CreateButton = styled(NavLink)`
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   padding: 3px;
 `
-const NoCardsToShow = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: lightgray;
-  margin: 20px;
-  height: 80%;
-`
 
 export default function Home({ cards }) {
-  function CardsToShow() {
+  function CheckForNoCards() {
     if (cards.length === 0) {
       return (
         <NoCardsToShow>
@@ -45,12 +37,10 @@ export default function Home({ cards }) {
       return null
     }
   }
-  console.log(cards)
-  console.log(cards.map(card => card.location !== ''))
   return (
     <React.Fragment>
       <CardContainer data-cy="card-container">
-        <CardsToShow />
+        <CheckForNoCards />
         {cards.map(card => (
           <Card
             date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}

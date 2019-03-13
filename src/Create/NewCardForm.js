@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
-import { uploadImage } from '../services'
-import EXIF from 'exif-js'
+import { uploadImage, getLocation } from '../services'
+import { getPictureLocation } from './GetPictureLocation'
 import uid from 'uid'
 
 const FormGrid = styled.form`
@@ -106,17 +106,11 @@ export default function CreateCard(props) {
   function onFileChange(event) {
     event.preventDefault()
     const picture = event.target.files[0]
-    EXIF.getData(picture, function() {
-      const longitude = EXIF.getTag(this, 'GPSLongitude')
-      const latitude = EXIF.getTag(this, 'GPSLatitude')
-      // const longitude = EXIF.getTag(this, 'GPSLongitudSLon')
-      // const latitude = EXIF.getTag(this, 'GPSlatitude')
-      console.log(longitude)
-      console.log(latitude)
-    })
+    console.log(picture.exifdata)
+    console.log(getPictureLocation(picture))
     setData({ ...data, pictureFile: event.target.files[0] })
   }
-
+  // Func auslagern
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
@@ -127,7 +121,7 @@ export default function CreateCard(props) {
     data.id = uid()
     props.onSubmit(data)
     props.history.push('/')
-  }
+  } // Hier die Geodaten rein
 
   const summaryLength = 260 - data.summary.length
   const dateLength = data.date.length > 0
