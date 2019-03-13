@@ -12,6 +12,13 @@ describe('Riyoko', () => {
       cy.title().should('include', 'RIYOKO')
     })
 
+    it('Clears the local storage', () => {
+      cy.clearLocalStorage()
+        .get('section')
+        .should('not.contain', 'How was today')
+        .should('have.length', ' 2')
+    })
+
     it('renders a single card', () => {
       cy.get('[data-cy="single-card"]')
         .should('contain', '')
