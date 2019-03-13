@@ -151,14 +151,13 @@ export default function CreateCard(props) {
     data.id = uid()
     props.onSubmit(data)
     props.history.push('/')
-  } // Hier die Geodaten rein
+  }
 
   const summaryLength = 260 - data.summary.length
   const dateLength = data.date.length > 0
   const locationLength = imageLocation.length > 0
   const foodLength = data.food.length > 0
   const tasteLength = data.taste.length > 0
-  // const pictureLength = data.picture.length
 
   function SummaryInputMessage() {
     if (summaryLength < 0) {
@@ -227,6 +226,16 @@ export default function CreateCard(props) {
       <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
         <h2>New Card</h2>
         <div>
+          <h3>Image</h3>
+          <input
+            onChange={onFileChange}
+            type="file"
+            required
+            accept="image/jpeg"
+          />
+          <InputMessage />
+        </div>
+        <div>
           <h3>Date</h3>
           <input onChange={onInputChange} name="date" type="date" required />
           <DateMessage />
@@ -264,16 +273,7 @@ export default function CreateCard(props) {
           <input onChange={onInputChange} name="taste" type="text" required />
           <TasteMessage />
         </div>
-        <div>
-          <h3>Image</h3>
-          <input
-            onChange={onFileChange}
-            type="file"
-            required
-            accept="image/jpeg"
-          />
-          <InputMessage />
-        </div>
+
         <ButtonWrapper>
           <BackButton to="/">X</BackButton>
           <button>OK!</button>
