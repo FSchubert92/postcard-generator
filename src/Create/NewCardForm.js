@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, NavLink } from 'react-router-dom'
-import { uploadImage, getLocation } from '../services'
+import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
 
@@ -121,12 +121,18 @@ export default function CreateCard(props) {
     let latitude = 0
     const picture = event.target.files[0]
     setData({ ...data, pictureFile: event.target.files[0] })
+
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
+
       try {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
+        await getWeather(latitude, longitude).then(res =>
+          setData({...data, temperatur: res.data.main.temp, weather: res.data.weather[0].main})
+          )
+
         await getLocation(latitude, longitude).then(res =>
           setImageLocation(
             res.data.address.city ||
