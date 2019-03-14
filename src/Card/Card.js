@@ -1,7 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import testImage from '../assets/images/test-image.jpg'
-import WeatherIconSun from '../assets/images/weatherIconSun.png'
+import cloudy from '../assets/weather-icons/cloudy.png'
+import drizzle from '../assets/weather-icons/drizzle.png'
+import mist from '../assets/weather-icons/mist.png'
+import rain from '../assets/weather-icons/rain.png'
+import snow from '../assets/weather-icons/snow.png'
+import sun from '../assets/weather-icons/sun.png'
+import thunderstorm from '../assets/weather-icons/thunderstorm.png'
+import wind from '../assets/weather-icons/wind.png'
 
 const StyledCard = styled.section`
   p {
@@ -48,6 +55,7 @@ export default function Card({
   date,
   location,
   temperatur,
+  weather,
   picture,
   summary,
   iAte,
@@ -61,6 +69,33 @@ export default function Card({
     padding: 10px 0 0 13px;
   `
 
+  function chooseWeatherIcon(weather) {
+    console.log(weather)
+    if (weather === 'Clear') {
+      return sun
+    }
+    if (weather === 'Cloudy') {
+      return cloudy
+    }
+    if (weather === 'Drizzle') {
+      return drizzle
+    }
+    if (weather === 'Mist') {
+      return mist
+    }
+    if (weather === 'Rain') {
+      return rain
+    }
+    if (weather === 'Snow') {
+      return snow
+    }
+    if (weather === 'Thunderstorm') {
+      return thunderstorm
+    }
+    if (weather === 'Wind') {
+      return wind
+    }
+  }
   return (
     <StyledCard data-cy="single-card">
       <DateHeadline>{date}</DateHeadline>
@@ -78,7 +113,7 @@ export default function Card({
             <p>{iAte}</p>
           </section>
           <section>
-            <WeatherIcon src={WeatherIconSun} alt="" />
+            <WeatherIcon src={chooseWeatherIcon(weather)} alt="" />
           </section>
           <section>
             <h3>It tasted</h3>

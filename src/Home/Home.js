@@ -51,6 +51,7 @@ export default function Home({ cards }) {
             iAte={card.food}
             itTasted={card.taste}
             key={card.id}
+            weather={card.weather}
           />
         ))}
       </CardContainer>

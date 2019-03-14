@@ -81,6 +81,14 @@ const Message = styled.p`
   color: #333;
 `
 
+const DropDownMenu = styled.select`
+  border: 2px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  width: 90%;
+  font-size: 1em;
+`
+
 const defaultData = {
   date: '',
   summary: '',
@@ -97,6 +105,7 @@ export default function CreateCard(props) {
       ...data,
       [event.target.name]: event.target.value,
     })
+    console.log(data)
   }
 
   function onLocationInputChange(event) {
@@ -129,9 +138,14 @@ export default function CreateCard(props) {
       try {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
-        await getWeather(latitude, longitude).then(res =>
-          setData({...data, temperatur: res.data.main.temp, weather: res.data.weather[0].main})
-          )
+
+        // await getWeather(latitude, longitude).then(res =>
+        //   setData({
+        //     ...data,
+        //     temperatur: Math.round(res.data.main.temp) + ' C°',
+        //     weather: res.data.weather[0].main,
+        //   })
+        // )
 
         await getLocation(latitude, longitude).then(res =>
           setImageLocation(
@@ -151,6 +165,7 @@ export default function CreateCard(props) {
     let imageURL = null
 
     await uploadImage(data.pictureFile).then(res => {
+      console.log(data.pictureFile)
       imageURL = res.data.url
     })
 
@@ -258,6 +273,32 @@ export default function CreateCard(props) {
             value={imageLocation}
           />
           <LocationMessage />
+        </div>
+        <div>
+          <h3>Weather</h3>
+          <input
+            onChange={onInputChange}
+            name="temperatur"
+            type="text"
+            placeholder="Temperatur in C°"
+            value={data.temperatur}
+          />
+          <label>
+            Choose the weather condition
+            <DropDownMenu
+              name="weather"
+              size="1"
+              value={data.weather}
+              onChange={onInputChange}
+            >
+              <option>Clear</option>
+              <option>Clouds</option>
+              <option> Snow</option>
+              <option> Rain</option>
+              <option> Drizzle</option>
+              <option> Thunderstorm</option>
+            </DropDownMenu>
+          </label>
         </div>
         <div>
           <h3>Summarize your day</h3>
