@@ -5,10 +5,10 @@ import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
-import testImage from '../assets/images/test-image.jpg'
 import uid from 'uid'
 import { Helmet } from 'react-helmet'
-import { postNewCard, saveCardsToStorage } from '../services'
+import { saveCardsToStorage, getCardsFromStorage } from '../services'
+
 
 const Grid = styled.div`
   display: grid;
@@ -21,34 +21,29 @@ const Grid = styled.div`
 `
 
 function App() {
-  const [cards, setCards] = useState([
-    {
-      date: '',
-      location: '',
-      temperatur: '20C°',
-      picture: testImage,
-      summary: '',
-      food: '',
-      taste: '',
-      id: uid(),
-    },
-  ])
+  const [cards, setCards] = useState(getCardsFromStorage())
+
+  useEffect(() => {
+    saveCardsToStorage(cards)
+  }, [cards])
 
   useEffect(() => {
     saveCardsToStorage(cards)
   }, [cards])
 
   function addCardToState(data) {
+    console.log(data)
     setCards([...cards, data])
   }
+
   return (
     <React.Fragment>
-      <Helmet>
+      {/* <Helmet>
         <link
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
           rel="stylesheet"
         />
-      </Helmet>
+      </Helmet> */}
       <Router>
         <Grid>
           <Header />

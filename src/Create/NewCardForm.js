@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, NavLink } from 'react-router-dom'
+import { uploadImage, getLocation } from '../services'
+import uid from 'uid'
+import EXIF from 'exif-js'
 
 const FormGrid = styled.form`
   display: grid;
@@ -80,14 +83,13 @@ const Message = styled.p`
 
 const defaultData = {
   date: '',
-  location: '',
-  picture: '',
   summary: '',
   food: '',
   taste: '',
 }
 
 export default function CreateCard(props) {
+  const [imageLocation, setImageLocation] = useState('')
   const [data, setData] = useState(defaultData)
 
   function onInputChange(event) {
@@ -97,29 +99,67 @@ export default function CreateCard(props) {
     })
   }
 
+  function onLocationInputChange(event) {
+    setImageLocation(event.target.value)
+  }
+
   function validateForm() {
     return !Object.values(data).includes('')
   }
 
-  function fileSelectedHandler(event) {
-    setData({ ...data, picture: URL.createObjectURL(event.target.files[0]) })
-    validateForm()
+  function toDecimal(number) {
+    return (
+      number[0].numerator +
+      number[1].numerator / (60 * number[1].denominator) +
+      number[2].numerator / (3600 * number[2].denominator)
+    )
   }
 
-  function onSubmit(event) {
+  function onFileChange(event) {
     event.preventDefault()
-    validateForm()
+    let longitude = 0
+    let latitude = 0
+    const picture = event.target.files[0]
+    setData({ ...data, pictureFile: event.target.files[0] })
+    EXIF.getData(picture, async function() {
+      longitude = EXIF.getTag(this, 'GPSLongitude')
+      latitude = EXIF.getTag(this, 'GPSLatitude')
+      try {
+        longitude = toDecimal(longitude)
+        latitude = toDecimal(latitude)
+        await getLocation(latitude, longitude).then(res =>
+          setImageLocation(
+            res.data.address.city ||
+              res.data.address.village ||
+              res.data.address.country
+          )
+        )
+      } catch (error) {
+        setData({ ...data, autoImage: false })
+      }
+    })
+  }
+
+  async function onSubmit(event) {
+    event.preventDefault()
+    let imageURL = null
+
+    await uploadImage(data.pictureFile).then(res => {
+      imageURL = res.data.url
+    })
+
+    data.location = imageLocation
+    data.picture = imageURL
+    data.id = uid()
     props.onSubmit(data)
-    setData(defaultData)
     props.history.push('/')
   }
 
   const summaryLength = 260 - data.summary.length
   const dateLength = data.date.length > 0
-  const locationLength = data.location.length > 0
+  const locationLength = imageLocation.length > 0
   const foodLength = data.food.length > 0
   const tasteLength = data.taste.length > 0
-  const pictureLength = data.picture.length
 
   function SummaryInputMessage() {
     if (summaryLength < 0) {
@@ -166,69 +206,81 @@ export default function CreateCard(props) {
     }
   }
 
-  function PictureMessage() {
-    if (pictureLength > 0) {
-      return <Message> Thank you very much!</Message>
+  function InputMessage() {
+    if (data.autoImage === false) {
+      return (
+        <ErrorMessage>
+          Oh no! No location could be found! Please enter one by yourself!
+        </ErrorMessage>
+      )
     } else {
-      return null
+      return (
+        <Message>
+          Upload a JPG- Picture. The App will try to get the place where the
+          Image has been taken automatically.
+        </Message>
+      )
     }
   }
 
   return (
-    <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
-      <h2>New Card</h2>
-      <div>
-        <h3>Date</h3>
-        <input onChange={onInputChange} name="date" type="date" required />
-        <DateMessage />
-      </div>
-      <div>
-        <h3>Location</h3>
-        <input
-          onChange={onInputChange}
-          name="location"
-          type="text"
-          placeholder="Where have you been"
-          required
-        />
-        <LocationMessage />
-      </div>
-      <div>
-        <h3>Summarize your day</h3>
-        <textarea
-          onChange={onInputChange}
-          name="summary"
-          className={'input-summary'}
-          maxLength="280"
-          placeholder="Summarize what you did today"
-          required
-        />
-        <SummaryInputMessage />
-      </div>
-      <div>
-        <h3>Today I ate</h3>
-        <input onChange={onInputChange} name="food" type="text" required />
-        <FoodMessage />
-      </div>
-      <div>
-        <h3>It tasted</h3>
-        <input onChange={onInputChange} name="taste" type="text" required />
-        <TasteMessage />
-      </div>
-      <div>
-        <h3>Image</h3>
-        <input
-          type="file"
-          onChange={fileSelectedHandler}
-          required
-          accept="image/x-png,image/gif,image/jpeg"
-        />
-        <PictureMessage />
-      </div>
-      <ButtonWrapper>
-        <BackButton to="/">X</BackButton>
-        <button>OK!</button>
-      </ButtonWrapper>
-    </FormGrid>
+    <React.Fragment>
+      <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
+        <h2>New Card</h2>
+        <div>
+          <h3>Image</h3>
+          <input
+            onChange={onFileChange}
+            type="file"
+            required
+            accept="image/jpeg"
+          />
+          <InputMessage />
+        </div>
+        <div>
+          <h3>Date</h3>
+          <input onChange={onInputChange} name="date" type="date" required />
+          <DateMessage />
+        </div>
+        <div>
+          <h3>Location</h3>
+          <input
+            onChange={onLocationInputChange}
+            name="location"
+            type="text"
+            placeholder="Where have you been"
+            value={imageLocation}
+          />
+          <LocationMessage />
+        </div>
+        <div>
+          <h3>Summarize your day</h3>
+          <textarea
+            onChange={onInputChange}
+            name="summary"
+            className={'input-summary'}
+            maxLength="280"
+            placeholder="Summarize what you did today"
+            required
+          />
+          <SummaryInputMessage />
+        </div>
+        <div>
+          <h3>Today I ate</h3>
+          <input onChange={onInputChange} name="food" type="text" required />
+          <FoodMessage />
+        </div>
+        <div>
+          <h3>It tasted</h3>
+          <input onChange={onInputChange} name="taste" type="text" required />
+          <TasteMessage />
+        </div>
+
+        <ButtonWrapper>
+          <BackButton to="/">X</BackButton>
+          <button>OK!</button>
+        </ButtonWrapper>
+      </FormGrid>
+    </React.Fragment>
   )
 }

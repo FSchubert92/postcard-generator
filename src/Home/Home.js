@@ -4,6 +4,7 @@ import Card from '../Card/Card'
 import CardContainer from '../Card/CardContainer'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
+import NoCardsToShow from './NoCardsToShow'
 
 const CreateButton = styled(NavLink)`
   background-color: #18b839;
@@ -24,9 +25,22 @@ const CreateButton = styled(NavLink)`
 `
 
 export default function Home({ cards }) {
+  function CheckForNoCards() {
+    if (cards.length === 0) {
+      return (
+        <NoCardsToShow>
+          Sorry, there are no postcards to show TT <br />
+          Why don't you start adding one?
+        </NoCardsToShow>
+      )
+    } else {
+      return null
+    }
+  }
   return (
     <React.Fragment>
       <CardContainer data-cy="card-container">
+        <CheckForNoCards />
         {cards.map(card => (
           <Card
             date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
