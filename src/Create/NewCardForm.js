@@ -99,13 +99,13 @@ const defaultData = {
 export default function CreateCard(props) {
   const [imageLocation, setImageLocation] = useState('')
   const [data, setData] = useState(defaultData)
+  const [weatherData, setWeatherData] = useState('')
 
   function onInputChange(event) {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
   function onLocationInputChange(event) {
@@ -139,13 +139,12 @@ export default function CreateCard(props) {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
 
-        // await getWeather(latitude, longitude).then(res =>
-        //   setData({
-        //     ...data,
-        //     temperatur: Math.round(res.data.main.temp) + ' C°',
-        //     weather: res.data.weather[0].main,
-        //   })
-        // )
+        await getWeather(latitude, longitude).then(res =>
+          setWeatherData({
+            temperatur: Math.round(res.data.main.temp) + ' C°',
+            weather: res.data.weather[0].main,
+          })
+        )
 
         await getLocation(latitude, longitude).then(res =>
           setImageLocation(
@@ -171,6 +170,8 @@ export default function CreateCard(props) {
 
     data.location = imageLocation
     data.picture = imageURL
+    data.temperatur = weatherData.temperatur
+    data.weather = weatherData.weather
     data.id = uid()
     props.onSubmit(data)
     props.history.push('/')
@@ -281,14 +282,14 @@ export default function CreateCard(props) {
             name="temperatur"
             type="text"
             placeholder="Temperatur in C°"
-            value={data.temperatur}
+            value={weatherData.temperatur}
           />
           <label>
             Choose the weather condition
             <DropDownMenu
               name="weather"
               size="1"
-              value={data.weather}
+              value={weatherData.weather}
               onChange={onInputChange}
             >
               <option>Clear</option>
@@ -328,6 +329,7 @@ export default function CreateCard(props) {
           <button>OK!</button>
         </ButtonWrapper>
       </FormGrid>
+      <button onClick={() => console.log(data, weatherData)} />
     </React.Fragment>
   )
 }
