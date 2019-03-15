@@ -12,6 +12,7 @@ import {
   FoodMessage,
   TasteMessage,
   InputMessage,
+  WeatherMessage,
 } from './NewCardFormMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
@@ -158,6 +159,7 @@ export default function CreateCard(props) {
               <option> Drizzle</option>
               <option> Thunderstorm</option>
             </DropDownMenu>
+            <WeatherMessage weatherData={weatherData} />
           </label>
         </div>
         <div>

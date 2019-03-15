@@ -35,6 +35,20 @@ export function LocationMessage(props) {
     return null
   }
 }
+export function WeatherMessage(props) {
+  console.log(props)
+  const weatherlength = props.weatherData.temperatur
+
+  if (weatherlength === undefined) {
+    return (
+      <ErrorMessage>
+        Oh no! No location could be found! Please enter one by yourself!
+      </ErrorMessage>
+    )
+  } else {
+    return null
+  }
+}
 
 export function FoodMessage(props) {
   const foodLength = props.data.food.length > 0
