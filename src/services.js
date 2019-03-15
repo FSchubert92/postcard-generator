@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
 import axios from 'axios'
-import uid from 'uid'
-import testImage from './assets/images/test-image.jpg'
 
 const cardsPath = 'http://localhost:4000/cards'
 export function getAllCards() {

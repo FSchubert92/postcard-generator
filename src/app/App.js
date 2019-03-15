@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
 import uid from 'uid'
-import { Helmet } from 'react-helmet'
 import { saveCardsToStorage, getCardsFromStorage } from '../services'
-
 
 const Grid = styled.div`
   display: grid;

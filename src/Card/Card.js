@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import testImage from '../assets/images/test-image.jpg'
 import cloudy from '../assets/weather-icons/cloudy.png'
 import drizzle from '../assets/weather-icons/drizzle.png'
 import mist from '../assets/weather-icons/mist.png'

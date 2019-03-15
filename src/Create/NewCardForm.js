@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { FormGrid, BackButton, ButtonWrapper, DropDownMenu } from './FormStyles'
+import {
+  FormGrid,
+  BackButton,
+  ButtonWrapper,
+  DropDownMenu,
+} from './NewCardFormStyles'
 import {
   SummaryInputMessage,
   DateMessage,
@@ -7,9 +12,8 @@ import {
   FoodMessage,
   TasteMessage,
   InputMessage,
-} from './FormMessages'
+} from './NewCardFormMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
-import GetLocationAndWeather from './GetLocationAndWeather'
 import uid from 'uid'
 import EXIF from 'exif-js'
 
@@ -36,21 +40,11 @@ export default function CreateCard(props) {
     setImageLocation(event.target.value)
   }
 
-  function toDecimal(number) {
-    return (
-      number[0].numerator +
-      number[1].numerator / (60 * number[1].denominator) +
-      number[2].numerator / (3600 * number[2].denominator)
-    )
-  }
-
   function onFileChange(event) {
     event.preventDefault()
     let longitude = 0
     let latitude = 0
     const picture = event.target.files[0]
-    // setData({ ...data, pictureFile: event.target.files[0] })
-    console.log(GetLocationAndWeather(picture))
 
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
@@ -80,6 +74,14 @@ export default function CreateCard(props) {
     })
   }
 
+  function toDecimal(number) {
+    return (
+      number[0].numerator +
+      number[1].numerator / (60 * number[1].denominator) +
+      number[2].numerator / (3600 * number[2].denominator)
+    )
+  }
+
   function validateForm() {
     return !Object.values(data).includes('')
   }
@@ -92,7 +94,6 @@ export default function CreateCard(props) {
       console.log(data.pictureFile)
       imageURL = res.data.url
     })
-
     data.location = imageLocation
     data.picture = imageURL
     data.temperatur = weatherData.temperatur
@@ -180,7 +181,6 @@ export default function CreateCard(props) {
           <input onChange={onInputChange} name="taste" type="text" required />
           <TasteMessage data={data} />
         </div>
-
         <ButtonWrapper>
           <BackButton to="/">X</BackButton>
           <button>OK!</button>

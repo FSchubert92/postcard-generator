@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import Card from '../Card/Card'
 import CardContainer from '../Card/CardContainer'
 import styled from 'styled-components'

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { ErrorMessage, Message } from './FormStyles'
+import React from 'react'
+import { ErrorMessage, Message } from './NewCardFormStyles'
 
 export function SummaryInputMessage(props) {
   const summaryLength = 260 - props.data.summary.length
