@@ -37,6 +37,7 @@ export function toggleCardBookmark(card) {
     bookmarked: !card.bookmarked,
   })
 }
+
 export function deleteCardFromServer(card) {
   return axios.delete(`${cardsPath}/${card._id}`)
 }

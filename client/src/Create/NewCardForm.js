@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   FormGrid,
   BackButton,
@@ -23,6 +23,7 @@ const defaultData = {
   summary: '',
   food: '',
   taste: '',
+  pictureFile: '',
 }
 
 export default function CreateCard(props) {
@@ -40,18 +41,23 @@ export default function CreateCard(props) {
   function onLocationInputChange(event) {
     setImageLocation(event.target.value)
   }
+  useEffect(() => {
+    getPictureData()
+  }, [data.pictureFile])
 
   function onFileChange(event) {
     event.preventDefault()
+    setData({ ...data, pictureFile: event.target.files[0] })
+  }
+
+  function getPictureData() {
+    const picture = data.pictureFile
     let longitude = 0
     let latitude = 0
-    const picture = event.target.files[0]
-    setData({ ...data, pictureFile: event.target.files[0] })
-
+    console.log(picture)
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
-
       try {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
@@ -91,7 +97,7 @@ export default function CreateCard(props) {
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
-
+    console.log(data.pictureFile)
     await uploadImage(data.pictureFile).then(res => {
       console.log(data.pictureFile)
       imageURL = res.data.url
@@ -189,6 +195,7 @@ export default function CreateCard(props) {
           <button>OK!</button>
         </ButtonWrapper>
       </FormGrid>
+      <button onClick={() => console.log(data)} />
     </React.Fragment>
   )
 }

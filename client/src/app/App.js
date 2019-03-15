@@ -6,7 +6,12 @@ import Header from '../Header/Header'
 import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
 import uid from 'uid'
-import { saveCardsToStorage, getCardsFromStorage } from '../services'
+import {
+  saveCardsToStorage,
+  getCardsFromStorage,
+  getAllCards,
+  postNewCard,
+} from '../services'
 
 const Grid = styled.div`
   display: grid;
@@ -22,26 +27,23 @@ function App() {
   const [cards, setCards] = useState(getCardsFromStorage())
 
   useEffect(() => {
-    saveCardsToStorage(cards)
-  }, [cards])
+    getAllCards().then(res => {
+      setCards(res.data)
+    })
+  }, [])
 
   useEffect(() => {
     saveCardsToStorage(cards)
   }, [cards])
 
   function addCardToState(data) {
-    console.log(data)
-    setCards([...cards, data])
+    postNewCard(data).then(res => {
+      setCards([...cards, res.data])
+    })
   }
 
   return (
     <React.Fragment>
-      {/* <Helmet>
-        <link
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
-          rel="stylesheet"
-        />
-      </Helmet> */}
       <Router>
         <Grid>
           <Header />

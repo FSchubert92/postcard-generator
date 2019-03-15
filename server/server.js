@@ -11,7 +11,7 @@ app.use(express.json())
 
 app.use('/cards', require('./routes/cards'))
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 app.listen(port, () => {
   console.log('Server ready on port ' + port)
 })
