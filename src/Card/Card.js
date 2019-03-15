@@ -38,7 +38,6 @@ const HowWasToday = styled.h3`
 
 const WeatherIcon = styled.img`
   width: 48px;
-  height: 50px;
 `
 
 const CardBottomWrapper = styled.section`
@@ -73,7 +72,7 @@ export default function Card({
     if (weather === 'Clear') {
       return sun
     }
-    if (weather === 'Cloudy') {
+    if (weather === 'Clouds') {
       return cloudy
     }
     if (weather === 'Drizzle') {
@@ -112,7 +111,7 @@ export default function Card({
             <p>{iAte}</p>
           </section>
           <section>
-            <WeatherIcon src={chooseWeatherIcon(weather)} alt="" />
+            <WeatherIcon src={chooseWeatherIcon(weather)} />
           </section>
           <section>
             <h3>It tasted</h3>
