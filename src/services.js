@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
 import axios from 'axios'
-import uid from 'uid'
-import testImage from './assets/images/test-image.jpg'
 
 const cardsPath = 'http://localhost:4000/cards'
 export function getAllCards() {
@@ -14,10 +11,9 @@ export function getLocation(lat, long) {
   return axios.get(url)
 }
 
-const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
-const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
-
 export function uploadImage(picture) {
+  const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
+  const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
   console.log(picture)
   const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
 
@@ -30,8 +26,6 @@ export function uploadImage(picture) {
       'Content-type': 'multipart/form-data',
     },
   })
-  // .then(onImageSave)
-  // .catch(err => console.error(err))
 }
 
 export function postNewCard(card) {
@@ -53,6 +47,12 @@ export function getCardsFromStorage() {
 
 export function saveCardsToStorage(cards) {
   saveToStorage('cards', cards)
+}
+
+export function getWeather(lat, long) {
+  const KEY = process.env.REACT_APP_WEATHER_KEY
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=${KEY}`
+  return axios.get(url)
 }
 
 export function getFromStorage(name) {
