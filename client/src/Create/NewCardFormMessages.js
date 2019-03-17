@@ -23,6 +23,7 @@ export function DateMessage() {
 export function LocationMessage() {
   return <Message> What a great place! </Message>
 }
+
 export function WeatherMessage() {
   return (
     <ErrorMessage>

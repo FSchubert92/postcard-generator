@@ -4,8 +4,8 @@ export default styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  color: lightgray;
-  margin: 20px;
   height: 80%;
+  margin: 20px;
+  color: lightgray;
+  font-weight: bold;
 `

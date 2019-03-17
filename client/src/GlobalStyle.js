@@ -49,10 +49,10 @@ h2{
   }
 
   button {
-    background-color: #18B839;
-    color: white;
-    height:44px;
     width: 44px;
+    height:44px;
+    color: white;
+    background-color: #18B839;
     border-radius: 50%;
   }
 `

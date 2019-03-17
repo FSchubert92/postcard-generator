@@ -27,8 +27,8 @@ const defaultData = {
 }
 
 export default function CreateCard(props) {
-  const [imageLocation, setImageLocation] = useState('')
   const [data, setData] = useState(defaultData)
+  const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState('')
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
@@ -71,6 +71,7 @@ export default function CreateCard(props) {
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
+
       try {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)

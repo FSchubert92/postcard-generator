@@ -4,8 +4,8 @@ import styled from 'styled-components'
 export const FormGrid = styled.form`
   display: grid;
   grid-template-rows: repeat(7, auto);
-  margin: 20px;
   grid-gap: 50px;
+  margin: 20px;
   overflow-y: scroll;
   padding: 0 5px;
 
@@ -19,24 +19,24 @@ export const FormGrid = styled.form`
 
   input,
   textarea {
-    border: 2px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
     width: 90%;
+    border: 2px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
   }
 
   input[type='file'] {
-    padding: 0;
     width: 315px;
+    padding: 0;
   }
 
   button {
+    height: 44px;
+    width: 44px;
     background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
     color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
     border-radius: 50%;
-    height: 44px;
-    width: 44px;
   }
 
   .input-summary {
@@ -45,16 +45,16 @@ export const FormGrid = styled.form`
 `
 
 export const BackButton = styled(NavLink)`
-  background-color: crimson;
-  color: white;
-  height: 44px;
-  width: 44px;
-  border-radius: 50%;
-  text-decoration: none;
-  font-size: 30px;
   display: flex;
   justify-content: center;
   align-self: center;
+  height: 44px;
+  width: 44px;
+  color: white;
+  background-color: crimson;
+  border-radius: 50%;
+  font-size: 30px;
+  text-decoration: none;
   bottom: 9px;
   left: 27px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
@@ -78,9 +78,9 @@ export const Message = styled.p`
 `
 
 export const DropDownMenu = styled.select`
-  border: 2px solid #ddd;
-  padding: 10px;
-  margin: 10px 0;
   width: 90%;
+  margin: 10px 0;
+  padding: 10px;
   font-size: 1em;
+  border: 2px solid #ddd;
 `
