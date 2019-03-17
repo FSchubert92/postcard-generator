@@ -37,9 +37,8 @@ function App() {
   }, [cards])
 
   function addCardToState(data) {
-    postNewCard(data).then(res => {
-      setCards([...cards, res.data])
-    })
+    setCards([...cards, data])
+    postNewCard(data)
   }
 
   return (
