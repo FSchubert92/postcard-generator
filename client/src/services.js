@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const cardsPath = 'http://localhost:4000/cards'
+
 export function getAllCards() {
   return axios.get(cardsPath)
 }
@@ -37,6 +38,7 @@ export function toggleCardBookmark(card) {
     bookmarked: !card.bookmarked,
   })
 }
+
 export function deleteCardFromServer(card) {
   return axios.delete(`${cardsPath}/${card._id}`)
 }

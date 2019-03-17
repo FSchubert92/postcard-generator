@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   FormGrid,
   BackButton,
@@ -23,12 +23,18 @@ const defaultData = {
   summary: '',
   food: '',
   taste: '',
+  pictureFile: '',
 }
 
 export default function CreateCard(props) {
-  const [imageLocation, setImageLocation] = useState('')
   const [data, setData] = useState(defaultData)
+  const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState('')
+  const isDateEmpty = data.date.length > 0
+  const isLocationEmpty = imageLocation.length > 0
+  const isWeatherUndefined = weatherData.temperatur === undefined
+  const isFoodEmpty = data.food.length > 0
+  const isTasteEmpty = data.taste.length > 0
 
   function onInputChange(event) {
     setData({
@@ -41,13 +47,27 @@ export default function CreateCard(props) {
     setImageLocation(event.target.value)
   }
 
+  function onWeatherInputChange(event) {
+    setWeatherData({
+      ...weatherData,
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  useEffect(() => {
+    getPictureData()
+  }, [data.pictureFile])
+
   function onFileChange(event) {
     event.preventDefault()
+    setData({ ...data, pictureFile: event.target.files[0] })
+  }
+
+  function getPictureData() {
+    const picture = data.pictureFile
     let longitude = 0
     let latitude = 0
-    const picture = event.target.files[0]
-    setData({ ...data, pictureFile: event.target.files[0] })
-
+    console.log(picture)
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
@@ -91,7 +111,7 @@ export default function CreateCard(props) {
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
-
+    console.log(data.pictureFile)
     await uploadImage(data.pictureFile).then(res => {
       console.log(data.pictureFile)
       imageURL = res.data.url
@@ -122,7 +142,7 @@ export default function CreateCard(props) {
         <div>
           <h3>Date</h3>
           <input onChange={onInputChange} name="date" type="date" required />
-          <DateMessage data={data} />
+          {isDateEmpty && <DateMessage />}
         </div>
         <div>
           <h3>Location</h3>
@@ -133,12 +153,12 @@ export default function CreateCard(props) {
             placeholder="Where have you been"
             value={imageLocation}
           />
-          <LocationMessage imageLocation={imageLocation} />
+          {isLocationEmpty && <LocationMessage />}
         </div>
         <div>
           <h3>Weather</h3>
           <input
-            onChange={onInputChange}
+            onChange={onWeatherInputChange}
             name="temperatur"
             type="text"
             placeholder="Temperatur in C°"
@@ -150,7 +170,7 @@ export default function CreateCard(props) {
               name="weather"
               size="1"
               value={weatherData.weather}
-              onChange={onInputChange}
+              onChange={onWeatherInputChange}
             >
               <option>Clear</option>
               <option>Clouds</option>
@@ -159,7 +179,7 @@ export default function CreateCard(props) {
               <option> Drizzle</option>
               <option> Thunderstorm</option>
             </DropDownMenu>
-            <WeatherMessage weatherData={weatherData} />
+            {isWeatherUndefined && <WeatherMessage />}
           </label>
         </div>
         <div>
@@ -177,12 +197,12 @@ export default function CreateCard(props) {
         <div>
           <h3>Today I ate</h3>
           <input onChange={onInputChange} name="food" type="text" required />
-          <FoodMessage data={data} />
+          {isFoodEmpty && <FoodMessage />}
         </div>
         <div>
           <h3>It tasted</h3>
           <input onChange={onInputChange} name="taste" type="text" required />
-          <TasteMessage data={data} />
+          {isTasteEmpty && <TasteMessage />}
         </div>
         <ButtonWrapper>
           <BackButton to="/">X</BackButton>

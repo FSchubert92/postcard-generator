@@ -32,8 +32,8 @@ const TitleAndWeatherWrapper = styled.div`
 `
 
 const HowWasToday = styled.h3`
-  font-size: 24px;
   padding-top: 5px;
+  font-size: 24px;
 `
 
 const WeatherIcon = styled.img`
@@ -111,7 +111,7 @@ export default function Card({
             <p>{iAte}</p>
           </section>
           <section>
-            <WeatherIcon src={chooseWeatherIcon(weather)} />
+            <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
           </section>
           <section>
             <h3>It tasted</h3>

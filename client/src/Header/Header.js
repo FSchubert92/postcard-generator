@@ -11,14 +11,13 @@ const StyledHeader = styled.header`
   img {
     position: absolute;
     left: 0;
-    height: 31px;
     width: 62px;
+    height: 31px;
     margin: 5px;
     margin-left: 10px;
   }
-  h1 {
-  }
 `
+
 export default function Header() {
   return (
     <StyledHeader>

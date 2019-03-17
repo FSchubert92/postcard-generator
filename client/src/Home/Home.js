@@ -7,21 +7,21 @@ import dayjs from 'dayjs'
 import NoCardsToShow from './NoCardsToShow'
 
 const CreateButton = styled(NavLink)`
-  background-color: #18b839;
-  color: white;
-  height: 44px;
-  width: 44px;
-  border-radius: 50%;
-  text-decoration: none;
-  position: fixed;
-  font-size: 30px;
   display: flex;
   justify-content: center;
   align-self: center;
+  height: 44px;
+  width: 44px;
+  padding: 3px;
+  position: fixed;
   bottom: 9px;
   left: 41%;
+  color: white;
+  background-color: #18b839;
+  text-decoration: none;
+  font-size: 30px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
-  padding: 3px;
+  border-radius: 50%;
 `
 
 export default function Home({ cards }) {
