@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const cardsPath = 'http://localhost:4000/cards'
+
 export function getAllCards() {
   return axios.get(cardsPath)
 }

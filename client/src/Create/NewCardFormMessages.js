@@ -16,62 +16,30 @@ export function SummaryInputMessage(props) {
   }
 }
 
-export function DateMessage(props) {
-  const dateLength = props.data.date.length > 0
-  if (dateLength > 0) {
-    return <Message> Thank you very much!</Message>
-  } else {
-    return null
-  }
+export function DateMessage() {
+  return <Message> That surley was a great Day wasn't it?</Message>
 }
 
-export function LocationMessage(props) {
-  console.log(props)
-  const locationLength = props.imageLocation.length > 0
-
-  if (locationLength > 0) {
-    return <Message> Thank you very much!</Message>
-  } else {
-    return null
-  }
+export function LocationMessage() {
+  return <Message> What a great place! </Message>
 }
-export function WeatherMessage(props) {
-  console.log(props)
-  const weatherlength = props.weatherData.temperatur
-
-  if (weatherlength === undefined) {
-    return (
-      <ErrorMessage>
-        Oh no! No location could be found! Please enter one by yourself!
-      </ErrorMessage>
-    )
-  } else {
-    return null
-  }
+export function WeatherMessage() {
+  return (
+    <ErrorMessage>
+      Oh no! No location could be found! Please enter one by yourself!
+    </ErrorMessage>
+  )
 }
 
-export function FoodMessage(props) {
-  const foodLength = props.data.food.length > 0
-
-  if (foodLength > 0) {
-    return <Message> Thank you very much!</Message>
-  } else {
-    return null
-  }
+export function FoodMessage() {
+  return <Message> Thank you very much!</Message>
 }
 
-export function TasteMessage(props) {
-  const tasteLength = props.data.taste.length > 0
-
-  if (tasteLength > 0) {
-    return <Message> Thank you very much!</Message>
-  } else {
-    return null
-  }
+export function TasteMessage() {
+  return <Message> Thank you very much!</Message>
 }
 
 export function InputMessage(props) {
-  console.log(props)
   if (props.data.autoImage === false) {
     return (
       <ErrorMessage>
