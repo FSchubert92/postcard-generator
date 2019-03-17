@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import {
-  FormGrid,
-  BackButton,
-  ButtonWrapper,
-  DropDownMenu,
-} from './NewCardFormStyles'
+import { FormGrid, BackButton, ButtonWrapper } from './NewCardFormStyles'
 import {
   SummaryInputMessage,
   DateMessage,
-  LocationMessage,
   FoodMessage,
   TasteMessage,
   InputMessage,
-  WeatherMessage,
 } from './NewCardFormMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
+import LocationInput from './LocationInput'
+import WeatherInput from './WeatherInput'
 
 const defaultData = {
   date: '',
@@ -144,44 +139,18 @@ export default function CreateCard(props) {
           <input onChange={onInputChange} name="date" type="date" required />
           {isDateEmpty && <DateMessage />}
         </div>
-        <div>
-          <h3>Location</h3>
-          <input
-            onChange={onLocationInputChange}
-            name="location"
-            type="text"
-            placeholder="Where have you been"
-            value={imageLocation}
-          />
-          {isLocationEmpty && <LocationMessage />}
-        </div>
-        <div>
-          <h3>Weather</h3>
-          <input
-            onChange={onWeatherInputChange}
-            name="temperatur"
-            type="text"
-            placeholder="Temperatur in C°"
-            value={weatherData.temperatur}
-          />
-          <label>
-            Choose the weather condition
-            <DropDownMenu
-              name="weather"
-              size="1"
-              value={weatherData.weather}
-              onChange={onWeatherInputChange}
-            >
-              <option>Clear</option>
-              <option>Clouds</option>
-              <option> Snow</option>
-              <option> Rain</option>
-              <option> Drizzle</option>
-              <option> Thunderstorm</option>
-            </DropDownMenu>
-            {isWeatherUndefined && <WeatherMessage />}
-          </label>
-        </div>
+        <LocationInput
+          onInputChange={onLocationInputChange}
+          isLocationEmpty={isLocationEmpty}
+          location={imageLocation}
+        />
+
+        <WeatherInput
+          onInputChange={onWeatherInputChange}
+          isWeatherUndefined={isWeatherUndefined}
+          temperatur={weatherData.temperatur}
+          weather={weatherData.weather}
+        />
         <div>
           <h3>Summarize your day</h3>
           <textarea

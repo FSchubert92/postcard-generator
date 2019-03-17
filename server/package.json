@@ -8,7 +8,7 @@
     "start": "node server.js",
     "dev": "PORT=4000 nodemon server.js"
   },
-  "author": "Jeremias Erbs <jerry@badabam.de> (http://www.badabam.de/)",
+  "author": "Florian Schubert",
   "license": "UNLICENSED",
   "dependencies": {
     "cors": "2.8.5",

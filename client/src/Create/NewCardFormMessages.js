@@ -27,13 +27,13 @@ export function LocationMessage() {
 export function WeatherMessage() {
   return (
     <ErrorMessage>
-      Oh no! No location could be found! Please enter one by yourself!
+      Oh no! No location could be found! Please enter the weather by yourself!
     </ErrorMessage>
   )
 }
 
 export function FoodMessage() {
-  return <Message> Thank you very much!</Message>
+  return <Message> Cool! Was it delicious? </Message>
 }
 
 export function TasteMessage() {
