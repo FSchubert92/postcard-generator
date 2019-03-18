@@ -115,7 +115,7 @@ export default function CreateCard(props) {
     data.picture = imageURL
     data.temperatur = weatherData.temperatur
     data.weather = weatherData.weather
-    data.id = uid()
+    data._id = uid()
     props.onSubmit(data)
     props.history.push('/')
   }

@@ -30,6 +30,10 @@ const TitleAndWeatherWrapper = styled.div`
   grid-template-rows: auto;
   grid-template-columns: 1fr 48px;
 `
+const HeadlineAndButtonWrapper = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 48px;
+`
 
 const HowWasToday = styled.h3`
   padding-top: 5px;
@@ -49,6 +53,18 @@ const CardBottomWrapper = styled.section`
   background-color: white;
 `
 
+const DeleteButton = styled.button`
+  display: flex;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  color: crimson;
+  border-width: 0;
+  font-size: 2em;
+  border-radius: 0;
+  margin: 0 auto;
+`
+
 export default function Card({
   date,
   location,
@@ -58,6 +74,7 @@ export default function Card({
   summary,
   iAte,
   itTasted,
+  onDelete,
 }) {
   const Stage = styled.section`
     height: 237px;
@@ -94,6 +111,7 @@ export default function Card({
       return wind
     }
   }
+  console.log(onDelete)
   return (
     <StyledCard data-cy="single-card">
       <DateHeadline>{date}</DateHeadline>
@@ -101,7 +119,12 @@ export default function Card({
         <LocationHeadline>{location}</LocationHeadline>
       </Stage>
       <CardBottomWrapper>
-        <HowWasToday>How was today?</HowWasToday>
+        <HeadlineAndButtonWrapper>
+          <HowWasToday>How was today?</HowWasToday>
+          <div>
+            <DeleteButton onClick={onDelete}>X</DeleteButton>
+          </div>
+        </HeadlineAndButtonWrapper>
         <div>
           <p>{summary}</p>
         </div>
