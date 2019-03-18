@@ -74,6 +74,7 @@ export default function Card({
   summary,
   iAte,
   itTasted,
+  onDelete,
 }) {
   const Stage = styled.section`
     height: 237px;
@@ -110,6 +111,7 @@ export default function Card({
       return wind
     }
   }
+  console.log(onDelete)
   return (
     <StyledCard data-cy="single-card">
       <DateHeadline>{date}</DateHeadline>
@@ -120,7 +122,7 @@ export default function Card({
         <HeadlineAndButtonWrapper>
           <HowWasToday>How was today?</HowWasToday>
           <div>
-            <DeleteButton>X</DeleteButton>
+            <DeleteButton onClick={onDelete}>X</DeleteButton>
           </div>
         </HeadlineAndButtonWrapper>
         <div>

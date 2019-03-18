@@ -11,6 +11,7 @@ import {
   getCardsFromStorage,
   getAllCards,
   postNewCard,
+  deleteCardFromServer,
 } from '../services'
 
 const Grid = styled.div`
@@ -41,6 +42,13 @@ function App() {
     postNewCard(data)
   }
 
+  function deleteCard(card) {
+    console.log(card)
+    deleteCardFromServer(card).then(res => console.log(res))
+    const index = cards.indexOf(card)
+    setCards([...cards.slice(0, index), ...cards.slice(index + 1)])
+  }
+
   return (
     <React.Fragment>
       <Router>
@@ -49,8 +57,7 @@ function App() {
           <Route
             exact
             path="/"
-            key={uid()}
-            render={() => <Home key={uid()} cards={cards} />}
+            render={() => <Home cards={cards} onDelete={deleteCard} />}
           />
           <Route
             path="/create"

@@ -24,7 +24,8 @@ const CreateButton = styled(NavLink)`
   border-radius: 50%;
 `
 
-export default function Home({ cards }) {
+export default function Home({ cards, onDelete }) {
+  console.log(onDelete)
   function CheckForNoCards() {
     if (cards.length === 0) {
       return (
@@ -50,8 +51,9 @@ export default function Home({ cards }) {
             summary={card.summary}
             iAte={card.food}
             itTasted={card.taste}
-            key={card.id}
+            key={card._id}
             weather={card.weather}
+            onDelete={() => onDelete(card)}
           />
         ))}
       </CardContainer>
