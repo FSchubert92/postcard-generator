@@ -12,7 +12,10 @@ import SwipeableViews from 'react-swipeable-views'
 
 const StyledCard = styled.section`
   p {
+    padding: 10px 10px 20px 0;
     margin: 2px 0 0 0px;
+    line-height: 24px;
+    font-size: 17px;
   }
 `
 
@@ -42,13 +45,13 @@ const HowWasToday = styled.h3`
 `
 
 const WeatherIcon = styled.img`
-  width: 48px;
+  width: 140px;
 `
 
 const CardBottomWrapper = styled.section`
   display: grid;
   grid-gap: 15px;
-  margin: -50px 25px 0;
+  margin: -50px 25px 25px;
   padding: 12px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   background-color: white;
@@ -64,6 +67,13 @@ const DeleteButton = styled.button`
   font-size: 2em;
   border-radius: 0;
   margin: 0 auto;
+`
+
+const WeatherContainer = styled.section`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 `
 
 export default function Card({
@@ -128,20 +138,19 @@ export default function Card({
           <div>
             <p>{summary}</p>
           </div>
-          <TitleAndWeatherWrapper>
-            <section>
-              <h3>I ate</h3>
-              <p>{iAte}</p>
-            </section>
-            <section>
-              <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-            </section>
-            <section>
-              <h3>It tasted</h3>
-              <p>{itTasted}</p>
-            </section>
+          {/* <TitleAndWeatherWrapper> */}
+          <div>
+            <h3>I ate</h3>
+            <p>{iAte}</p>
+            <h3>It tasted</h3>
+            <p>{itTasted}</p>
+          </div>
+          <WeatherContainer>
+            <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
             <div>{temperatur}</div>
-          </TitleAndWeatherWrapper>
+          </WeatherContainer>
+
+          {/* </TitleAndWeatherWrapper> */}
         </SwipeableViews>
       </CardBottomWrapper>
     </StyledCard>

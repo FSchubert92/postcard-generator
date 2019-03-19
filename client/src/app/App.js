@@ -39,7 +39,7 @@ function App() {
 
   function addCardToState(data) {
     setCards([...cards, data])
-    postNewCard(data)
+    postNewCard(data).then(res => console.log(res))
   }
 
   function deleteCard(card) {

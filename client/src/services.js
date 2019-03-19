@@ -29,6 +29,7 @@ export function uploadImage(picture) {
 }
 
 export function postNewCard(card) {
+  console.log(card)
   return axios.post(cardsPath, card)
 }
 

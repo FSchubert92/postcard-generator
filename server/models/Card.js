@@ -21,7 +21,7 @@ const CardSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.String,
     default: '',
   },
-  id: {
+  _id: {
     type: mongoose.SchemaTypes.String,
     default: '',
   },
