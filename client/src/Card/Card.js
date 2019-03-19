@@ -8,6 +8,7 @@ import snow from '../assets/weather-icons/snow.png'
 import sun from '../assets/weather-icons/sun.png'
 import thunderstorm from '../assets/weather-icons/thunderstorm.png'
 import wind from '../assets/weather-icons/wind.png'
+import SwipeableViews from 'react-swipeable-views'
 
 const StyledCard = styled.section`
   p {
@@ -123,23 +124,25 @@ export default function Card({
             <DeleteButton onClick={onDelete}>X</DeleteButton>
           </div>
         </HeadlineAndButtonWrapper>
-        <div>
-          <p>{summary}</p>
-        </div>
-        <TitleAndWeatherWrapper>
-          <section>
-            <h3>I ate</h3>
-            <p>{iAte}</p>
-          </section>
-          <section>
-            <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-          </section>
-          <section>
-            <h3>It tasted</h3>
-            <p>{itTasted}</p>
-          </section>
-          <div>{temperatur}</div>
-        </TitleAndWeatherWrapper>
+        <SwipeableViews>
+          <div>
+            <p>{summary}</p>
+          </div>
+          <TitleAndWeatherWrapper>
+            <section>
+              <h3>I ate</h3>
+              <p>{iAte}</p>
+            </section>
+            <section>
+              <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
+            </section>
+            <section>
+              <h3>It tasted</h3>
+              <p>{itTasted}</p>
+            </section>
+            <div>{temperatur}</div>
+          </TitleAndWeatherWrapper>
+        </SwipeableViews>
       </CardBottomWrapper>
     </StyledCard>
   )
