@@ -85,7 +85,6 @@ export default function Card({
   `
 
   function chooseWeatherIcon(weather) {
-    console.log(weather)
     if (weather === 'Clear') {
       return sun
     }
@@ -111,7 +110,6 @@ export default function Card({
       return wind
     }
   }
-  console.log(onDelete)
   return (
     <StyledCard data-cy="single-card">
       <DateHeadline>{date}</DateHeadline>

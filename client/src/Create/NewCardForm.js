@@ -62,7 +62,6 @@ export default function CreateCard(props) {
     const picture = data.pictureFile
     let longitude = 0
     let latitude = 0
-    console.log(picture)
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
@@ -106,9 +105,7 @@ export default function CreateCard(props) {
   async function onSubmit(event) {
     event.preventDefault()
     let imageURL = null
-    console.log(data.pictureFile)
     await uploadImage(data.pictureFile).then(res => {
-      console.log(data.pictureFile)
       imageURL = res.data.url
     })
     data.location = imageLocation

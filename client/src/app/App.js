@@ -13,6 +13,7 @@ import {
   postNewCard,
   deleteCardFromServer,
 } from '../services'
+import Carousel from '../Create/Carousel/Carousel'
 
 const Grid = styled.div`
   display: grid;
@@ -71,6 +72,15 @@ function App() {
             )}
           />
           <GlobalStyle />
+          <Route
+            path="/test"
+            render={() => (
+              <Carousel>
+                <div>Ananas</div>
+                <div>Papaya</div>
+              </Carousel>
+            )}
+          />
         </Grid>
       </Router>
     </React.Fragment>
