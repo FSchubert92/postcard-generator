@@ -15,7 +15,6 @@ export function getLocation(lat, long) {
 export function uploadImage(picture) {
   const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
   const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
-  console.log(picture)
   const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
 
   const formData = new FormData()

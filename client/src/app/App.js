@@ -39,7 +39,7 @@ function App() {
 
   function addCardToState(data) {
     setCards([...cards, data])
-    postNewCard(data)
+    postNewCard(data).then(res => console.log(res))
   }
 
   function deleteCard(card) {
@@ -71,6 +71,7 @@ function App() {
             )}
           />
           <GlobalStyle />
+          {/* <Route path="/test" render={() => <Carousel />} /> */}
         </Grid>
       </Router>
     </React.Fragment>

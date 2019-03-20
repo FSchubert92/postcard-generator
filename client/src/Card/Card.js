@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import cloudy from '../assets/weather-icons/cloudy.png'
 import drizzle from '../assets/weather-icons/drizzle.png'
@@ -8,10 +8,15 @@ import snow from '../assets/weather-icons/snow.png'
 import sun from '../assets/weather-icons/sun.png'
 import thunderstorm from '../assets/weather-icons/thunderstorm.png'
 import wind from '../assets/weather-icons/wind.png'
+import SwipeableViews from 'react-swipeable-views'
+import Pagination from './components/Pagination'
 
 const StyledCard = styled.section`
   p {
+    padding: 10px 10px 20px 0;
     margin: 2px 0 0 0px;
+    line-height: 24px;
+    font-size: 17px;
   }
 `
 
@@ -41,13 +46,13 @@ const HowWasToday = styled.h3`
 `
 
 const WeatherIcon = styled.img`
-  width: 48px;
+  width: 140px;
 `
 
 const CardBottomWrapper = styled.section`
   display: grid;
   grid-gap: 15px;
-  margin: -50px 25px 0;
+  margin: -50px 25px 25px;
   padding: 12px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
   background-color: white;
@@ -63,6 +68,18 @@ const DeleteButton = styled.button`
   font-size: 2em;
   border-radius: 0;
   margin: 0 auto;
+`
+
+const WeatherContainer = styled.section`
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: auto;
+    font-weight: bold;
+  }
 `
 
 export default function Card({
@@ -83,9 +100,13 @@ export default function Card({
     background-size: cover;
     padding: 10px 0 0 13px;
   `
+  const [index, setIndex] = useState(0)
+
+  function handleChangeIndex(index) {
+    setIndex(index)
+  }
 
   function chooseWeatherIcon(weather) {
-    console.log(weather)
     if (weather === 'Clear') {
       return sun
     }
@@ -111,7 +132,6 @@ export default function Card({
       return wind
     }
   }
-  console.log(onDelete)
   return (
     <StyledCard data-cy="single-card">
       <DateHeadline>{date}</DateHeadline>
@@ -125,23 +145,22 @@ export default function Card({
             <DeleteButton onClick={onDelete}>X</DeleteButton>
           </div>
         </HeadlineAndButtonWrapper>
-        <div>
-          <p>{summary}</p>
-        </div>
-        <TitleAndWeatherWrapper>
-          <section>
+        <SwipeableViews onChangeIndex={handleChangeIndex}>
+          <div>
+            <p>{summary}</p>
+          </div>
+          <div>
             <h3>I ate</h3>
             <p>{iAte}</p>
-          </section>
-          <section>
-            <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-          </section>
-          <section>
             <h3>It tasted</h3>
             <p>{itTasted}</p>
-          </section>
-          <div>{temperatur}</div>
-        </TitleAndWeatherWrapper>
+          </div>
+          <WeatherContainer>
+            <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
+            <p>{temperatur}</p>
+          </WeatherContainer>
+        </SwipeableViews>
+        <Pagination index={index} />
       </CardBottomWrapper>
     </StyledCard>
   )

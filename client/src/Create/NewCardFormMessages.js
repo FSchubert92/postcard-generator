@@ -2,7 +2,7 @@ import React from 'react'
 import { ErrorMessage, Message } from './NewCardFormStyles'
 
 export function SummaryInputMessage(props) {
-  const summaryLength = 260 - props.data.summary.length
+  const summaryLength = 260 - props.summaryLength
 
   if (summaryLength < 0) {
     return (
