@@ -12,6 +12,8 @@ import uid from 'uid'
 import EXIF from 'exif-js'
 import LocationInput from './LocationInput'
 import WeatherInput from './WeatherInput'
+import LoadingOverlay from 'react-loading-overlay'
+import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
 
 const defaultData = {
   date: '',
@@ -25,6 +27,7 @@ export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
   const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState('')
+  const [isActive, setIsActive] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
   const isWeatherUndefined = weatherData.temperatur === undefined
@@ -104,6 +107,7 @@ export default function CreateCard(props) {
 
   async function onSubmit(event) {
     event.preventDefault()
+    setIsActive(true)
     let imageURL = null
     await uploadImage(data.pictureFile).then(res => {
       imageURL = res.data.url
@@ -113,68 +117,80 @@ export default function CreateCard(props) {
     data.temperatur = weatherData.temperatur
     data.weather = weatherData.weather
     data._id = uid()
+    setIsActive(false)
     props.onSubmit(data)
     props.history.push('/')
   }
-
+  console.log(isActive)
   return (
     <React.Fragment>
-      <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
-        <h2>New Card</h2>
-        <div>
-          <h3>Image</h3>
-          <input
-            onChange={onFileChange}
-            type="file"
-            required
-            accept="image/jpeg"
+      <LoadingOverlay
+        active={isActive}
+        spinner={<ClimbingBoxLoader />}
+        text="Getting your Image up to the clouds!"
+        styles={{
+          wrapper: {
+            overflow: isActive ? 'hidden' : 'scroll',
+          },
+        }}
+      >
+        <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
+          <h2>New Card</h2>
+          <div>
+            <h3>Image</h3>
+            <input
+              onChange={onFileChange}
+              type="file"
+              required
+              accept="image/jpeg"
+            />
+            <InputMessage data={data} />
+          </div>
+          <div>
+            <h3>Date</h3>
+            <input onChange={onInputChange} name="date" type="date" required />
+            {isDateEmpty && <DateMessage />}
+          </div>
+          <LocationInput
+            onInputChange={onLocationInputChange}
+            isLocationEmpty={isLocationEmpty}
+            location={imageLocation}
           />
-          <InputMessage data={data} />
-        </div>
-        <div>
-          <h3>Date</h3>
-          <input onChange={onInputChange} name="date" type="date" required />
-          {isDateEmpty && <DateMessage />}
-        </div>
-        <LocationInput
-          onInputChange={onLocationInputChange}
-          isLocationEmpty={isLocationEmpty}
-          location={imageLocation}
-        />
 
-        <WeatherInput
-          onInputChange={onWeatherInputChange}
-          isWeatherUndefined={isWeatherUndefined}
-          temperatur={weatherData.temperatur}
-          weather={weatherData.weather}
-        />
-        <div>
-          <h3>Summarize your day</h3>
-          <textarea
-            onChange={onInputChange}
-            name="summary"
-            className={'input-summary'}
-            maxLength="280"
-            placeholder="Summarize what you did today"
-            required
+          <WeatherInput
+            onInputChange={onWeatherInputChange}
+            isWeatherUndefined={isWeatherUndefined}
+            temperatur={weatherData.temperatur}
+            weather={weatherData.weather}
           />
-          <SummaryInputMessage data={data} />
-        </div>
-        <div>
-          <h3>Today I ate</h3>
-          <input onChange={onInputChange} name="food" type="text" required />
-          {isFoodEmpty && <FoodMessage />}
-        </div>
-        <div>
-          <h3>It tasted</h3>
-          <input onChange={onInputChange} name="taste" type="text" required />
-          {isTasteEmpty && <TasteMessage />}
-        </div>
-        <ButtonWrapper>
-          <BackButton to="/">X</BackButton>
-          <button>OK!</button>
-        </ButtonWrapper>
-      </FormGrid>
+          <div>
+            <h3>Summarize your day</h3>
+            <textarea
+              onChange={onInputChange}
+              name="summary"
+              className={'input-summary'}
+              maxLength="280"
+              placeholder="Summarize what you did today"
+              required
+            />
+            <SummaryInputMessage data={data} />
+          </div>
+          <div>
+            <h3>Today I ate</h3>
+            <input onChange={onInputChange} name="food" type="text" required />
+            {isFoodEmpty && <FoodMessage />}
+          </div>
+          <div>
+            <h3>It tasted</h3>
+            <input onChange={onInputChange} name="taste" type="text" required />
+            {isTasteEmpty && <TasteMessage />}
+          </div>
+          <ButtonWrapper>
+            <BackButton to="/">X</BackButton>
+            <button>OK!</button>
+          </ButtonWrapper>
+        </FormGrid>
+      </LoadingOverlay>
     </React.Fragment>
   )
 }
