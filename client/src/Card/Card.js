@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import cloudy from '../assets/weather-icons/cloudy.png'
 import drizzle from '../assets/weather-icons/drizzle.png'
@@ -9,6 +9,7 @@ import sun from '../assets/weather-icons/sun.png'
 import thunderstorm from '../assets/weather-icons/thunderstorm.png'
 import wind from '../assets/weather-icons/wind.png'
 import SwipeableViews from 'react-swipeable-views'
+import Pagination from './components/Pagination'
 
 const StyledCard = styled.section`
   p {
@@ -70,10 +71,15 @@ const DeleteButton = styled.button`
 `
 
 const WeatherContainer = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-rows: auto auto;
   height: 100%;
   justify-content: center;
   align-items: center;
+  p {
+    margin: auto;
+    font-weight: bold;
+  }
 `
 
 export default function Card({
@@ -94,6 +100,12 @@ export default function Card({
     background-size: cover;
     padding: 10px 0 0 13px;
   `
+  const [index, setIndex] = useState(0)
+
+  function handleChangeIndex(index) {
+    setIndex(index)
+    console.log(index)
+  }
 
   function chooseWeatherIcon(weather) {
     if (weather === 'Clear') {
@@ -134,11 +146,10 @@ export default function Card({
             <DeleteButton onClick={onDelete}>X</DeleteButton>
           </div>
         </HeadlineAndButtonWrapper>
-        <SwipeableViews>
+        <SwipeableViews onChangeIndex={handleChangeIndex}>
           <div>
             <p>{summary}</p>
           </div>
-          {/* <TitleAndWeatherWrapper> */}
           <div>
             <h3>I ate</h3>
             <p>{iAte}</p>
@@ -147,11 +158,10 @@ export default function Card({
           </div>
           <WeatherContainer>
             <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-            <div>{temperatur}</div>
+            <p>{temperatur}</p>
           </WeatherContainer>
-
-          {/* </TitleAndWeatherWrapper> */}
         </SwipeableViews>
+        <Pagination index={index} />
       </CardBottomWrapper>
     </StyledCard>
   )

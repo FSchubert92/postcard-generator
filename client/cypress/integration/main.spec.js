@@ -12,20 +12,15 @@ describe('Riyoko', () => {
       cy.title().should('include', 'RIYOKO')
     })
 
-    it('Clears the local storage', () => {
-      cy.clearLocalStorage()
-        .get('section')
-        .should('not.contain', 'How was today')
-        .should('have.length', ' 2')
-    })
+   
 
     it('renders a single card', () => {
       cy.get('[data-cy="single-card"]')
         .should('contain', '')
         .should('contain', '')
         .should('contain', 'How was today')
-        .should('contain', 'Summary of the day')
     })
+
     it('has button to create new card', () => {
       cy.get('a').should('contain', '+')
     })
@@ -71,6 +66,8 @@ describe('Riyoko', () => {
         .type(testValue)
         .should('have.value', testValue)
     })
+
+    
     // it('Uploads an Image', () => {
     //   cy.fixture('images/logo.png').as('logo')
     //   cy.get('input[type=file]').then($input => {
