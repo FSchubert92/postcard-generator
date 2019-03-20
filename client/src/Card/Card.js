@@ -104,7 +104,6 @@ export default function Card({
 
   function handleChangeIndex(index) {
     setIndex(index)
-    console.log(index)
   }
 
   function chooseWeatherIcon(weather) {

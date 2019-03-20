@@ -13,7 +13,6 @@ const Wrapper = styled.section`
 `
 
 export default function Pagination({index}) {
-    console.log(index)
 
   return (
     <Wrapper data-cy="pagination">

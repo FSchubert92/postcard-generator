@@ -12,8 +12,6 @@ describe('Riyoko', () => {
       cy.title().should('include', 'RIYOKO')
     })
 
-   
-
     it('renders a single card', () => {
       cy.get('[data-cy="single-card"]')
         .should('contain', '')
