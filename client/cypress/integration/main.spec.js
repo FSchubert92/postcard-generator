@@ -21,6 +21,15 @@ describe('Riyoko', () => {
         .should('contain', 'How was today')
     })
 
+    describe('Card', () => {
+      it('has a working pagination', () => {
+        cy.get('[data-cy="pagination"]').children('svg')
+        // .first('includes', 'svg')
+        // cy.get('[data-cy="pagination"]').last('includes', 'svg')
+        // cy.get('[data-cy="pagination"]').eq(1).should('contain', 'svg')
+      
+    })
+
     it('has button to create new card', () => {
       cy.get('a').should('contain', '+')
     })
@@ -36,7 +45,7 @@ describe('Riyoko', () => {
     })
     it('has all input fields', () => {
       cy.get('form').should('have.length', '1')
-      cy.get('form > div> input').should('have.length', '5')
+      cy.get('form > div> input').should('have.length', '6')
       cy.get('form > div> textarea').should('have.length', '1')
       cy.get('form > section > button').should('have.length', '1')
       cy.get('form > section> a').should('have.length', '1')
@@ -68,6 +77,8 @@ describe('Riyoko', () => {
     })
 
     
+      })
+
     // it('Uploads an Image', () => {
     //   cy.fixture('images/logo.png').as('logo')
     //   cy.get('input[type=file]').then($input => {

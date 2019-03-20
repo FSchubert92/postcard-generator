@@ -16,7 +16,7 @@ export default function Pagination({index}) {
     console.log(index)
 
   return (
-    <Wrapper>
+    <Wrapper data-cy="pagination">
         {
             index ===0 
         ? (<SummaryActive/>)
