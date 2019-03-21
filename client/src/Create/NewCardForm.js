@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { FormGrid, BackButton, ButtonWrapper } from './NewCardFormStyles'
+import {
+  FormGrid,
+  BackButton,
+  ButtonWrapper,
+} from './components/NewCardFormStyles'
 import {
   SummaryInputMessage,
   DateMessage,
   FoodMessage,
   TasteMessage,
   InputMessage,
-} from './NewCardFormMessages'
+} from './components/NewCardFormMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
-import LocationInput from './LocationInput'
-import WeatherInput from './WeatherInput'
+import LocationInput from './components/LocationInput'
+import WeatherInput from './components/WeatherInput'
 import LoadingOverlay from 'react-loading-overlay'
-import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
 
 const defaultData = {
   date: '',

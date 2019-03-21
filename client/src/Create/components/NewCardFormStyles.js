@@ -32,6 +32,7 @@ export const FormGrid = styled.form`
 
   button {
     height: 44px;
+    border: none;
     width: 44px;
     background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
     color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
