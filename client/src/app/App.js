@@ -71,7 +71,6 @@ function App() {
             )}
           />
           <GlobalStyle />
-          {/* <Route path="/test" render={() => <Carousel />} /> */}
         </Grid>
       </Router>
     </React.Fragment>
