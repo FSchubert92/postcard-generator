@@ -126,7 +126,7 @@ export default function CreateCard(props) {
     <React.Fragment>
       <LoadingOverlay
         active={isActive}
-        spinner={<ClimbingBoxLoader />}
+        spinner
         text="Getting your Image up to the clouds!"
         styles={{
           wrapper: {
