@@ -29,7 +29,7 @@ const defaultData = {
 export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
   const [imageLocation, setImageLocation] = useState('')
-  const [weatherData, setWeatherData] = useState('')
+  const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
   const [isActive, setIsActive] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
@@ -158,6 +158,7 @@ export default function CreateCard(props) {
             onInputChange={onLocationInputChange}
             isLocationEmpty={isLocationEmpty}
             location={imageLocation}
+            required
           />
 
           <WeatherInput
@@ -165,6 +166,7 @@ export default function CreateCard(props) {
             isWeatherUndefined={isWeatherUndefined}
             temperatur={weatherData.temperatur}
             weather={weatherData.weather}
+            required
           />
           <div>
             <h3>Summarize your day</h3>
