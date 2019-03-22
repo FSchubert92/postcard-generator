@@ -13,6 +13,7 @@ import EXIF from 'exif-js'
 import LocationInput from './components/LocationInput'
 import WeatherInput from './components/WeatherInput'
 import LoadingOverlay from 'react-loading-overlay'
+import { ReactComponent as ImagePlaceholder } from '../assets/form-icons/image-placeholder.svg'
 
 const defaultData = {
   date: '',
@@ -143,14 +144,27 @@ export default function CreateCard(props) {
       >
         <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
           <h2>New Card</h2>
-          <div>
+          <div className={'file-input-wrapper'}>
             <h3>Image</h3>
             <input
               onChange={onFileChange}
               type="file"
               required
               accept="image/jpeg"
+              id="picture"
             />
+            <label for="picture">
+              {data.pictureFile === '' ? (
+                <ImagePlaceholder />
+              ) : (
+                <img
+                  width="280px"
+                  height="200px"
+                  src={URL.createObjectURL(data.pictureFile)}
+                  alt=""
+                />
+              )}
+            </label>
             <InputMessage data={data} />
           </div>
           <div>
