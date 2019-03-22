@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import {
-  FormGrid,
-  BackButton,
-  ButtonWrapper,
-} from './components/NewCardFormStyles'
+import { FormGrid, BackButton, ButtonWrapper } from './components/FormStyles'
 import {
   SummaryInputMessage,
   DateMessage,
   FoodMessage,
   TasteMessage,
   InputMessage,
-} from './components/NewCardFormMessages'
+} from './components/ErrorAndSuccessMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
@@ -28,9 +24,14 @@ const defaultData = {
 
 export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
+  // const [date, setDate] = useState('')
+  // const [summary, setSummary] = useState('')
+  // const [food, setFood] = useState('')
+  // const [taste, setTaste] = useState('')
   const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
   const [isActive, setIsActive] = useState(false)
+
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
   const isWeatherUndefined = weatherData.temperatur === undefined
@@ -105,7 +106,11 @@ export default function CreateCard(props) {
   }
 
   function validateForm() {
-    return !Object.values(data).includes('')
+    return (
+      !Object.values(data).includes('') &&
+      !Object.values(weatherData).includes('') &&
+      !Object.values(imageLocation).includes('')
+    )
   }
 
   async function onSubmit(event) {
@@ -124,7 +129,6 @@ export default function CreateCard(props) {
     props.onSubmit(data)
     props.history.push('/')
   }
-  console.log(isActive)
   return (
     <React.Fragment>
       <LoadingOverlay
