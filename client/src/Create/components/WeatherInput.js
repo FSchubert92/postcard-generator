@@ -1,6 +1,6 @@
 import React from 'react'
-import { WeatherMessage } from './NewCardFormMessages'
-import { DropDownMenu } from './NewCardFormStyles'
+import { WeatherMessage } from './ErrorAndSuccessMessages'
+import { DropDownMenu } from './FormStyles'
 
 export default function WeatherInput(props) {
   console.log(props)
@@ -13,6 +13,7 @@ export default function WeatherInput(props) {
         type="text"
         placeholder="Temperatur in C°"
         value={props.temperatur}
+        required
       />
       <label>
         Choose the weather condition
@@ -21,6 +22,7 @@ export default function WeatherInput(props) {
           size="1"
           value={props.weather}
           onChange={props.onInputChange}
+          required
         >
           <option>Clear</option>
           <option>Clouds</option>

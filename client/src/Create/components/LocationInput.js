@@ -1,5 +1,5 @@
 import React from 'react'
-import { LocationMessage } from './NewCardFormMessages'
+import { LocationMessage } from './ErrorAndSuccessMessages'
 
 export default function LocationInput(props) {
   console.log(props)

@@ -8,7 +8,19 @@ menu: Common
 import Card from './Card'
 import { Playground } from 'docz'
 import styled from 'styled-components'
+import demoPicture from '../assets/images/test-image.jpg'
 
 <Playground>
-  <Card />
+  <Card
+    picture={demoPicture}
+    date={'Tuesday 20th January 2018'}
+    location={'Tokyo'}
+    temperatur={'20 C°'}
+    summary={
+      'Though the rivers current never fails, the water passing, moment by moment, is never the same.  Where the current pools, bubbles form on the surface, bursting and disappearing as others rise to replace them, none lasting long.  In this world, people and their dwelling places are like that, always changing.When you see the ridgepoles of the impressive houses in Heian-kyo competing to rise above one another--dwellings of people of high status or of low--they look like they might stand for generations, but when you inquire you discover there are very few still standing from ages past.  Some may have burned down just last year, and been rebuilt since. '
+    }
+    iAte={'Hamburger'}
+    itTasted={'Fantastico'}
+    weather={'Clear'}
+  />
 </Playground>

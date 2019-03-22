@@ -24,19 +24,52 @@ export const FormGrid = styled.form`
     margin: 10px 0;
     padding: 10px;
   }
+  div & .file-input-wrapper {
+    h3 {
+      text-align: start;
+    }
 
-  input[type='file'] {
+    display: inline-block;
+    margin: 0 0.5rem 1rem;
+    text-align: center;
+
+    input[type='file'] {
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 2px;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    label {
+      z-index: 1;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      overflow: hidden;
+      padding: 0 0.5rem;
+      cursor: pointer;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+
+    /* input[type='file'] {
     width: 315px;
     padding: 0;
-  }
+  } */
 
-  button {
-    height: 44px;
-    width: 44px;
-    background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
-    color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
-    border-radius: 50%;
+    button {
+      height: 44px;
+      border: none;
+      width: 44px;
+      background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
+      color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
+      border-radius: 50%;
+    }
   }
 
   .input-summary {
