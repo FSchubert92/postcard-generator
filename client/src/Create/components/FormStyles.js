@@ -25,6 +25,10 @@ export const FormGrid = styled.form`
     padding: 10px;
   }
   div & .file-input-wrapper {
+    h3 {
+      text-align: start;
+    }
+
     display: inline-block;
     margin: 0 0.5rem 1rem;
     text-align: center;
