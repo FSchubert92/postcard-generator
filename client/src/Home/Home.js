@@ -27,16 +27,28 @@ const CreateButton = styled(NavLink)`
 `
 const Confirm = styled.section`
   display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 3;
   position: absolute;
-  background: hotpink;
+  background: #000000b0;
   height: 100vh;
   width: 100vw;
+  button {
+    margin: 10px;
+    font-size: 20px;
+    border: none;
+    &.yes {
+      background: red;
+    }
+  }
 `
 export default function Home({ cards, onDelete }) {
-  const [confirmation, setConfirmation] = useState(false)
+  const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
 
   console.log(onDelete)
@@ -55,7 +67,7 @@ export default function Home({ cards, onDelete }) {
 
   function confirmDelete(card) {
     setCardToDelete(card)
-    setConfirmation(true)
+    setConfirmMessage(true)
   }
 
   function ConfirmationMessage() {
@@ -63,22 +75,25 @@ export default function Home({ cards, onDelete }) {
     return (
       <Confirm>
         Are you sure?
-        <button
-          onClick={() => {
-            onDelete(card)
-            setConfirmation(false)
-          }}
-        >
-          Yes
-        </button>
-        <button onClick={() => setConfirmation(false)}>No</button>
+        <div>
+          <button
+            className={'yes'}
+            onClick={() => {
+              onDelete(card)
+              setConfirmMessage(false)
+            }}
+          >
+            Yes
+          </button>
+          <button onClick={() => setConfirmMessage(false)}>No</button>
+        </div>
       </Confirm>
     )
   }
   return (
     <React.Fragment>
       <CardContainer data-cy="card-container">
-        {confirmation && <ConfirmationMessage />}
+        {showConfirmMessage && <ConfirmationMessage />}
         <CheckForNoCards />
         {cards.map(card => (
           <Card

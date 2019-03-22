@@ -13,6 +13,7 @@ export default function WeatherInput(props) {
         type="text"
         placeholder="Temperatur in C°"
         value={props.temperatur}
+        required
       />
       <label>
         Choose the weather condition
@@ -21,6 +22,7 @@ export default function WeatherInput(props) {
           size="1"
           value={props.weather}
           onChange={props.onInputChange}
+          required
         >
           <option>Clear</option>
           <option>Clouds</option>
