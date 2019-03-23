@@ -17,13 +17,6 @@ export const FormGrid = styled.form`
         : '2px 1px 12px 0px rgba(0, 0, 0, 10%)'};
   }
 
-  input,
-  textarea {
-    width: 90%;
-    border: 2px solid #ddd;
-    margin: 10px 0;
-    padding: 10px;
-  }
   div & .file-input-wrapper {
     h3 {
       text-align: start;

@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
 
 import { loginUser, setCurrentUser } from '../services'
+import StyledForm from './styling'
 
 export default function Login({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({
@@ -38,14 +39,8 @@ export default function Login({ props, setAuth, auth }) {
 
   return (
     <React.Fragment>
-      <h1>Login</h1>
-      <form
-        onSubmit={onSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <StyledForm onSubmit={onSubmit}>
+        <h2>Login</h2>
         <input
           type="text"
           placeholder="Username or E-Mail"
@@ -63,8 +58,8 @@ export default function Login({ props, setAuth, auth }) {
         />
         {errors && errors.password ? <p>{errors.password}</p> : null}
 
-        <button>Login</button>
-      </form>
+        <button>OK</button>
+      </StyledForm>
     </React.Fragment>
   )
 }

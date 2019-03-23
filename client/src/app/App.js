@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
-import Login from '../Landing/Login'
-import Register from '../Landing/Register'
+import Login from '../Landingpage/Login'
+import Register from '../Landingpage/Register'
 import PrivateRoute from '../auth/PrivateRoute'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
@@ -19,7 +19,7 @@ import {
   setCurrentUser,
   logoutUser,
 } from '../services'
-import LandingPage from '../Landing/LandingPage'
+import LandingPage from '../Landingpage/LandingPage'
 
 const Grid = styled.div`
   display: grid;

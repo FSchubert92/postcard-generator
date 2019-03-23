@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
+import StyledForm from './styling'
 
 import { registerUser, setCurrentUser } from '../services'
 
@@ -16,7 +17,7 @@ export default function Register({ props, setAuth, auth }) {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      props.history.push('/dashboard')
+      props.history.push('/home')
     }
   })
 
@@ -40,14 +41,8 @@ export default function Register({ props, setAuth, auth }) {
 
   return (
     <React.Fragment>
-      <h1>Register</h1>
-      <form
-        onSubmit={onSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <StyledForm onSubmit={onSubmit}>
+        <h2>Register</h2>
         <input
           type="text"
           placeholder="Username"
@@ -64,24 +59,26 @@ export default function Register({ props, setAuth, auth }) {
           onChange={onInputChange}
         />
         {errors && errors.email ? <p>{errors.email}</p> : null}
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={userData.password}
-          onChange={onInputChange}
-        />
-        {errors && errors.password ? <p>{errors.password}</p> : null}
-        <input
-          type="password"
-          placeholder="Repeat Password"
-          name="password2"
-          value={userData.password2}
-          onChange={onInputChange}
-        />
-        {errors && errors.password2 ? <p>{errors.password2}</p> : null}
-        <button>Register</button>
-      </form>
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={userData.password}
+            onChange={onInputChange}
+          />
+          {errors && errors.password ? <p>{errors.password}</p> : null}
+          <input
+            type="password"
+            placeholder="Repeat Password"
+            name="password2"
+            value={userData.password2}
+            onChange={onInputChange}
+          />
+          {errors && errors.password2 ? <p>{errors.password2}</p> : null}
+        </div>
+        <button>OK</button>
+      </StyledForm>
     </React.Fragment>
   )
 }
