@@ -14,7 +14,7 @@ export default function Login({ props, setAuth, auth }) {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      props.history.push('/dashboard')
+      props.history.push('/home')
     }
   })
 

@@ -35,7 +35,7 @@ export default function Register({ props, setAuth, auth }) {
         const decoded = jwt_decode(localStorage.jwtToken)
         setCurrentUser(decoded, setAuth)
       })
-      .catch(err => console.log(err))
+      .catch(err => setErrors(err.response.data))
   }
 
   return (

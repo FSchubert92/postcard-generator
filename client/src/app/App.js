@@ -75,6 +75,7 @@ function App() {
     <React.Fragment>
       <Router>
         <Grid>
+          <GlobalStyle />
           <Header />
           <Switch>
             <Route
@@ -95,21 +96,25 @@ function App() {
               exact
               auth={auth.isAuthenticated}
               path="/home"
-              render={() => <Home cards={cards} onDelete={deleteCard} />}
+              cards={cards}
+              onDelete={deleteCard}
+              component={Home}
+              // render={() => <Home cards={cards} onDelete={deleteCard} />}
             />
             <PrivateRoute
               exact
-              path="/create"
               auth={auth.isAuthenticated}
-              render={({ history }) => (
-                <NewCardForm
-                  key={uid()}
-                  history={history}
-                  onSubmit={addCardToState}
-                />
-              )}
+              path="/create"
+              onSubmit={addCardToState}
+              component={NewCardForm}
+
+              // render={({ history }) => (
+              //   <NewCardForm
+              //     key={uid()}
+              //     history={history}
+              //     onSubmit={addCardToState}
+              //   />
             />
-            <GlobalStyle />
           </Switch>
         </Grid>
       </Router>

@@ -209,7 +209,7 @@ export default function CreateCard(props) {
             {isTasteEmpty && <TasteMessage />}
           </div>
           <ButtonWrapper>
-            <BackButton to="/">X</BackButton>
+            <BackButton to="/home">X</BackButton>
             <button>OK!</button>
           </ButtonWrapper>
         </FormGrid>
