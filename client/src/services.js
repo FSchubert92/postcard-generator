@@ -16,8 +16,8 @@ export function uploadImage(picture) {
   const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
   const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
   const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`
-
   const formData = new FormData()
+
   formData.append('file', picture)
   formData.append('upload_preset', PRESET)
 

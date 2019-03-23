@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { FormGrid, BackButton, ButtonWrapper } from './NewCardFormStyles'
+import { FormGrid, BackButton, ButtonWrapper } from './components/FormStyles'
 import {
   SummaryInputMessage,
   DateMessage,
   FoodMessage,
   TasteMessage,
   InputMessage,
-} from './NewCardFormMessages'
+} from './components/ErrorAndSuccessMessages'
 import { uploadImage, getLocation, getWeather } from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
-import LocationInput from './LocationInput'
-import WeatherInput from './WeatherInput'
+import LocationInput from './components/LocationInput'
+import WeatherInput from './components/WeatherInput'
 import LoadingOverlay from 'react-loading-overlay'
-import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader'
+import { ReactComponent as ImagePlaceholder } from '../assets/form-icons/image-placeholder.svg'
 
 const defaultData = {
   date: '',
@@ -25,9 +25,14 @@ const defaultData = {
 
 export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
+  // const [date, setDate] = useState('')
+  // const [summary, setSummary] = useState('')
+  // const [food, setFood] = useState('')
+  // const [taste, setTaste] = useState('')
   const [imageLocation, setImageLocation] = useState('')
-  const [weatherData, setWeatherData] = useState('')
+  const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
   const [isActive, setIsActive] = useState(false)
+
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
   const isWeatherUndefined = weatherData.temperatur === undefined
@@ -102,7 +107,11 @@ export default function CreateCard(props) {
   }
 
   function validateForm() {
-    return !Object.values(data).includes('')
+    return (
+      !Object.values(data).includes('') &&
+      !Object.values(weatherData).includes('') &&
+      !Object.values(imageLocation).includes('')
+    )
   }
 
   async function onSubmit(event) {
@@ -121,7 +130,6 @@ export default function CreateCard(props) {
     props.onSubmit(data)
     props.history.push('/')
   }
-  console.log(isActive)
   return (
     <React.Fragment>
       <LoadingOverlay
@@ -136,14 +144,27 @@ export default function CreateCard(props) {
       >
         <FormGrid checkForEmptyFields={validateForm()} onSubmit={onSubmit}>
           <h2>New Card</h2>
-          <div>
+          <div className={'file-input-wrapper'}>
             <h3>Image</h3>
             <input
               onChange={onFileChange}
               type="file"
               required
               accept="image/jpeg"
+              id="picture"
             />
+            <label for="picture">
+              {data.pictureFile === '' ? (
+                <ImagePlaceholder />
+              ) : (
+                <img
+                  width="280px"
+                  height="200px"
+                  src={URL.createObjectURL(data.pictureFile)}
+                  alt=""
+                />
+              )}
+            </label>
             <InputMessage data={data} />
           </div>
           <div>
@@ -155,6 +176,7 @@ export default function CreateCard(props) {
             onInputChange={onLocationInputChange}
             isLocationEmpty={isLocationEmpty}
             location={imageLocation}
+            required
           />
 
           <WeatherInput
@@ -162,6 +184,7 @@ export default function CreateCard(props) {
             isWeatherUndefined={isWeatherUndefined}
             temperatur={weatherData.temperatur}
             weather={weatherData.weather}
+            required
           />
           <div>
             <h3>Summarize your day</h3>

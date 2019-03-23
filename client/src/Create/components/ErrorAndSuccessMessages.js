@@ -1,5 +1,5 @@
 import React from 'react'
-import { ErrorMessage, Message } from './NewCardFormStyles'
+import { ErrorMessage, Message } from './FormStyles'
 
 export function SummaryInputMessage(props) {
   const summaryLength = 260 - props.summaryLength
@@ -27,7 +27,8 @@ export function LocationMessage() {
 export function WeatherMessage() {
   return (
     <ErrorMessage>
-      Oh no! No location could be found! Please enter the weather by yourself!
+      No weather has been either found or entered. How about entering it
+      yourself?
     </ErrorMessage>
   )
 }

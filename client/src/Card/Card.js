@@ -30,11 +30,6 @@ const LocationHeadline = styled.h2`
   text-shadow: 0 2px 14px black;
 `
 
-const TitleAndWeatherWrapper = styled.div`
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 48px;
-`
 const HeadlineAndButtonWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 48px;
@@ -65,7 +60,7 @@ const DeleteButton = styled.button`
   background-color: white;
   color: crimson;
   border-width: 0;
-  font-size: 2em;
+  font-size: 30px;
   border-radius: 0;
   margin: 0 auto;
 `
