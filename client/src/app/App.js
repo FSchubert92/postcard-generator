@@ -10,7 +10,6 @@ import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
 import NewCardForm from '../Create/NewCardForm'
-import uid from 'uid'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
@@ -20,6 +19,7 @@ import {
   setCurrentUser,
   logoutUser,
 } from '../services'
+import LandingPage from '../Landing/LandingPage'
 
 const Grid = styled.div`
   display: grid;
@@ -71,13 +71,24 @@ function App() {
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)])
   }
 
+  function onLogoutClick() {
+    logoutUser(setAuth)
+  }
+
   return (
     <React.Fragment>
       <Router>
         <Grid>
           <GlobalStyle />
-          <Header />
+          <Header onClick={onLogoutClick} />
           <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <LandingPage props={props} setAuth={setAuth} auth={auth} />
+              )}
+            />
             <Route
               exact
               path="/register"
