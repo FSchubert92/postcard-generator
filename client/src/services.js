@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const cardsPath = 'http://localhost:4000/cards'
+const usersPath = 'http://localhost:4000/users'
 
 export function getAllCards() {
   return axios.get(cardsPath)
@@ -64,6 +65,35 @@ export function getFromStorage(name) {
     console.error(error.message)
   }
 }
+
+export function registerUser(userData) {
+  return axios.post('http://localhost:4000/api/users/register', userData)
+}
+
+export function loginUser(userData) {
+  return axios.post('api/users/login', userData)
+}
+
+export function logoutUser(setAuth) {
+  localStorage.removeItem('jwtToken')
+  setAuthToken(false)
+  setAuth({ user: {}, isAuthenticated: false })
+}
+
+export function setCurrentUser(decoded, setAuth) {
+  setAuth({ user: decoded, isAuthenticated: true })
+}
+
+export function setAuthToken(token) {
+  if (token) {
+    // Apply to every request
+    axios.defaults.headers.common['Authorization'] = token
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common['Authorization']
+  }
+}
+
 export function saveToStorage(name, data) {
   const dataString = JSON.stringify(data)
   localStorage.setItem(name, dataString)
