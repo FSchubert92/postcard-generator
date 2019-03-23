@@ -20,13 +20,14 @@ const StyledHeader = styled.header`
     margin-left: auto;
   }
 `
+export default function Header({ onClick, auth }) {
+  console.log(auth)
 
-export default function Header({ onClick }) {
   return (
     <StyledHeader>
       <img src={Logo} alt="Riyoko Logo" />
       <h1>RIYOKO</h1>
-      <LogoutIcon onClick={onClick} />
+      {auth && <LogoutIcon onClick={onClick} />}
     </StyledHeader>
   )
 }

@@ -80,7 +80,7 @@ function App() {
       <Router>
         <Grid>
           <GlobalStyle />
-          <Header onClick={onLogoutClick} />
+          <Header onClick={onLogoutClick} auth={auth.isAuthenticated} />
           <Switch>
             <Route
               exact
