@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const cardsPath = 'http://localhost:4000/cards'
+const cardsPath = 'cards'
 const usersPath = 'http://localhost:4000/users'
 
 export function getAllCards() {
@@ -67,7 +67,7 @@ export function getFromStorage(name) {
 }
 
 export function registerUser(userData) {
-  return axios.post('http://localhost:4000/api/users/register', userData)
+  return axios.post('api/users/register', userData)
 }
 
 export function loginUser(userData) {
