@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const cardsPath = 'cards'
-const usersPath = 'http://localhost:4000/users'
+const cardsPath = 'http://localhost:4000/cards'
+// const usersPath = 'http://localhost:4000/users'
 
 export function getAllCards() {
   return axios.get(cardsPath)
@@ -53,7 +53,7 @@ export function saveCardsToStorage(cards) {
 
 export function getWeather(lat, long) {
   const KEY = process.env.REACT_APP_WEATHER_KEY
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=${KEY}`
+  const url = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=${KEY}`
   return axios.get(url)
 }
 
@@ -67,11 +67,11 @@ export function getFromStorage(name) {
 }
 
 export function registerUser(userData) {
-  return axios.post('api/users/register', userData)
+  return axios.post('http://localhost:4000/users/api/users/register', userData)
 }
 
 export function loginUser(userData) {
-  return axios.post('api/users/login', userData)
+  return axios.post('http://localhost:4000/users/api/users/login', userData)
 }
 
 export function logoutUser(setAuth) {
