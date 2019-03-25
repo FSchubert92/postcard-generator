@@ -165,7 +165,7 @@ export default function CreateCard(props) {
               accept="image/jpeg"
               id="picture"
             />
-            <label for="picture">
+            <label htmlFor="picture">
               {data.pictureFile === '' ? (
                 <ImagePlaceholder />
               ) : (
