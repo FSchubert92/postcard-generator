@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const CardSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.SchemaTypes.String,
+    default: '',
+  },
   date: {
     type: mongoose.SchemaTypes.String,
     default: '',
