@@ -41,11 +41,10 @@ h2{
   }
 
   input, textarea {
-    appearance: none;
-    border: 4px solid #ddd;
-    border-radius: none;
-    background: white;
-    padding-left: 4px;
+    width: 90%;
+    border: 2px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
   }
 
   button {

@@ -7,7 +7,12 @@ import {
   TasteMessage,
   InputMessage,
 } from './components/ErrorAndSuccessMessages'
-import { uploadImage, getLocation, getWeather } from '../services'
+import {
+  uploadImage,
+  getLocation,
+  getWeather,
+  setAuthHeader,
+} from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
 import LocationInput from './components/LocationInput'
@@ -78,22 +83,27 @@ export default function CreateCard(props) {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
 
-        await getWeather(latitude, longitude).then(res =>
-          setWeatherData({
-            temperatur: Math.round(res.data.main.temp) + ' C°',
-            weather: res.data.weather[0].main,
-          })
+        console.log(
+          await getWeather(latitude, longitude).then(res =>
+            setWeatherData({
+              temperatur: Math.round(res.data.main.temp) + ' C°',
+              weather: res.data.weather[0].main,
+            })
+          ),
+          'CONSOLE'
         )
 
-        await getLocation(latitude, longitude).then(res =>
+        await getLocation(latitude, longitude).then(res => {
           setImageLocation(
             res.data.address.city ||
               res.data.address.village ||
               res.data.address.country
           )
-        )
+          setAuthHeader(props.setAuth)
+        })
       } catch (error) {
         setData({ ...data, autoImage: false })
+        console.log(error)
       }
     })
   }
@@ -120,6 +130,7 @@ export default function CreateCard(props) {
     let imageURL = null
     await uploadImage(data.pictureFile).then(res => {
       imageURL = res.data.url
+      setAuthHeader(props.setAuth)
     })
     data.location = imageLocation
     data.picture = imageURL
@@ -128,7 +139,8 @@ export default function CreateCard(props) {
     data._id = uid()
     setIsActive(false)
     props.onSubmit(data)
-    props.history.push('/')
+
+    props.history.push('/home')
   }
   return (
     <React.Fragment>
@@ -153,7 +165,7 @@ export default function CreateCard(props) {
               accept="image/jpeg"
               id="picture"
             />
-            <label for="picture">
+            <label htmlFor="picture">
               {data.pictureFile === '' ? (
                 <ImagePlaceholder />
               ) : (
@@ -209,7 +221,7 @@ export default function CreateCard(props) {
             {isTasteEmpty && <TasteMessage />}
           </div>
           <ButtonWrapper>
-            <BackButton to="/">X</BackButton>
+            <BackButton to="/home">X</BackButton>
             <button>OK!</button>
           </ButtonWrapper>
         </FormGrid>
