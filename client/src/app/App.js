@@ -60,7 +60,9 @@ function App() {
   }, [cards])
 
   function addCardToState(data) {
+    data.user = auth.user.username
     setCards([...cards, data])
+    console.log(data)
     postNewCard(data).then(res => console.log(res))
   }
 
@@ -74,6 +76,7 @@ function App() {
   function onLogoutClick() {
     logoutUser(setAuth)
   }
+  console.log(auth.user.username)
 
   return (
     <React.Fragment>
@@ -107,6 +110,7 @@ function App() {
               exact
               auth={auth.isAuthenticated}
               path="/home"
+              user={auth.user.username}
               cards={cards}
               onDelete={deleteCard}
               component={Home}

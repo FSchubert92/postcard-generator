@@ -47,13 +47,15 @@ const Confirm = styled.section`
     }
   }
 `
-export default function Home({ cards, onDelete }) {
+export default function Home({ cards, onDelete, user }) {
   const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
 
   console.log(onDelete)
   function CheckForNoCards() {
-    if (cards.length === 0) {
+    const userCards = cards.filter(card => card.user === user)
+    console.log(userCards)
+    if (userCards.length === 0) {
       return (
         <NoCardsToShow>
           Sorry, there are no postcards to show TT <br />
@@ -95,20 +97,22 @@ export default function Home({ cards, onDelete }) {
       <CardContainer data-cy="card-container">
         {showConfirmMessage && <ConfirmationMessage />}
         <CheckForNoCards />
-        {cards.map(card => (
-          <Card
-            date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
-            location={card.location}
-            temperatur={card.temperatur}
-            picture={card.picture}
-            summary={card.summary}
-            iAte={card.food}
-            itTasted={card.taste}
-            key={card._id}
-            weather={card.weather}
-            onDelete={() => confirmDelete(card)}
-          />
-        ))}
+        {cards
+          .filter(card => card.user === user)
+          .map(card => (
+            <Card
+              date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
+              location={card.location}
+              temperatur={card.temperatur}
+              picture={card.picture}
+              summary={card.summary}
+              iAte={card.food}
+              itTasted={card.taste}
+              key={card._id}
+              weather={card.weather}
+              onDelete={() => confirmDelete(card)}
+            />
+          ))}
       </CardContainer>
       <CreateButton to="/create">
         <div>+</div>

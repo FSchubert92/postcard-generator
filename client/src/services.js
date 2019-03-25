@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-const cardsPath = 'cards'
 const usersPath = 'http://localhost:4000/users'
+const cardsPath = 'cards'
 
 export function getAllCards() {
   return axios.get(cardsPath)
