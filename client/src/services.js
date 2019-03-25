@@ -1,7 +1,7 @@
 import axios from 'axios'
-
-const cardsPath = 'http://localhost:4000/cards'
-// const usersPath = 'http://localhost:4000/users'
+import jwt_decode from 'jwt-decode'
+const cardsPath = 'cards'
+const usersPath = 'http://localhost:4000/users'
 
 export function getAllCards() {
   return axios.get(cardsPath)
@@ -10,6 +10,7 @@ export function getAllCards() {
 export function getLocation(lat, long) {
   const TOKEN = process.env.REACT_APP_LOCATIONIQ_TOKEN
   const url = `https://eu1.locationiq.com/v1/reverse.php?key=${TOKEN}&lat=${lat}&lon=${long}&format=json`
+  delete axios.defaults.headers.common['Authorization']
   return axios.get(url)
 }
 
@@ -21,6 +22,7 @@ export function uploadImage(picture) {
 
   formData.append('file', picture)
   formData.append('upload_preset', PRESET)
+  delete axios.defaults.headers.common['Authorization']
 
   return axios.post(url, formData, {
     headers: {
@@ -67,11 +69,11 @@ export function getFromStorage(name) {
 }
 
 export function registerUser(userData) {
-  return axios.post('http://localhost:4000/users/api/users/register', userData)
+  return axios.post('api/users/register', userData)
 }
 
 export function loginUser(userData) {
-  return axios.post('http://localhost:4000/users/api/users/login', userData)
+  return axios.post('api/users/login', userData)
 }
 
 export function logoutUser(setAuth) {
@@ -97,4 +99,18 @@ export function setAuthToken(token) {
 export function saveToStorage(name, data) {
   const dataString = JSON.stringify(data)
   localStorage.setItem(name, dataString)
+}
+
+export function setAuthHeader(setAuth) {
+  if (localStorage.jwtToken) {
+    setAuthToken(localStorage.jwtToken)
+    const decoded = jwt_decode(localStorage.jwtToken)
+    setCurrentUser(decoded, setAuth)
+
+    const currentTime = Date.now() / 1000
+    if (decoded.exp < currentTime) {
+      logoutUser(setAuth)
+      window.location.href = '/login'
+    }
+  }
 }

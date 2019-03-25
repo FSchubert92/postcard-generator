@@ -115,6 +115,7 @@ function App() {
             <PrivateRoute
               exact
               auth={auth.isAuthenticated}
+              setAuth={setAuth}
               path="/create"
               onSubmit={addCardToState}
               component={NewCardForm}

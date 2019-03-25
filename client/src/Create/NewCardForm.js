@@ -7,7 +7,12 @@ import {
   TasteMessage,
   InputMessage,
 } from './components/ErrorAndSuccessMessages'
-import { uploadImage, getLocation, getWeather } from '../services'
+import {
+  uploadImage,
+  getLocation,
+  getWeather,
+  setAuthHeader,
+} from '../services'
 import uid from 'uid'
 import EXIF from 'exif-js'
 import LocationInput from './components/LocationInput'
@@ -88,16 +93,14 @@ export default function CreateCard(props) {
           'CONSOLE'
         )
 
-        console.log(
-          await getLocation(latitude, longitude).then(res =>
-            setImageLocation(
-              res.data.address.city ||
-                res.data.address.village ||
-                res.data.address.country
-            )
-          ),
-          'Location'
-        )
+        await getLocation(latitude, longitude).then(res => {
+          setImageLocation(
+            res.data.address.city ||
+              res.data.address.village ||
+              res.data.address.country
+          )
+          setAuthHeader(props.setAuth)
+        })
       } catch (error) {
         setData({ ...data, autoImage: false })
         console.log(error)
@@ -127,6 +130,7 @@ export default function CreateCard(props) {
     let imageURL = null
     await uploadImage(data.pictureFile).then(res => {
       imageURL = res.data.url
+      setAuthHeader(props.setAuth)
     })
     data.location = imageLocation
     data.picture = imageURL
@@ -135,7 +139,8 @@ export default function CreateCard(props) {
     data._id = uid()
     setIsActive(false)
     props.onSubmit(data)
-    props.history.push('/')
+
+    props.history.push('/home')
   }
   return (
     <React.Fragment>
