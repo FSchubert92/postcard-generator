@@ -37,7 +37,6 @@ export default function CreateCard(props) {
   const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
   const [isActive, setIsActive] = useState(false)
-
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
   const isWeatherUndefined = weatherData.temperatur === undefined

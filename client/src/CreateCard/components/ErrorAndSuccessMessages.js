@@ -2,7 +2,10 @@ import React from 'react'
 import { ErrorMessage, Message } from './FormStyles'
 
 export function SummaryInputMessage(props) {
-  const summaryLength = 260 - props.summaryLength
+  const summaryLength = 260 - props.data.summary.length
+  console.log(summaryLength)
+  console.log(summaryLength > 0)
+  console.log(props)
 
   if (summaryLength < 0) {
     return (
@@ -10,6 +13,12 @@ export function SummaryInputMessage(props) {
         Oh! Try to keep yourself a little shorter. The maximum input length is
         260 characters. Ask yourself: What was your highest high today?
       </ErrorMessage>
+    )
+  } else if (summaryLength > 0) {
+    return (
+      <Message>
+        Thank you! Please describe your day in up to 260 characters!
+      </Message>
     )
   } else {
     return null
