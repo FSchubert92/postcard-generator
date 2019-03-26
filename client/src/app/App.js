@@ -9,7 +9,7 @@ import PrivateRoute from '../auth/PrivateRoute'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
-import NewCardForm from '../Create/NewCardForm'
+import NewCardForm from '../CreateCard/NewCardForm'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
@@ -63,12 +63,12 @@ function App() {
     data.user = auth.user.username
     setCards([...cards, data])
     console.log(data)
-    postNewCard(data).then(res => console.log(res))
+    postNewCard(data)
   }
 
   function deleteCard(card) {
     console.log(card)
-    deleteCardFromServer(card).then(res => console.log(res))
+    deleteCardFromServer(card)
     const index = cards.indexOf(card)
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)])
   }
