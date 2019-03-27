@@ -3,7 +3,6 @@ import { WeatherMessage } from './ErrorAndSuccessMessages'
 import { DropDownMenu } from './FormStyles'
 
 export default function WeatherInput(props) {
-  console.log(props)
   return (
     <div>
       <h3>Weather</h3>

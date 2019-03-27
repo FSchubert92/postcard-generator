@@ -5,7 +5,7 @@ export const StyledForm = styled.form`
   align-items: center;
   display: grid;
   margin: 20px;
-  grid-template-rows: 48px 48px 48px auto;
+  grid-template-rows: 48px 48px 48px 100px 48px 48px;
   grid-gap: 20px;
   overflow-y: scroll;
 
@@ -43,4 +43,7 @@ export const IconWrapper = styled.div`
   height: 18px;
   padding-top: 5px;
   margin-bottom: 5px;
+`
+export const Footer = styled.section`
+  margin: 0 50px;
 `

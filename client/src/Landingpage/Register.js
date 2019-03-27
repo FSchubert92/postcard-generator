@@ -3,7 +3,8 @@ import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
 
 import { registerUser, setCurrentUser } from '../services'
-import { StyledForm } from './styling'
+import { StyledForm, Wrapper, IconWrapper, Footer } from './styling'
+import { ReactComponent as LoginLogo } from '../assets/landingpage-icons/login.svg'
 
 export default function Register({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({
@@ -79,6 +80,15 @@ export default function Register({ props, setAuth, auth }) {
         </div>
         <button>OK</button>
       </StyledForm>
+      <Footer>
+        <div>Already have an account?</div>
+        <Wrapper to="login">
+          <IconWrapper>
+            <LoginLogo />
+          </IconWrapper>
+          <p>Login!</p>
+        </Wrapper>
+      </Footer>
     </React.Fragment>
   )
 }
