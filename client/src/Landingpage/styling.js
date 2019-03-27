@@ -1,8 +1,7 @@
-import React from 'react'
-
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
-export default styled.form`
+export const StyledForm = styled.form`
   align-items: center;
   display: grid;
   margin: 20px;
@@ -12,7 +11,36 @@ export default styled.form`
 
   button {
     justify-self: center;
-    justify-self: center;
     align-self: end;
   }
+`
+
+export const Container = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px 80px;
+  grid-column-gap: 20px;
+  margin: 20px;
+`
+
+export const Text = styled.p`
+  grid-column: 1 / span 2;
+`
+
+export const Wrapper = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #afaaaa;
+  border-radius: 9px;
+  padding: 5px;
+  text-decoration: none;
+  color: #333;
+`
+
+export const IconWrapper = styled.div`
+  height: 18px;
+  padding-top: 5px;
+  margin-bottom: 5px;
 `

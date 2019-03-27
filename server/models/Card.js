@@ -33,7 +33,7 @@ const CardSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.String,
     default: '',
   },
-  temperatur: {
+  temperature: {
     type: mongoose.SchemaTypes.String,
     default: '',
   },

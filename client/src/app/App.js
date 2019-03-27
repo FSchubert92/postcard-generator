@@ -114,7 +114,6 @@ function App() {
               cards={cards}
               onDelete={deleteCard}
               component={Home}
-              // render={() => <Home cards={cards} onDelete={deleteCard} />}
             />
             <PrivateRoute
               exact
@@ -123,13 +122,6 @@ function App() {
               path="/create"
               onSubmit={addCardToState}
               component={NewCardForm}
-
-              // render={({ history }) => (
-              //   <NewCardForm
-              //     key={uid()}
-              //     history={history}
-              //     onSubmit={addCardToState}
-              //   />
             />
           </Switch>
         </Grid>

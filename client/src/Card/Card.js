@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import cloudy from '../assets/weather-icons/cloudy.png'
 import drizzle from '../assets/weather-icons/drizzle.png'
@@ -77,10 +78,21 @@ const WeatherContainer = styled.section`
   }
 `
 
+Card.propTypes = {
+  date: PropTypes.string,
+  location: PropTypes.string,
+  temperature: PropTypes.string,
+  weather: PropTypes.string,
+  picture: PropTypes.string,
+  summary: PropTypes.string,
+  iAte: PropTypes.string,
+  itTasted: PropTypes.string,
+}
+
 export default function Card({
   date,
   location,
-  temperatur,
+  temperature,
   weather,
   picture,
   summary,
@@ -152,7 +164,7 @@ export default function Card({
           </div>
           <WeatherContainer>
             <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-            <p>{temperatur}</p>
+            <p>{temperature}</p>
           </WeatherContainer>
         </SwipeableViews>
         <Pagination index={index} />

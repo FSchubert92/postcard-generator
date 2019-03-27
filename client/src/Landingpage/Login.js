@@ -3,7 +3,22 @@ import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
 
 import { loginUser, setCurrentUser } from '../services'
-import StyledForm from './styling'
+import { Wrapper, IconWrapper } from './styling'
+import { ReactComponent as SignUpLogo } from '../assets/landingpage-icons/plus.svg'
+import styled from 'styled-components'
+
+const StyledForm = styled.form`
+  align-items: center;
+  display: grid;
+  margin: 20px;
+  grid-template-rows: 48px 48px 48px 48px 163px;
+  grid-gap: 20px;
+  overflow-y: scroll;
+  button {
+    justify-self: center;
+    align-self: end;
+  }
+`
 
 export default function Login({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({
@@ -60,6 +75,15 @@ export default function Login({ props, setAuth, auth }) {
 
         <button>OK</button>
       </StyledForm>
+      <div>
+        No Account yet?!
+        <Wrapper to="register">
+          <IconWrapper>
+            <SignUpLogo />
+          </IconWrapper>
+          <p>Sign Up now!</p>
+        </Wrapper>
+      </div>
     </React.Fragment>
   )
 }

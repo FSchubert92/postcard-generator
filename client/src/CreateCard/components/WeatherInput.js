@@ -9,10 +9,10 @@ export default function WeatherInput(props) {
       <h3>Weather</h3>
       <input
         onChange={props.onInputChange}
-        name="temperatur"
+        name="temperature"
         type="text"
-        placeholder="Temperatur in C°"
-        value={props.temperatur}
+        placeholder="temperature in C°"
+        value={props.temperature}
         required
       />
       <label>

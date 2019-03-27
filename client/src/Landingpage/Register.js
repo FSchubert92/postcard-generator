@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
-import StyledForm from './styling'
 
 import { registerUser, setCurrentUser } from '../services'
+import { StyledForm } from './styling'
 
 export default function Register({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({

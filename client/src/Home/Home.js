@@ -103,7 +103,7 @@ export default function Home({ cards, onDelete, user }) {
             <Card
               date={dayjs(card.date).format('dddd  DD MMMM YYYY ')}
               location={card.location}
-              temperatur={card.temperatur}
+              temperature={card.temperature}
               picture={card.picture}
               summary={card.summary}
               iAte={card.food}

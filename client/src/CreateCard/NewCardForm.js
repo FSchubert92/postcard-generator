@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import uid from 'uid'
+import EXIF from 'exif-js'
+import LoadingOverlay from 'react-loading-overlay'
+import LocationInput from './components/LocationInput'
+import WeatherInput from './components/WeatherInput'
 import { FormGrid, BackButton, ButtonWrapper } from './components/FormStyles'
 import {
   SummaryInputMessage,
@@ -13,11 +18,6 @@ import {
   getWeather,
   setAuthHeader,
 } from '../services'
-import uid from 'uid'
-import EXIF from 'exif-js'
-import LocationInput from './components/LocationInput'
-import WeatherInput from './components/WeatherInput'
-import LoadingOverlay from 'react-loading-overlay'
 import { ReactComponent as ImagePlaceholder } from '../assets/form-icons/image-placeholder.svg'
 
 const defaultData = {
@@ -30,16 +30,15 @@ const defaultData = {
 
 export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
-  // const [date, setDate] = useState('')
-  // const [summary, setSummary] = useState('')
-  // const [food, setFood] = useState('')
-  // const [taste, setTaste] = useState('')
   const [imageLocation, setImageLocation] = useState('')
-  const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
+  const [weatherData, setWeatherData] = useState({
+    weather: 'Clear',
+    temperature: '',
+  })
   const [isActive, setIsActive] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
-  const isWeatherUndefined = weatherData.temperatur === undefined
+  const isWeatherUndefined = weatherData.temperature === undefined
   const isFoodEmpty = data.food.length > 0
   const isTasteEmpty = data.taste.length > 0
 
@@ -82,15 +81,11 @@ export default function CreateCard(props) {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
 
-        console.log(
-          await getWeather(latitude, longitude).then(res =>
-            setWeatherData({
-              temperatur: Math.round(res.data.main.temp) + ' C°',
-              weather: res.data.weather[0].main,
-            })
-          ),
-          'CONSOLE'
-        )
+        const res = await getWeather(latitude, longitude)
+        setWeatherData({
+          temperature: Math.round(res.data.main.temp) + ' C°',
+          weather: res.data.weather[0].main,
+        })
 
         await getLocation(latitude, longitude).then(res => {
           setImageLocation(
@@ -133,12 +128,11 @@ export default function CreateCard(props) {
     })
     data.location = imageLocation
     data.picture = imageURL
-    data.temperatur = weatherData.temperatur
+    data.temperature = weatherData.temperature
     data.weather = weatherData.weather
     data._id = uid()
     setIsActive(false)
     props.onSubmit(data)
-
     props.history.push('/home')
   }
   return (
@@ -189,11 +183,10 @@ export default function CreateCard(props) {
             location={imageLocation}
             required
           />
-
           <WeatherInput
             onInputChange={onWeatherInputChange}
             isWeatherUndefined={isWeatherUndefined}
-            temperatur={weatherData.temperatur}
+            temperature={weatherData.temperature}
             weather={weatherData.weather}
             required
           />
