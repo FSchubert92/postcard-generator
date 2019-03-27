@@ -81,20 +81,19 @@ export default function CreateCard(props) {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
 
-        const res = await getWeather(latitude, longitude)
+        let res = await getWeather(latitude, longitude)
         setWeatherData({
           temperature: Math.round(res.data.main.temp) + ' C°',
           weather: res.data.weather[0].main,
         })
 
-        await getLocation(latitude, longitude).then(res => {
-          setImageLocation(
-            res.data.address.city ||
-              res.data.address.village ||
-              res.data.address.country
-          )
-          setAuthHeader(props.setAuth)
-        })
+        res = await getLocation(latitude, longitude)
+        setImageLocation(
+          res.data.address.city ||
+            res.data.address.village ||
+            res.data.address.country
+        )
+        setAuthHeader(props.setAuth)
       } catch (error) {
         setData({ ...data, autoImage: false })
         console.log(error)
