@@ -49,11 +49,6 @@ export const FormGrid = styled.form`
       border-radius: 4px;
     }
 
-    /* input[type='file'] {
-    width: 315px;
-    padding: 0;
-  } */
-
     button {
       height: 44px;
       border: none;

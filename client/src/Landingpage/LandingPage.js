@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wrapper, IconWrapper, Container, Text } from './styling'
+import { Wrapper, IconWrapper, Container, Text } from './styles'
 import { ReactComponent as LoginLogo } from '../assets/landingpage-icons/login.svg'
 import { ReactComponent as SignUpLogo } from '../assets/landingpage-icons/plus.svg'
 

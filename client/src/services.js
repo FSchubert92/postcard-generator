@@ -1,6 +1,5 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-const usersPath = 'http://localhost:4000/users'
 const cardsPath = 'cards'
 
 export function getAllCards() {
@@ -33,12 +32,6 @@ export function uploadImage(picture) {
 
 export function postNewCard(card) {
   return axios.post(cardsPath, card)
-}
-
-export function toggleCardBookmark(card) {
-  return axios.patch(`${cardsPath}/${card._id}`, {
-    bookmarked: !card.bookmarked,
-  })
 }
 
 export function deleteCardFromServer(card) {
@@ -88,10 +81,8 @@ export function setCurrentUser(decoded, setAuth) {
 
 export function setAuthToken(token) {
   if (token) {
-    // Apply to every request
     axios.defaults.headers.common['Authorization'] = token
   } else {
-    // Delete auth header
     delete axios.defaults.headers.common['Authorization']
   }
 }

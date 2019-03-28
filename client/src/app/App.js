@@ -9,7 +9,7 @@ import PrivateRoute from '../auth/PrivateRoute'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/Home'
-import NewCardForm from '../CreateCard/NewCardForm'
+import NewCardForm from '../NewCardForm/NewCardForm'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
@@ -62,7 +62,6 @@ function App() {
   function addCardToState(data) {
     data.user = auth.user.username
     setCards([...cards, data])
-    console.log(data)
     postNewCard(data)
   }
 
@@ -76,7 +75,6 @@ function App() {
   function onLogoutClick() {
     logoutUser(setAuth)
   }
-  console.log(auth.user.username)
 
   return (
     <React.Fragment>

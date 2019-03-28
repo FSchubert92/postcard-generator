@@ -9,20 +9,21 @@ const StyledHeader = styled.header`
   width: 100%;
   justify-content: center;
   align-items: center;
-  box-shadow: -1px 0px 8px;
+  box-shadow: -1px 0 8px;
+
   img {
     width: 62px;
-    height: 31px;
+    height: 30px;
     margin: 5px;
     margin-left: 10px;
   }
+
   svg {
     margin-left: auto;
   }
 `
-export default function Header({ onClick, auth }) {
-  console.log(auth)
 
+export default function Header({ onClick, auth }) {
   return (
     <StyledHeader>
       <img src={Logo} alt="Riyoko Logo" />

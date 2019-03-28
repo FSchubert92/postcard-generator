@@ -1,6 +1,6 @@
 import React from 'react'
 import { WeatherMessage } from './ErrorAndSuccessMessages'
-import { DropDownMenu } from './FormStyles'
+import { DropDownMenu } from '../styles'
 
 export default function WeatherInput(props) {
   return (

@@ -4,7 +4,7 @@ import EXIF from 'exif-js'
 import LoadingOverlay from 'react-loading-overlay'
 import LocationInput from './components/LocationInput'
 import WeatherInput from './components/WeatherInput'
-import { FormGrid, BackButton, ButtonWrapper } from './components/FormStyles'
+import { FormGrid, BackButton, ButtonWrapper } from './styles'
 import {
   SummaryInputMessage,
   DateMessage,
@@ -35,7 +35,7 @@ export default function CreateCard(props) {
     weather: 'Clear',
     temperature: '',
   })
-  const [isActive, setIsActive] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
   const isWeatherUndefined = weatherData.temperature === undefined
@@ -119,7 +119,7 @@ export default function CreateCard(props) {
 
   async function onSubmit(event) {
     event.preventDefault()
-    setIsActive(true)
+    setIsLoading(true)
     let imageURL = null
     const res = await uploadImage(data.pictureFile)
     imageURL = res.data.url
@@ -130,19 +130,21 @@ export default function CreateCard(props) {
     data.temperature = weatherData.temperature
     data.weather = weatherData.weather
     data._id = uid()
-    setIsActive(false)
+
+    setIsLoading(false)
     props.onSubmit(data)
     props.history.push('/home')
   }
+
   return (
     <React.Fragment>
       <LoadingOverlay
-        active={isActive}
+        active={isLoading}
         spinner
         text="Getting your Image up to the clouds!"
         styles={{
           wrapper: {
-            overflow: isActive ? 'hidden' : 'scroll',
+            overflow: isLoading ? 'hidden' : 'scroll',
           },
         }}
       >

@@ -39,7 +39,3 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 app.use('/cards', require('./routes/cards'))
-
-// app.listen(port, () => {
-//   console.log('Server ready on port ' + port)
-// })

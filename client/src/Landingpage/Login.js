@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
-
 import { loginUser, setCurrentUser } from '../services'
-import { Wrapper, IconWrapper, Footer, StyledForm } from './styling'
+import { Wrapper, IconWrapper, Footer, StyledForm } from './styles'
 import { ReactComponent as SignUpLogo } from '../assets/landingpage-icons/plus.svg'
-import styled from 'styled-components'
-
-// const StyledForm = styled.form`
-//   align-items: center;
-//   display: grid;
-//   margin: 20px;
-//   grid-template-rows: 48px 48px 48px 48px 163px;
-//   grid-gap: 20px;
-//   overflow-y: scroll;
-//   button {
-//     justify-self: center;
-//     align-self: end;
-//   }
-// `
 
 export default function Login({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({
@@ -49,7 +34,7 @@ export default function Login({ props, setAuth, auth }) {
         const decoded = jwt_decode(localStorage.jwtToken)
         setCurrentUser(decoded, setAuth)
       })
-      .catch(err => setErrors(err.response.data))
+      .catch(error => setErrors(error.response.data))
   }
 
   return (
