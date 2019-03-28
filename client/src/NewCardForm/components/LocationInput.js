@@ -2,7 +2,6 @@ import React from 'react'
 import { LocationMessage } from './ErrorAndSuccessMessages'
 
 export default function LocationInput(props) {
-  console.log(props)
   return (
     <div>
       <h3>Location</h3>

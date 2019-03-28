@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
-
 import { loginUser, setCurrentUser } from '../services'
-import StyledForm from './styling'
+import { Wrapper, IconWrapper, Footer, StyledForm } from './styles'
+import { ReactComponent as SignUpLogo } from '../assets/landingpage-icons/plus.svg'
 
 export default function Login({ props, setAuth, auth }) {
   const [userData, setUserData] = useState({
@@ -34,7 +34,7 @@ export default function Login({ props, setAuth, auth }) {
         const decoded = jwt_decode(localStorage.jwtToken)
         setCurrentUser(decoded, setAuth)
       })
-      .catch(err => setErrors(err.response.data))
+      .catch(error => setErrors(error.response.data))
   }
 
   return (
@@ -60,6 +60,15 @@ export default function Login({ props, setAuth, auth }) {
 
         <button>OK</button>
       </StyledForm>
+      <Footer>
+        No Account yet?!
+        <Wrapper to="register">
+          <IconWrapper>
+            <SignUpLogo />
+          </IconWrapper>
+          <p>Sign Up now!</p>
+        </Wrapper>
+      </Footer>
     </React.Fragment>
   )
 }

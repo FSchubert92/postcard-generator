@@ -1,18 +1,17 @@
 import React from 'react'
 import { WeatherMessage } from './ErrorAndSuccessMessages'
-import { DropDownMenu } from './FormStyles'
+import { DropDownMenu } from '../styles'
 
 export default function WeatherInput(props) {
-  console.log(props)
   return (
     <div>
       <h3>Weather</h3>
       <input
         onChange={props.onInputChange}
-        name="temperatur"
+        name="temperature"
         type="text"
-        placeholder="Temperatur in C°"
-        value={props.temperatur}
+        placeholder="temperature in C°"
+        value={props.temperature}
         required
       />
       <label>

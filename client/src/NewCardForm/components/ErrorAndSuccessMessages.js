@@ -1,11 +1,8 @@
 import React from 'react'
-import { ErrorMessage, Message } from './FormStyles'
+import { ErrorMessage, Message } from '../styles'
 
 export function SummaryInputMessage(props) {
   const summaryLength = 260 - props.data.summary.length
-  console.log(summaryLength)
-  console.log(summaryLength > 0)
-  console.log(props)
 
   if (summaryLength < 0) {
     return (
@@ -47,7 +44,7 @@ export function FoodMessage() {
 }
 
 export function TasteMessage() {
-  return <Message> Thank you very much!</Message>
+  return <Message> Thank you for the info</Message>
 }
 
 export function InputMessage(props) {

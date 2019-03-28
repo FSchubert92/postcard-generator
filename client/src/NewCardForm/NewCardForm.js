@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { FormGrid, BackButton, ButtonWrapper } from './components/FormStyles'
+import uid from 'uid'
+import EXIF from 'exif-js'
+import LoadingOverlay from 'react-loading-overlay'
+import LocationInput from './components/LocationInput'
+import WeatherInput from './components/WeatherInput'
+import { FormGrid, BackButton, ButtonWrapper } from './styles'
 import {
   SummaryInputMessage,
   DateMessage,
@@ -13,11 +18,6 @@ import {
   getWeather,
   setAuthHeader,
 } from '../services'
-import uid from 'uid'
-import EXIF from 'exif-js'
-import LocationInput from './components/LocationInput'
-import WeatherInput from './components/WeatherInput'
-import LoadingOverlay from 'react-loading-overlay'
 import { ReactComponent as ImagePlaceholder } from '../assets/form-icons/image-placeholder.svg'
 
 const defaultData = {
@@ -30,16 +30,15 @@ const defaultData = {
 
 export default function CreateCard(props) {
   const [data, setData] = useState(defaultData)
-  // const [date, setDate] = useState('')
-  // const [summary, setSummary] = useState('')
-  // const [food, setFood] = useState('')
-  // const [taste, setTaste] = useState('')
   const [imageLocation, setImageLocation] = useState('')
-  const [weatherData, setWeatherData] = useState({ weather: 'Clear' })
-  const [isActive, setIsActive] = useState(false)
+  const [weatherData, setWeatherData] = useState({
+    weather: 'Clear',
+    temperature: '',
+  })
+  const [isLoading, setIsLoading] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
-  const isWeatherUndefined = weatherData.temperatur === undefined
+  const isWeatherUndefined = weatherData.temperature === undefined
   const isFoodEmpty = data.food.length > 0
   const isTasteEmpty = data.taste.length > 0
 
@@ -82,24 +81,19 @@ export default function CreateCard(props) {
         longitude = toDecimal(longitude)
         latitude = toDecimal(latitude)
 
-        console.log(
-          await getWeather(latitude, longitude).then(res =>
-            setWeatherData({
-              temperatur: Math.round(res.data.main.temp) + ' C°',
-              weather: res.data.weather[0].main,
-            })
-          ),
-          'CONSOLE'
-        )
-
-        await getLocation(latitude, longitude).then(res => {
-          setImageLocation(
-            res.data.address.city ||
-              res.data.address.village ||
-              res.data.address.country
-          )
-          setAuthHeader(props.setAuth)
+        let res = await getWeather(latitude, longitude)
+        setWeatherData({
+          temperature: Math.round(res.data.main.temp) + ' C°',
+          weather: res.data.weather[0].main,
         })
+
+        res = await getLocation(latitude, longitude)
+        setImageLocation(
+          res.data.address.city ||
+            res.data.address.village ||
+            res.data.address.country
+        )
+        setAuthHeader(props.setAuth)
       } catch (error) {
         setData({ ...data, autoImage: false })
         console.log(error)
@@ -125,31 +119,32 @@ export default function CreateCard(props) {
 
   async function onSubmit(event) {
     event.preventDefault()
-    setIsActive(true)
+    setIsLoading(true)
     let imageURL = null
-    await uploadImage(data.pictureFile).then(res => {
-      imageURL = res.data.url
-      setAuthHeader(props.setAuth)
-    })
+    const res = await uploadImage(data.pictureFile)
+    imageURL = res.data.url
+    setAuthHeader(props.setAuth)
+
     data.location = imageLocation
     data.picture = imageURL
-    data.temperatur = weatherData.temperatur
+    data.temperature = weatherData.temperature
     data.weather = weatherData.weather
     data._id = uid()
-    setIsActive(false)
-    props.onSubmit(data)
 
+    setIsLoading(false)
+    props.onSubmit(data)
     props.history.push('/home')
   }
+
   return (
     <React.Fragment>
       <LoadingOverlay
-        active={isActive}
+        active={isLoading}
         spinner
         text="Getting your Image up to the clouds!"
         styles={{
           wrapper: {
-            overflow: isActive ? 'hidden' : 'scroll',
+            overflow: isLoading ? 'hidden' : 'scroll',
           },
         }}
       >
@@ -189,11 +184,10 @@ export default function CreateCard(props) {
             location={imageLocation}
             required
           />
-
           <WeatherInput
             onInputChange={onWeatherInputChange}
             isWeatherUndefined={isWeatherUndefined}
-            temperatur={weatherData.temperatur}
+            temperature={weatherData.temperature}
             weather={weatherData.weather}
             required
           />

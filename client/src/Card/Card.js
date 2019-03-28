@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import cloudy from '../assets/weather-icons/cloudy.png'
 import drizzle from '../assets/weather-icons/drizzle.png'
@@ -10,77 +11,33 @@ import thunderstorm from '../assets/weather-icons/thunderstorm.png'
 import wind from '../assets/weather-icons/wind.png'
 import SwipeableViews from 'react-swipeable-views'
 import Pagination from './components/Pagination'
+import {
+  StyledCard,
+  DateHeadline,
+  LocationHeadline,
+  CardBottomWrapper,
+  HeadlineAndButtonWrapper,
+  HowWasToday,
+  DeleteButton,
+  WeatherContainer,
+  WeatherIcon,
+} from './styles'
 
-const StyledCard = styled.section`
-  p {
-    padding: 10px 10px 20px 0;
-    margin: 2px 0 0 0px;
-    line-height: 24px;
-    font-size: 17px;
-  }
-`
-
-const DateHeadline = styled.h2`
-  margin-left: 13px;
-  margin-bottom: 5px;
-`
-
-const LocationHeadline = styled.h2`
-  color: white;
-  text-shadow: 0 2px 14px black;
-`
-
-const HeadlineAndButtonWrapper = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 48px;
-`
-
-const HowWasToday = styled.h3`
-  padding-top: 5px;
-  font-size: 24px;
-`
-
-const WeatherIcon = styled.img`
-  width: 140px;
-`
-
-const CardBottomWrapper = styled.section`
-  display: grid;
-  grid-gap: 15px;
-  margin: -50px 25px 25px;
-  padding: 12px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
-  background-color: white;
-`
-
-const DeleteButton = styled.button`
-  display: flex;
-  height: 20px;
-  width: 20px;
-  background-color: white;
-  color: crimson;
-  border-width: 0;
-  font-size: 30px;
-  border-radius: 0;
-  margin: 0 auto;
-`
-
-const WeatherContainer = styled.section`
-  display: grid;
-  grid-template-rows: auto auto;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  p {
-    margin: auto;
-    font-weight: bold;
-  }
-`
+Card.propTypes = {
+  date: PropTypes.string,
+  location: PropTypes.string,
+  temperature: PropTypes.string,
+  weather: PropTypes.string,
+  picture: PropTypes.string,
+  summary: PropTypes.string,
+  iAte: PropTypes.string,
+  itTasted: PropTypes.string,
+}
 
 export default function Card({
   date,
   location,
-  temperatur,
+  temperature,
   weather,
   picture,
   summary,
@@ -95,6 +52,7 @@ export default function Card({
     background-size: cover;
     padding: 10px 0 0 13px;
   `
+
   const [index, setIndex] = useState(0)
 
   function handleChangeIndex(index) {
@@ -152,7 +110,7 @@ export default function Card({
           </div>
           <WeatherContainer>
             <WeatherIcon src={chooseWeatherIcon(weather)} alt={weather} />
-            <p>{temperatur}</p>
+            <p>{temperature}</p>
           </WeatherContainer>
         </SwipeableViews>
         <Pagination index={index} />
