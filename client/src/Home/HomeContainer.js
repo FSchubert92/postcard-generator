@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
 import Home from './Home'
-import { CreateCard } from '../store/actions'
+import { toggleBookmark } from '../store/actions'
 
 const mapStateProps = (state, ownProps) => ({
-  cards: state,
+  ...state,
 })
+
+const mapDispatchToProps = {
+  onBookmark: toggleBookmark,
+}
 
 export default connect(
   mapStateProps,
-  null
+  mapDispatchToProps
 )(Home)
