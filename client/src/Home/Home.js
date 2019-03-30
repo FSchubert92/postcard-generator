@@ -8,9 +8,10 @@ import { CreateButton, Confirm } from './styles'
 export default function Home({ cards, onDelete, user }) {
   const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
-
+  console.log(cards)
   function CheckForNoCards() {
     const userCards = cards.filter(card => card.user === user)
+    console.log(userCards)
     if (userCards.length === 0) {
       return (
         <NoCardsToShow>
