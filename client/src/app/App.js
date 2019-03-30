@@ -10,7 +10,7 @@ import PrivateRoute from '../auth/PrivateRoute'
 import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/HomeContainer'
-import NewCardForm from '../NewCardForm/NewCardForm'
+import NewCardForm from '../NewCardForm/NewCardFormContainer'
 import {
   saveCardsToStorage,
   getCardsFromStorage,

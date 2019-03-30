@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import NewCardForm from './NewCardForm'
-import { CreateCard } from '../store/actions'
+import { createCard } from '../store/actions'
 
 const mapDispatchToProps = (state, ownProps) => ({
-  onSubmit: CreateCard,
+  onSubmit: createCard,
 })
 
 export default connect(
