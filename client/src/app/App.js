@@ -66,7 +66,6 @@ function App() {
   }
 
   function deleteCard(card) {
-    console.log(card)
     deleteCardFromServer(card)
     const index = cards.indexOf(card)
     setCards([...cards.slice(0, index), ...cards.slice(index + 1)])

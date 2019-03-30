@@ -88,6 +88,10 @@ export const ButtonWrapper = styled.section`
   grid-template-columns: 1fr 1fr 1fr;
   padding-bottom: 10px;
   box-shadow: 0;
+
+  button {
+    justify-self: center;
+  }
 `
 
 export const ErrorMessage = styled.p`

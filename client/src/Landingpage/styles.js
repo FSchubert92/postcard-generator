@@ -12,6 +12,7 @@ export const StyledForm = styled.form`
   button {
     justify-self: center;
     align-self: end;
+    border: none;
   }
 `
 
