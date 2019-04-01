@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import NewCardForm from './NewCardForm'
-import { createCard, getCards } from '../store/actions'
+import { createCard, getCards, submitCard } from '../store/actions'
 
 const mapDispatchToProps = {
-  onSubmit: createCard,
+  onSubmit: submitCard,
   getCards,
 }
 
