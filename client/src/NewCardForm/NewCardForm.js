@@ -202,6 +202,7 @@ export default function CreateCard(props) {
               placeholder="Summarize what you did today"
               required
             />
+            <div>{data.summary.length}/260</div>
             <SummaryInputMessage data={data} />
           </div>
           <div>

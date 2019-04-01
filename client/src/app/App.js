@@ -14,7 +14,6 @@ import NewCardForm from '../NewCardForm/NewCardFormContainer'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
-  getAllCards,
   postNewCard,
   deleteCardFromServer,
   setCurrentUser,

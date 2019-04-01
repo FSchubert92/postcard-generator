@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '../Card/Card'
 import CardContainer from '../Card/components/CardContainer'
 import dayjs from 'dayjs'
 import NoCardsToShow from './NoCardsToShow'
 import { CreateButton, Confirm } from './styles'
+import { getAllCards } from '../services'
 
-export default function Home({ cards, onDelete, user }) {
+export default function Home({ cards, onDelete, user, setCards }) {
   const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
   console.log(cards)
   function CheckForNoCards() {
-    const userCards = cards.filter(card => card.user === user)
-    console.log(userCards)
-    if (userCards.length === 0) {
+    if (cards.length === 0) {
       return (
         <NoCardsToShow>
           Sorry, there are no postcards to show TT <br />
@@ -23,6 +22,12 @@ export default function Home({ cards, onDelete, user }) {
       return null
     }
   }
+
+  useEffect(() => {
+    getAllCards(user).then(res => {
+      setCards(res.data)
+    })
+  }, [])
 
   function confirmDelete(card) {
     setCardToDelete(card)

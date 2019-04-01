@@ -3,8 +3,8 @@ const router = express.Router()
 const Card = require('../models/Card')
 const passport = require('passport')
 
-router.get('/', (req, res) => {
-  Card.find().then(cards => res.json(cards))
+router.get('/:user', (req, res) => {
+  Card.find({ user: req.params.user }).then(cards => res.json(cards))
 })
 
 router.post(
