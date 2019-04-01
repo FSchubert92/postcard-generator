@@ -11,14 +11,7 @@ import GlobalStyle from '../GlobalStyle'
 import Header from '../Header/Header'
 import Home from '../Home/HomeContainer'
 import NewCardForm from '../NewCardForm/NewCardFormContainer'
-import {
-  saveCardsToStorage,
-  getCardsFromStorage,
-  postNewCard,
-  deleteCardFromServer,
-  setCurrentUser,
-  logoutUser,
-} from '../services'
+import { saveCardsToStorage, setCurrentUser, logoutUser } from '../services'
 import LandingPage from '../Landingpage/LandingPage'
 import store from '../store'
 
@@ -50,29 +43,6 @@ function App() {
       }
     }
   }, [])
-
-  // useEffect(() => {
-  //   getAllCards().then(res => {
-  //     setCards(res.data)
-  //   })
-  // }, [])
-
-  // useEffect(() => {
-  //   saveCardsToStorage(cards)
-  // }, [cards])
-
-  // function addCardToState(data) {
-  //   data.user = auth.user.username
-  //   setCards([...cards, data])
-  //   postNewCard(data)
-  // }
-
-  // function deleteCard(card) {
-  //   console.log(card)
-  //   deleteCardFromServer(card)
-  //   const index = cards.indexOf(card)
-  //   setCards([...cards.slice(0, index), ...cards.slice(index + 1)])
-  // }
 
   function onLogoutClick() {
     logoutUser(setAuth)
