@@ -17,6 +17,6 @@ export const submitCard = card => dispatch => {
 
 export const getCards = user => dispatch => {
   getAllCards(user).then(cards => {
-    dispatch(getCardsDone(cards))
+    dispatch(getCardsDone(cards.data))
   })
 }

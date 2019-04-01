@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
 import Home from './Home'
-import { createCard } from '../store/actions'
+import { getCards } from '../store/actions'
 
 const mapStateProps = (state, ownProps) => ({
   ...state,
 })
 
+const mapDispatchToProps = {
+  getCards,
+}
+
 export default connect(
   mapStateProps,
-  null
+  mapDispatchToProps
 )(Home)

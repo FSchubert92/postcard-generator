@@ -4,7 +4,6 @@ import { createCard, getCards, submitCard } from '../store/actions'
 
 const mapDispatchToProps = {
   onSubmit: submitCard,
-  getCards,
 }
 
 export default connect(
