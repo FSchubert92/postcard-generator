@@ -13,7 +13,6 @@ import NewCardForm from '../NewCardForm/NewCardForm'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
-  getAllCards,
   postNewCard,
   deleteCardFromServer,
   setCurrentUser,
@@ -47,12 +46,6 @@ function App() {
         window.location.href = '/login'
       }
     }
-  }, [])
-
-  useEffect(() => {
-    getAllCards().then(res => {
-      setCards(res.data)
-    })
   }, [])
 
   useEffect(() => {
@@ -111,6 +104,7 @@ function App() {
               cards={cards}
               onDelete={deleteCard}
               component={Home}
+              setCards={setCards}
             />
             <PrivateRoute
               exact
