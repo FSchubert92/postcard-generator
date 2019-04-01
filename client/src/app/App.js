@@ -13,7 +13,6 @@ import NewCardForm from '../NewCardForm/NewCardForm'
 import {
   saveCardsToStorage,
   getCardsFromStorage,
-  getAllCards,
   postNewCard,
   deleteCardFromServer,
   setCurrentUser,

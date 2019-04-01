@@ -5,7 +5,6 @@ const passport = require('passport')
 
 router.get('/:user', (req, res) => {
   Card.find({ user: req.params.user }).then(cards => res.json(cards))
-  console.log(res)
 })
 
 router.post(
