@@ -27,7 +27,6 @@ const Grid = styled.div`
 store.subscribe(() => saveCardsToStorage(store.getState().cards))
 
 function App() {
-  // const [cards, setCards] = useState(getCardsFromStorage())
   const [auth, setAuth] = useState({ user: {}, isAuthenticated: false })
 
   useEffect(() => {
