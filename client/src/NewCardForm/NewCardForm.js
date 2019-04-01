@@ -29,6 +29,7 @@ const defaultData = {
 }
 
 export default function CreateCard(props) {
+  console.log(props)
   const [data, setData] = useState(defaultData)
   const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState({
@@ -124,7 +125,7 @@ export default function CreateCard(props) {
     const res = await uploadImage(data.pictureFile)
     imageURL = res.data.url
     setAuthHeader(props.setAuth)
-
+    data.user = props.user
     data.location = imageLocation
     data.picture = imageURL
     data.temperature = weatherData.temperature

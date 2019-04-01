@@ -23,6 +23,7 @@
     "react-scripts": "^2.1.8",
     "react-spinners": "^0.5.3",
     "react-swipeable-views": "^0.13.1",
+    "redux": "^4.0.1",
     "redux-starter-kit": "^0.4.3",
     "save-dev": "^2.0.0",
     "styled-components": "^4.1.3",

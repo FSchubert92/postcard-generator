@@ -6,10 +6,10 @@ import NoCardsToShow from './NoCardsToShow'
 import { CreateButton, Confirm } from './styles'
 import { getAllCards } from '../services'
 
-export default function Home({ cards, onDelete, user, setCards }) {
+export default function Home({ cards, onDelete, user, getCards }) {
   const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
-
+  console.log(cards)
   function CheckForNoCards() {
     if (cards.length === 0) {
       return (
@@ -24,9 +24,7 @@ export default function Home({ cards, onDelete, user, setCards }) {
   }
 
   useEffect(() => {
-    getAllCards(user).then(res => {
-      setCards(res.data)
-    })
+    getCards(user)
   }, [])
 
   function confirmDelete(card) {

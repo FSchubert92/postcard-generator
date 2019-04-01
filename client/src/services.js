@@ -3,7 +3,6 @@ import jwt_decode from 'jwt-decode'
 const cardsPath = 'cards'
 
 export function getAllCards(user) {
-  console.log(user)
   return axios.get(`${cardsPath}/${user}`)
 }
 
