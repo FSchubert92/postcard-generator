@@ -50,12 +50,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    getAllCards().then(res => {
-      setCards(res.data)
-    })
-  }, [])
-
-  useEffect(() => {
     saveCardsToStorage(cards)
   }, [cards])
 
@@ -111,6 +105,7 @@ function App() {
               cards={cards}
               onDelete={deleteCard}
               component={Home}
+              setCards={setCards}
             />
             <PrivateRoute
               exact

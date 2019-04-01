@@ -2,8 +2,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 const cardsPath = 'cards'
 
-export function getAllCards() {
-  return axios.get(cardsPath)
+export function getAllCards(user) {
+  console.log(user)
+  return axios.get(`${cardsPath}/${user}`)
 }
 
 export function getLocation(lat, long) {
