@@ -1,5 +1,5 @@
 import { createCard, removeCard } from './actions'
-import { getCardsFromStorage } from '../services'
+import { getCardsFromStorage, postNewCard } from '../services'
 import { createReducer } from 'redux-starter-kit'
 
 export const cards = createReducer(getCardsFromStorage(), {
