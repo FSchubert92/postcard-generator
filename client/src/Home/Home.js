@@ -21,7 +21,7 @@ export default function Home({ cards, onDelete, user, getCards }) {
       return null
     }
   }
-  console.log(cards)
+
   useEffect(() => {
     getCards(user)
   }, [])

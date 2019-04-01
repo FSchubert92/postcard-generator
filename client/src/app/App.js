@@ -118,6 +118,7 @@ function App() {
                 exact
                 auth={auth.isAuthenticated}
                 setAuth={setAuth}
+                user={auth.user.username}
                 path="/create"
                 component={NewCardForm}
               />

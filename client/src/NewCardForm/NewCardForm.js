@@ -125,7 +125,7 @@ export default function CreateCard(props) {
     const res = await uploadImage(data.pictureFile)
     imageURL = res.data.url
     setAuthHeader(props.setAuth)
-    data.user = 'flo'
+    data.user = props.user
     data.location = imageLocation
     data.picture = imageURL
     data.temperature = weatherData.temperature

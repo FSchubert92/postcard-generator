@@ -11,7 +11,7 @@ export const getCardsDone = createAction(GET_CARDS_DONE)
 
 export const submitCard = card => dispatch => {
   postNewCard(card).then(card => {
-    dispatch(createCard(card))
+    dispatch(createCard(card.data))
   })
 }
 
