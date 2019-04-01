@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Home from './Home'
-import { getCards } from '../store/actions'
+import { getCards, deleteCard } from '../store/actions'
 
 const mapStateProps = (state, ownProps) => ({
   ...state,
@@ -8,6 +8,7 @@ const mapStateProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   getCards,
+  onDelete: deleteCard,
 }
 
 export default connect(

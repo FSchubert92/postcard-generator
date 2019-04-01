@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit'
-import { getAllCards, postNewCard } from '../services'
+import { getAllCards, postNewCard, deleteCardFromServer } from '../services'
 
 export const CREATE_CARD = 'CREATE_CARD'
 export const REMOVE_CARD = 'REMOVE_CARD'
@@ -12,6 +12,12 @@ export const getCardsDone = createAction(GET_CARDS_DONE)
 export const submitCard = card => dispatch => {
   postNewCard(card).then(card => {
     dispatch(createCard(card.data))
+  })
+}
+
+export const deleteCard = card => dispatch => {
+  deleteCardFromServer(card).then(card => {
+    dispatch(removeCard(card.data))
   })
 }
 

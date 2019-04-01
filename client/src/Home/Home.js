@@ -9,6 +9,7 @@ import { getAllCards } from '../services'
 export default function Home({ cards, onDelete, user, getCards }) {
   const [showConfirmMessage, setConfirmMessage] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
+  console.log(cards)
   function CheckForNoCards() {
     if (cards.length === 0) {
       return (
