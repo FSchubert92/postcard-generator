@@ -35,6 +35,7 @@ export default function CreateCard(props) {
     weather: 'Clear',
     temperature: '',
   })
+
   const [isLoading, setIsLoading] = useState(false)
   const isDateEmpty = data.date.length > 0
   const isLocationEmpty = imageLocation.length > 0
@@ -130,7 +131,6 @@ export default function CreateCard(props) {
     data.temperature = weatherData.temperature
     data.weather = weatherData.weather
     data._id = uid()
-
     setIsLoading(false)
     props.onSubmit(data)
     props.history.push('/home')

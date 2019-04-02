@@ -23,6 +23,7 @@ export default function WeatherInput(props) {
           onChange={props.onInputChange}
           required
         >
+          <option value="">Please choose the weather</option>
           <option>Clear</option>
           <option>Clouds</option>
           <option> Snow</option>
