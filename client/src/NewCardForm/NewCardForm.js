@@ -29,7 +29,6 @@ const defaultData = {
 }
 
 export default function CreateCard(props) {
-  console.log(props)
   const [data, setData] = useState(defaultData)
   const [imageLocation, setImageLocation] = useState('')
   const [weatherData, setWeatherData] = useState({
