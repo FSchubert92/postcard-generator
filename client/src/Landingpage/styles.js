@@ -5,7 +5,7 @@ export const StyledForm = styled.form`
   align-items: center;
   display: grid;
   margin: 20px;
-  grid-template-rows: repeat(4, 48px) 100px 48px 48px;
+  grid-template-rows: repeat(3, 48px) 100px 48px 48px;
   grid-gap: 20px;
   overflow-y: scroll;
 
