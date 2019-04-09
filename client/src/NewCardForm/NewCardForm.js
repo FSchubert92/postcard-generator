@@ -74,9 +74,12 @@ export default function CreateCard(props) {
     const picture = data.pictureFile
     let longitude = 0
     let latitude = 0
+    let date = 0
     EXIF.getData(picture, async function() {
       longitude = EXIF.getTag(this, 'GPSLongitude')
       latitude = EXIF.getTag(this, 'GPSLatitude')
+      date = EXIF.getTag(this, 'DateTime')
+      date = date.slice(0, 10).replace(/:/g, '-')
 
       try {
         longitude = toDecimal(longitude)
@@ -95,6 +98,7 @@ export default function CreateCard(props) {
             res.data.address.country
         )
         setAuthHeader(props.setAuth)
+        setData({ ...data, date })
       } catch (error) {
         setData({ ...data, autoImage: false })
         console.log(error)
@@ -175,7 +179,13 @@ export default function CreateCard(props) {
           </div>
           <div>
             <h3>Date</h3>
-            <input onChange={onInputChange} name="date" type="date" required />
+            <input
+              onChange={onInputChange}
+              name="date"
+              type="date"
+              value={data.date}
+              required
+            />
             {isDateEmpty && <DateMessage />}
           </div>
           <LocationInput

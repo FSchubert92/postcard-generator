@@ -106,17 +106,5 @@ describe('Riyoko', () => {
           .should('have.value', testValue)
       })
     })
-
-    // it('Uploads an Image', () => {
-    //   cy.fixture('images/logo.png').as('logo')
-    //   cy.get('input[type=file]').then($input => {
-    //     Cypress.Blob.base64StringToBlob(this.logo, 'image/png').then(blob => {
-    //       // pass the blob to the fileupload jQuery plugin
-    //       // used in your application's code
-    //       // which initiates a programmatic upload
-    //       $input.fileupload('add', { files: blob })
-    //     })
-    //   })
-    // })
   })
 })
