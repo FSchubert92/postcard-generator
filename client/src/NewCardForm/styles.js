@@ -48,16 +48,15 @@ export const FormGrid = styled.form`
       background-color: #fff;
       border-radius: 4px;
     }
-
-    button {
-      height: 44px;
-      border: none;
-      width: 44px;
-      background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
-      color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
-      border-radius: 50%;
-    }
+  }
+  button {
+    height: 44px;
+    border: none;
+    width: 44px;
+    background: ${p => (p.checkForEmptyFields ? '#18B839' : '#333')};
+    color: ${p => (p.checkForEmptyFields ? 'white' : '#333')};
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 50%);
+    border-radius: 50%;
   }
 
   .input-summary {
